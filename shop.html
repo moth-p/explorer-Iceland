@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <link rel="icon" href="./src/img/logo.png">
+    <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body class="w-screen h-screen relative border-box bg-lightGray font-krona scroll-smooth">
+    <header class="w-full max-h-[1080px] lg:mb-5">
+        <nav>
+            <section id="navContainer" class="bg-white/50 shadow fixed top-0 left-0 right-0 z-20">
+                <template id="navBar" class="navTemplate">
+                    <div class=" mx-auto max-w-6xl sm:px-6 lg:px-20">
+                        <div class="relative flex h-16 justify-between">
+                            <!-- ham dropdown menu button -->
+                            <div id="hamBtn" class="absolute top-3 left-0 flex item-center sm:hidden">
+                                <button type="button"
+                                    class="relative inline-flex item-center justify-center rounded-md p-2 text-gray-40 hover:bg-lightGray hover:text-subPurple active:opacity-60"
+                                    aria-controls="hamMenu" aria-expanded="false">
+
+                                    <svg class="block size-7" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                        stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <!-- logo、nav select -->
+                            <div class="flex flex-1 justify-center items-center sm:justify-start gap-6">
+                                <!-- logo -->
+                                <div class="flex shrink-0 item-center">
+                                    <a href="#"><img class="h-7 w-auto" src="./src/img/logo.png" alt="Company Logo"></a>
+                                </div>
+
+                                <!-- nav select -->
+                                <div class="hidden sm:ml-6 sm:flex sm:space-x-3">
+
+                                    <div id="booking" class="cursor-pointer flex justify-center item-center">
+                                        <p
+                                            class=" px-3 py-2 text-sm text-gray-900 hover:bg-lightGray hover:text-subPurple hover:rounded-md">
+                                            Booking
+                                            &nbsp;<i class="fa-solid fa-angle-down"></i></p>
+                                    </div>
+                                    <div class="nav-btn flex justify-center item-center">
+                                        <a href=""
+                                            class="inline-flex item-center px-3 py-2 text-sm text-gray-900  hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">FAQ</a>
+                                    </div>
+                                    <div class="nav-btn flex justify-center item-center">
+                                        <a href=""
+                                            class="inline-flex item-center px-3 py-2 text-sm text-gray-900  hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">Contact
+                                            us</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- search icon -->
+                            <p id="searchIcon" class="absolute cursor-pointer top-4 right-[80px] md:right-[100px]">
+                                <button type="button"
+                                    class="w-10 h-10 rounded-full text-gray-800 hover:text-subPurple hover:bg-lightGray active:opacity-60">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </p>
+
+                            <!-- cart icon -->
+                            <a type="button" id="cartIcon" class="absolute top-4 right-[40px] md:right-[50px]">
+                                <button type="button"
+                                    class="w-10 h-10 rounded-full text-gray-800 hover:text-subPurple hover:bg-lightGray active:opacity-60">
+                                    <i class="fa-solid fa-cart-shopping"></i>
+                                    <div id="cartAlert" class="hidden absolute top-0 left-6">
+                                        <div id="cartAlertNum"
+                                            class=" p-2 font-sans text-[12px] flex justify-center items-center bg-red-500 text-lightGray w-5 h-5 rounded-full">
+                                        </div>
+                                    </div>
+                                </button>
+                            </a>
+
+                            <!-- user icon -->
+                            <a href="" class="absolute top-4 right-0">
+                                <button type="button"
+                                    class="w-10 h-10 rounded-full text-gray-800 hover:text-subPurple hover:bg-lightGray active:opacity-60">
+                                    <i class="fa-solid fa-user"></i>
+                                </button>
+                            </a>
+
+                            <div id="bgMask" class="hidden fixed inset-0 bg-gray-500/25 transition-opacity"
+                                aria-hidden="true">
+                            </div>
+
+                            <!-- search box -->
+                            <div id="searchBox"
+                                class="hidden absolute z-10 top-24 right-8 max-w-72 font-mono divide-gray-100 overflow-hidden rounded-xl shadow-md bg-lightGray">
+                                <div class="grid grid-cols-1">
+                                    <input type="text"
+                                        class="col-start-1 row-start-1 h-10 w-full pl-11 pr-4 text-base text-gray-900 outline-none placeholder:text-gray-400"
+                                        placeholder="Search..." role="combobox" aria-expanded="false"
+                                        aria-controls="options">
+                                    <svg class="pointer-events-none col-start-1 row-start-1 ml-4 size-5 self-center text-gray-400"
+                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                                        <path fill-rule="evenodd"
+                                            d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mobile ham menu -->
+                        <div class="sm:hidden w-screen" id="hamMenu">
+                            <div class="p-5 space-y-1 pb-5 bg-lightGray w-screen h-screen overflow-y-auto">
+
+                                <p id="accordionBtn"
+                                    class="block cursor-pointer border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 ps-3 pe-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">
+                                    Booking&nbsp;&nbsp;<span id="plusIcon"><i class="fa-solid fa-plus"></i></span></p>
+
+                                <!-- ham menu accordion all -->
+                                <div id="accordionContext" class="hidden ps-8 py-2">
+                                    <!-- ham menu - accordion 1 -->
+                                    <h4 class="text-subPurple mb-3">
+                                        <a href="" class="group">Hiking</a>
+                                    </h4>
+                                    <ul class="text-gray-600 font-mono">
+                                        <li class="hover:text-subPurple mb-2"><a href="">Laugavegur</a></li>
+                                        <li class="hover:text-subPurple mb-2"><a href="">Hornstrandir</a></li>
+                                        <li class="hover:text-subPurple mb-2"><a href="">Skaftafell</a></li>
+                                        <li class="hover:text-subPurple mb-6"><a href="">Ásbyrgi Canyon</a></li>
+                                    </ul>
+
+                                    <!-- ham menu - accordion 2 -->
+                                    <h4 class="text-subPurple mb-3">
+                                        <a href="" class="group">Sightseeing</a>
+                                    </h4>
+                                    <ul class="text-gray-600 font-mono">
+                                        <li class="hover:text-subPurple mb-2"><a href="">Boat Tour</a></li>
+                                        <li class="hover:text-subPurple mb-2"><a href="">Nature Reserve Tour</a></li>
+                                        <li class="hover:text-subPurple mb-2"><a href="">Ecotourism</a></li>
+                                        <li class="hover:text-subPurple mb-6"><a href="">Culture Tour</a></li>
+                                    </ul>
+
+                                    <!-- ham menu - accordion 3 -->
+                                    <h4 class="text-subPurple mb-3">
+                                        <a href="" class="group">Outdoor Sports</a>
+                                    </h4>
+                                    <ul class="text-gray-600 font-mono">
+                                        <li class="hover:text-subPurple mb-2"><a href="">Skiing and Snowboarding</a>
+                                        </li>
+                                        <li class="hover:text-subPurple mb-2"><a href="">Kayaking</a></li>
+                                        <li class="hover:text-subPurple mb-6"><a href="">Horseback Riding</a></li>
+                                    </ul>
+
+                                    <!-- ham menu - accordion 4 -->
+                                    <h4 class="text-subPurple mb-3">
+                                        <a href="" class="group">Festival</a>
+                                    </h4>
+                                    <ul class="text-gray-600 font-mono">
+                                        <li class="hover:text-subPurple mb-2"><a href="">Reykjavík Culture Night</a>
+                                        </li>
+                                        <li class="hover:text-subPurple mb-2"><a href="">Iceland Airwaves</a></li>
+                                        <li class="hover:text-subPurple mb-2"><a href="">The Great Fish Day</a></li>
+                                        <li class="hover:text-subPurple"><a href="">Winter Lights Festival</a></li>
+                                    </ul>
+
+                                </div>
+
+                                <a href="./shop.html"
+                                    class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 ps-3 pe-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">FAQ</a>
+                                <a href=""
+                                    class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 ps-3 pe-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">Contact
+                                    us</a>
+                                <br><br>
+                                <hr>
+
+                                <!-- ham menu 最下面的logo和超連結 -->
+                                <div class="w-full h-80 pt-8 flex flex-col items-center gap-5">
+                                    <img src="./src/img/shop-logo.png" class="w-[120px]" alt="">
+                                    <p class="text-sm text-gray-400 mb-5">Explore &copy;</p>
+                                    <div class="flex justify-center gap-10 text-gray-400 text-2xl">
+                                        <a href=""><i class="fa-brands fa-square-facebook"></i></a>
+                                        <a href=""><i class="fa-brands fa-square-instagram"></i></a>
+                                        <a href=""><i class="fa-brands fa-youtube"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Booking flyout menu-->
+                        <div id="flyoutMenu"
+                            class="absolute inset-x-0 top-0 -z-10 bg-lightGray pt-14 shadow-lg ring-1 ring-gray-900/5">
+                            <div
+                                class="grid grid-cols-1 gap-2  py-6 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-0 sm:py-10 lg:grid-cols-4 lg:gap-4 mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
+
+                                <!-- flyout menu-1 -->
+                                <div class="relative -mx-3 flex gap-6 rounded-lg p-3 text-sm/6 sm:flex-col sm:p-6">
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 mb-3">
+                                            <a href="" class="group">Hiking&nbsp;&nbsp;&nbsp;<span
+                                                    class="group-hover:ms-[5px]"><i
+                                                        class="fa-solid fa-chevron-right"></i></span></a>
+                                        </h4>
+                                        <ul class="text-gray-600 font-mono">
+                                            <li class="hover:text-subPurple"><a href="">Laugavegur</a></li>
+                                            <li class="hover:text-subPurple"><a href="">Hornstrandir</a></li>
+                                            <li class="hover:text-subPurple"><a href="">Skaftafell</a></li>
+                                            <li class="hover:text-subPurple"><a href="">Ásbyrgi Canyon</a></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+
+                                <!-- flyout menu-2 -->
+                                <div class="relative -mx-3 flex gap-6 rounded-lg p-3 text-sm/6 sm:flex-col sm:p-6">
+
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 mb-3">
+                                            <a href="" class="group">Sightseeing&nbsp;&nbsp;&nbsp;<span
+                                                    class="group-hover:ms-[5px]"><i
+                                                        class="fa-solid fa-chevron-right"></i></span></a>
+                                        </h4>
+                                        <ul class="text-gray-600 font-mono">
+                                            <li class="hover:text-subPurple"><a href="">Boat Tour</a></li>
+                                            <li class="hover:text-subPurple"><a href="">Nature Reserve Tour</a></li>
+                                            <li class="hover:text-subPurple"><a href="">Ecotourism</a></li>
+                                            <li class="hover:text-subPurple"><a href="">Culture Tour</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- flyout menu-3 -->
+                                <div class="relative -mx-3 flex gap-6 rounded-lg p-3 text-sm/6 sm:flex-col sm:p-6">
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 mb-3">
+                                            <a href="" class="group">Outdoor Sports&nbsp;&nbsp;&nbsp;<span
+                                                    class="group-hover:ms-[5px]"><i
+                                                        class="fa-solid fa-chevron-right"></i></span></a>
+                                        </h4>
+                                        <ul class="text-gray-600 font-mono">
+                                            <li class="hover:text-subPurple"><a href="">Skiing and Snowboarding</a></li>
+                                            <li class="hover:text-subPurple"><a href="">Kayaking</a></li>
+                                            <li class="hover:text-subPurple"><a href="">Horseback Riding</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- flyout menu-4 -->
+                                <div class="relative -mx-3 flex gap-6 rounded-lg p-3 text-sm/6 sm:flex-col sm:p-6">
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800 mb-3">
+                                            <a href="" class="group">Festival&nbsp;&nbsp;&nbsp;<span
+                                                    class="group-hover:ms-[5px]"><i
+                                                        class="fa-solid fa-chevron-right"></i></span></a>
+                                        </h4>
+                                        <ul class="text-gray-600 font-mono">
+                                            <li class="hover:text-subPurple"><a href="">Reykjavík Culture Night</a></li>
+                                            <li class="hover:text-subPurple"><a href="">Iceland Airwaves</a></li>
+                                            <li class="hover:text-subPurple"><a href="">The Great Fish Day</a></li>
+                                            <li class="hover:text-subPurple"><a href="">Winter Lights Festival</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- shopping cart 購物車內容 -->
+                        <div id="cartShow" class="hidden relative z-20" role="dialog" aria-modal="true">
+                            <!-- 灰色背景 -->
+                            <div class="hidden sm:fixed sm:inset-0 sm:block sm:bg-gray-500/75 sm:transition-opacity"
+                                aria-hidden="true">
+                            </div>
+
+                            <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+                                <div
+                                    class="flex min-h-full items-stretch justify-center text-center sm:items-center sm:px-6 lg:px-8">
+                                    <div class="flex w-full max-w-3xl transform text-left text-base transition sm:my-8">
+                                        <form
+                                            class="relative flex w-full flex-col overflow-hidden bg-white pb-8 pt-6 sm:rounded-lg sm:pb-6 lg:py-8">
+                                            <div class="flex items-center justify-between px-4 sm:px-6 lg:px-8">
+                                                <h2 class="text-lg font-medium text-gray-800">Shopping Cart</h2>
+                                                <button id="cartCloseBtn" type="button"
+                                                    class="text-gray-400 hover:text-gray-500">
+                                                    <svg class="size-6" fill="none" viewBox="0 0 24 24"
+                                                        stroke-width="1.5" stroke="currentColor" aria-hidden="true"
+                                                        data-slot="icon">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M6 18 18 6M6 6l12 12" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+
+                                            <div id="cartEmpty"
+                                                class="w-full h-64 text-gray-400 text-wrap break-words flex justify-center items-center text-2xl">
+                                                <p class="h-full flex justify-center items-center">Cart is empty.
+                                                </p>
+                                            </div>
+
+                                            <section>
+                                                <template id="cartTemplate">
+                                                    <div class="divide-y divide-gray-200 px-4 sm:px-6 lg:px-8">
+                                                        <li class="flex py-8 text-sm sm:items-center">
+                                                            <img id="cartImg" src="" alt=""
+                                                                class="size-24 flex-none rounded-lg border border-gray-200 sm:size-32">
+                                                            <div class="w-full grid grid-cols-12 ps-8">
+                                                                <div class="col-span-10">
+                                                                    <h3 class="text-md text-gray-900">
+                                                                        <a id="cartTitle" href="#"></a>
+                                                                    </h3>
+                                                                    <p class="mt-1 text-[14px] font-sans text-gray-400">
+                                                                        Date:&nbsp;<span id="cartDate"></span>&nbsp;&nbsp;/&nbsp;&nbsp;Group
+                                                                        Size:&nbsp;<span id="cartGroupSize"></span>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="col-span-2">
+                                                                    <p
+                                                                        class="text-md text-gray-800 sm:w-1/3 sm:flex-none sm:text-right">
+                                                                        €&nbsp;<span id="cartPrice"></span></p>
+
+                                                                    <button id="cartRemoveBtn" type="button"
+                                                                        class="text-[10px] text-subPurple hover:opacity-50 sm:mt-2">
+                                                                        <span>Remove</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <hr><br>
+                                                    </div>
+                                                </template>
+                                            </section>
+
+                                            <section id="cartContainer"></section>
+
+                                            <section id="cartTotal" aria-labelledby="summary-heading" class="hidden mt-auto sm:px-6 lg:px-8">
+                                                <div class="bg-gray-50 p-6 sm:rounded-lg sm:p-8">
+                                                    <h2 id="summary-heading" class="sr-only">Order summary</h2>
+
+                                                    <div class="flow-root">
+                                                        <dl class="-my-4 divide-y divide-gray-200 text-sm">
+                                                            <div class="flex items-center justify-between py-4">
+                                                                <dt class="text-gray-400">Subtotal</dt>
+                                                                <dd  class="font-medium text-gray-400">
+                                                                    €&nbsp;<span id="cartSubtotal"></span></dd>
+                                                            </div>
+                                                            <div class="flex items-center justify-between py-4">
+                                                                <dt class="text-gray-400">Tax&nbsp;&nbsp;&nbsp;<span
+                                                                        class="text-subPurple text-[16px] hover:opacity-50 cursor-pointer"><i
+                                                                            class="fa-solid fa-circle-question"></i></span>
+                                                                </dt>
+                                                                <dd class="font-medium text-gray-400">
+                                                                    €&nbsp;<span id="cartTax"></span></dd>
+                                                            </div>
+                                                            <div class="flex items-center justify-between py-4">
+                                                                <dt class="text-base font-medium text-gray-800">Order
+                                                                    total
+                                                                </dt>
+                                                                <dd 
+                                                                    class="text-base font-medium text-gray-800">
+                                                                    €&nbsp;<span id="cartOrderTotal"></span>
+                                                                </dd>
+                                                            </div>
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-8 flex justify-end px-4 sm:px-6 lg:px-8">
+                                                    <button type="submit"
+                                                        class="rounded-md border border-transparent bg-subPurple px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-mainYellow hover:text-gray-800 active:opacity-50">Continue
+                                                        to Payment</button>
+                                                </div>
+                                            </section>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </section>
+        </nav>
+
+        <!-- Swiper -->
+        <section id="bannerSwiper"
+            class="swiper w-screen h-[300px] md:h-[450px] lg:h-[600px] flex justify-center item-center mt-[80px]">
+            <div class="swiper-wrapper w-full h-full">
+                <!-- swiper-1-area -->
+                <div
+                    class="swiper-slide w-full h-full bg-swiper-1-sm md:bg-swiper-1 bg-cover bg-no-repeat grid grid-row-12 p-8 md:p-14 lg:p-20">
+                    <h2
+                        class="text-3xl md:text-5xl row-span-6 lg:text-7xl text-mainYellow mb-3 md:mb-5 lg:mb-8 relative">
+                        Kirkjufell
+                    </h2>
+                    <h2 class="text-3xl md:text-5xl row-span-6 lg:text-7xl text-mainYellow mb-8 md:mb-44 lg:mb-52">
+                        Hiking
+                    </h2>
+                    <p class="invisible md:visible md:text-lg lg:text-2xl text-lightGray">Known as the
+                        "photographer's paradise".</p>
+                    <p class="visible text-sm sm:invisible text-lightGray mb-2">Known as the
+                    </p>
+                    <p class="visible text-sm sm:invisible text-lightGray">"photographer's paradise".</p>
+                </div>
+
+                <!-- swiper-2-area -->
+                <div
+                    class="swiper-slide w-full h-full bg-swiper-2-sm md:bg-swiper-2 bg-cover bg-no-repeat grid grid-row-12 p-8 md:p-14 lg:p-20">
+                    <h2
+                        class="text-3xl md:text-5xl row-span-6 lg:text-7xl text-mainYellow mb-3 md:mb-5 lg:mb-8 relative">
+                        Gullfoss
+                    </h2>
+                    <h2 class="text-3xl md:text-5xl row-span-6 lg:text-7xl text-mainYellow mb-8 md:mb-44 lg:mb-52">
+                        Falls
+                    </h2>
+                    <p class="invisible md:visible md:text-lg lg:text-2xl text-lightGray">known as the Golden
+                        Falls, the breathtaking waterfalls.</p>
+                    <p class="visible text-sm sm:invisible text-lightGray mb-2">known as the Golden
+                        Falls,
+                    </p>
+                    <p class="visible text-sm sm:invisible text-lightGray">the breathtaking waterfalls.</p>
+                </div>
+
+
+                <!-- swiper-3-area -->
+                <div
+                    class="swiper-slide w-full h-full bg-swiper-3-sm md:bg-swiper-3 bg-cover bg-no-repeat grid grid-row-12 p-8 md:p-14 lg:p-20">
+                    <h2
+                        class="text-3xl md:text-5xl row-span-6 lg:text-7xl text-mainYellow mb-3 md:mb-5 lg:mb-8 relative">
+                        Námafjall
+                    </h2>
+                    <h2 class="text-3xl md:text-5xl row-span-6 lg:text-7xl text-mainYellow mb-8 md:mb-44 lg:mb-52">
+                        Geotherm
+                    </h2>
+                    <p class="invisible md:visible md:text-lg lg:text-2xl text-lightGray">Be characterized
+                        by sulfuric fumaroles and mud pools.</p>
+                    <p class="visible text-sm sm:invisible text-lightGray mb-2">Be characterized
+                        by the
+                    </p>
+                    <p class="visible text-sm sm:invisible text-lightGray">sulfuric fumaroles and mud pools.</p>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <main>
+        <!-- product cards -->
+        <div class="sm:px-12 lg:px-60">
+            <div class="mx-auto max-w-2xl px-4 py-10 sm:py-14 sm:px-6 lg:max-w-5xl lg:px-8">
+                <h2 class="text-2xl md:text-4xl text-gray-800 flex justify-center">
+                    <span class="text-subPurple"><i class="fa-solid fa-volcano"></i></span>
+                    &nbsp;Hiking
+                </h2>
+                <br>
+                <hr><br><br>
+
+                <!-- 商品card區 使用template模板生成 -->
+                <div id="productContainer"
+                    class="grid gap-y-4 grid-cols-2 gap-x-2 sm:grid-cols-3 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-8 mb-20">
+                    <template id="productTemplate">
+                        <a id="productUrl" href="" id="viewDetailsBtn"
+                            class="group relative cursor-pointer flex flex-col max-h-[800px] rounded-lg shadow-lg border border-gray-200 bg-white">
+                            <div class="px-3 pt-3">
+                                <img id="productImg" src="" alt=""
+                                    class="w-full object-cover group-hover:opacity-75 sm:aspect-auto h-36">
+                            </div>
+                            <div class="flex flex-1 flex-col space-y-2 p-4">
+                                <h3 id="productTitle"
+                                    class="break-words text-wrap text-sm font-sans font-medium text-gray-800 mb-2"></h3>
+                                <div class="flex flex-1 flex-col justify-end">
+                                    <p class="break-words text-wrap text-md font-sans font-medium text-gray-800 mb-2">
+                                        €&nbsp;<span id="productPrice"></span>
+                                    </p>
+                                    <p id="productBrief"
+                                        class="text-[12px] break-words text-wrap text-sm font-mono text-gray-400">
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                    </template>
+                </div>
+
+                <hr><br><br>
+
+                <!-- 頁尾 分頁頁碼 pagination -->
+                <div class="flex justify-center mb-12">
+                    <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                        <a
+                            class="relative cursor-pointer active:opacity-50 inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-white focus:z-20 focus:outline-offset-0">
+                            <span class="sr-only">Previous</span>
+                            <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                                data-slot="icon">
+                                <path fill-rule="evenodd"
+                                    d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                        <a aria-current="page"
+                            class="relative cursor-pointer active:opacity-50 z-10 inline-flex items-center bg-subPurple px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">1</a>
+                        <a
+                            class="relative cursor-pointer active:opacity-50 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-white focus:z-20 focus:outline-offset-0">2</a>
+                        <a
+                            class="relative cursor-pointer active:opacity-50 hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-white focus:z-20 focus:outline-offset-0 md:inline-flex">3</a>
+                        <span
+                            class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">...</span>
+                        <a
+                            class="relative cursor-pointer active:opacity-50 hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-white focus:z-20 focus:outline-offset-0 md:inline-flex">8</a>
+                        <a
+                            class="relative cursor-pointer active:opacity-50 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-white focus:z-20 focus:outline-offset-0">9</a>
+                        <a
+                            class="relative cursor-pointer active:opacity-50 inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-white focus:z-20 focus:outline-offset-0">10</a>
+                        <a
+                            class="relative cursor-pointer active:opacity-50 inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-white focus:z-20 focus:outline-offset-0">
+                            <span class="sr-only">Next</span>
+                            <svg class="size-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
+                                data-slot="icon">
+                                <path fill-rule="evenodd"
+                                    d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-400 text-lightGray">
+        <section class="w-screen h-[400px] md:h-[350px] flex justify-center items-center">
+            <div class="grid grid-row-12 px-8 py-14 md:py-12 justify-center items-center">
+                <!-- footer logo -->
+                <div class="row-span-7 flex flex-col justify-center items-center space-y-4 mb-6">
+                    <img src="./src/img/logo.png" class="max-w-[40px] max-h-[40px]" alt="company logo">
+                    <p class="text-sm">Explore &copy;</p>
+                </div>
+
+                <!-- footer select -->
+                <div
+                    class="row-span-5 flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-5 text-md">
+                    <div class="md:hidden line w-52 h-[1px] bg-lightGray"></div>
+                    <a href="" class="hover:text-mainYellow">
+                        <p>Concept</p>
+                    </a>
+                    <p class="hidden md:block">|</p>
+                    <a href="" class="hover:text-mainYellow">
+                        <p>FAQ</p>
+                    </a>
+                    <p class="hidden md:block">|</p>
+                    <a href="" class="hover:text-mainYellow">
+                        <p>Contact us</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="./src/js/shopNav.js"></script>
+    <script src="./src/js/shopBanner.js"></script>
+    <script src="./src/js/productsDatas.js"></script>
+</body>
+
+<script>
+    // main 商品卡片 template 模板
+    const products = [
+        {
+            img: './src/img/product-img-1.png',
+            imgBig: './src/img/product-big-img-1.png',
+            title: 'Laugavegur Trail',
+            price: 100,
+            brief: 'South',
+            briefLong: 'The Laugavegur Trail is one of Iceland’s most famous hiking routes, stretching from the Landmannalaugar region to Þórsmörk. Known for its diverse landscapes, it features hot springs, colorful rhyolite mountains, glaciers, and vast lava fields.',
+            aboutTheTour: 'Embark on an unforgettable adventure along the Laugavegur Trail. This tour will take you through Iceland’s iconic landscapes, where you’ll experience the incredible variety of terrain, including geothermal hot springs, volcanic craters, and lush valleys. As you hike, our knowledgeable guides will share insights into the area’s geology, flora, and history, offering you a deeper connection to this stunning natural wonder.',
+            quantity: 1,
+            duration: '4 days and 3 nights',
+            time: 'Approximately 6–8 hours of hiking per day',
+            startTime: '8:00 AM on the first day',
+            location: 'Landmannalaugar (Starting Point)',
+            meetingTime: '30 minutes before the tour starts',
+            groupSize: 12,
+            beforeYouGo: `
+        <li>Pack appropriate clothing for changing weather conditions, including waterproof layers and warm gear.</li>
+        <li>Bring a durable backpack, trekking poles, and a refillable water bottle.</li>
+        <li>Ensure you have enough snacks and lightweight meals for the journey, as there are no food stops along the trail.</li>
+        <li>Inform someone of your itinerary before starting the trek.</li>
+        <li>If you require vegetarian or special meal options, please specify during booking.</li>
+        `,
+            rules: `
+        <li>This tour is not suitable for beginners; participants should have prior hiking experience.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;12 participants to maintain safety and group cohesion.</li>
+        <li>Children under 16 and individuals with serious health conditions are not recommended to join this trek.</li>
+        <li>All participants must sign a liability waiver before departure.</li>
+        <li>The schedule may change due to weather conditions. If the trek is canceled due to severe weather, participants can choose between a full refund or rescheduling.</li>
+        <li>Please follow the guide’s instructions at all times to ensure safety.</li>
+        `,
+
+        },
+        {
+            img: './src/img/product-img-2.png',
+            imgBig: './src/img/product-big-img-2.png',
+            title: 'Hornstrandir Nature Reserve',
+            price: 20,
+            brief: 'West',
+            briefLong: 'Located in the Westfjords of Iceland, it is an untouched wilderness paradise known for its stunning fjords, rugged mountains, and diverse wildlife, especially Arctic foxes.',
+            aboutTheTour: 'Discover the hidden gem of Iceland’s Westfjords—Hornstrandir Nature Reserve. During this tour, you will hike through the reserve\'s stunning landscapes, enjoy panoramic ocean views, and learn about the area\'s rich history and culture from our expert guide.',
+            quantity: 1,
+            duration: '8 hours (including round-trip transportation)',
+            time: 'Approximately 4 hours',
+            startTime: '8:00 AM',
+            location: 'The main dock in Ísafjörður town center',
+            meetingTime: '15 minutes before the tour starts',
+            groupSize: 8,
+            beforeYouGo: `<li>Wear waterproof clothing and sturdy hiking boots with good traction.</li>
+        <li>Bring plenty of water and snacks.</li>
+        <li>Note that there is no mobile signal during the tour; inform family or friends of your plans beforehand.</li>
+        <li>If you have any special dietary requirements, please specify them during booking.</li>`,
+            rules: `<li>This tour is not recommended for children under 12.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;The tour is limited to 8 participants to ensure an intimate and personalized experience.</li>
+        <li>Not suitable for pregnant individuals or those with cardiovascular conditions.</li>
+        <li>All participants are required to sign a liability waiver before joining the tour.</li>
+        <li>The schedule may be subject to change or cancellation due to weather conditions. If the tour is canceled due to severe weather, we will offer a full refund or an alternative date.</li>`,
+        },
+        {
+            img: './src/img/product-img-3.png',
+            imgBig: './src/img/product-big-img-3.png',
+            title: 'Skaftafell Glacier Hikes',
+            price: 18,
+            brief: 'South',
+            briefLong: 'Skaftafell, located within Vatnajökull National Park, is known for its spectacular glaciers, breathtaking ice formations, and scenic mountain landscapes. The area offers a variety of hiking trails suitable for all levels of adventurers.',
+            aboutTheTour: 'Embark on a thrilling adventure in the heart of Vatnajökull National Park with our Skaftafell Glacier Hike. During this tour, you will explore the massive glaciers, trek across ice-covered terrain, and marvel at the stunning ice formations. Our expert guides will lead you through the glacier’s fascinating features, providing insights into the region’s unique geology and the forces that shaped this icy wonderland.',
+            quantity: 1,
+            duration: '6 hours (including round-trip transportation)',
+            time: 'Approximately 3.5 hours',
+            startTime: '9:00 AM',
+            location: 'Skaftafell National Park Visitor Center',
+            meetingTime: '20 minutes before the tour starts',
+            groupSize: 12,
+            beforeYouGo: `<li>Wear warm, waterproof clothing and sturdy hiking boots with good grip.</li>
+        <li>Bring plenty of water, snacks, and a camera to capture the stunning views.</li>
+        <li>Note that there is limited mobile signal in the area, so make sure to inform someone of your plans beforehand.</li>
+        <li>If you have any dietary restrictions, please let us know at the time of booking.</li>`,
+            rules: `<li>This tour is not recommended for children under 10 years old.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;The group size is limited to 12 participants to ensure a more personalized experience.</li>
+        <li>Not suitable for individuals with mobility impairments or severe medical conditions.</li>
+        <li>All participants must sign a liability waiver before the tour begins.</li>
+        <li>Tour may be canceled or modified due to weather conditions. If the tour is canceled, a full refund or an alternative date will be offered.</li>`
+
+        },
+        {
+            img: './src/img/product-img-4.png',
+            imgBig: './src/img/product-big-img-4.png',
+            title: 'Ásbyrgi Canyon Hike',
+            price: 18,
+            brief: 'North',
+            briefLong: 'Ásbyrgi Canyon, located in the northern part of Iceland, is a stunning horseshoe-shaped depression surrounded by towering cliffs. Known for its unique geological features and lush vegetation, it is a serene hiking destination.',
+            aboutTheTour: 'Join us for a hike through Ásbyrgi Canyon, one of Iceland’s most picturesque natural wonders. During this tour, you will walk along the canyon’s winding paths, surrounded by towering cliffs and lush greenery. Our expert guides will share the fascinating history and geology of the area, including the legend of the canyon’s creation, and introduce you to the rich wildlife that inhabits this tranquil oasis.',
+            quantity: 1,
+            duration: '6 hours (including round-trip transportation)',
+            time: 'Approximately 3.5 hours',
+            startTime: '9:00 AM',
+            location: 'The Ásbyrgi Canyon Visitor Center',
+            meetingTime: '15 minutes before the tour starts',
+            groupSize: 10,
+            beforeYouGo: `
+        <li>Wear comfortable hiking boots and warm, layered clothing suitable for changing weather conditions.</li>
+        <li>Bring enough water, snacks, and a packed lunch for the hike.</li>
+        <li>Be prepared for uneven terrain and steep sections during the hike.</li>
+        <li>If you have any allergies or medical conditions, please inform the guide ahead of time.</li>
+        `,
+            rules: `
+        <li>This tour is not recommended for individuals with limited mobility or severe knee issues.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;This tour is limited to 10 participants to maintain a safe and enjoyable experience.</li>
+        <li>Not suitable for children under 10 years old due to the challenging terrain.</li>
+        <li>All participants must sign a waiver acknowledging the risks involved in the hike.</li>
+        <li>The tour may be canceled or rescheduled if weather conditions are unsafe. In case of cancellation, a full refund or alternative date will be provided.</li>
+        `
+
+        },
+        {
+            img: './src/img/product-img-5.png',
+            imgBig: './src/img/product-big-img-5.png',
+            title: 'Jökulsárlón Glacier Lagoon Boat Tour',
+            price: 28,
+            brief: 'South',
+            briefLong: 'Jökulsárlón Glacier Lagoon, located in southeastern Iceland, is a breathtaking natural wonder. Known for its stunning icebergs floating in the lagoon, it offers an unforgettable view of the nearby Vatnajökull glacier.',
+            aboutTheTour: 'Embark on an unforgettable boat tour of the Jökulsárlón Glacier Lagoon, where you’ll witness majestic icebergs drifting serenely in the crystal-clear waters. During this tour, you’ll glide past colossal ice formations and get a closer look at the stunning beauty of the Vatnajökull glacier. Our experienced guides will provide insight into the glacier’s history, its impact on the landscape, and the unique wildlife that inhabits the area, including seals and birds.',
+            quantity: 1,
+            duration: '6 hours (including round-trip transportation)',
+            time: 'Approximately 3 hours',
+            startTime: '10:00 AM',
+            location: 'Jökulsárlón Glacier Lagoon, located along Route 1',
+            meetingTime: '20 minutes before the tour starts',
+            groupSize: 10,
+            beforeYouGo: `<li>Wear warm, waterproof clothing and sturdy footwear with good grip.</li>
+        <li>Bring a camera to capture the stunning views.</li>
+        <li>Ensure your camera or phone is protected from water splashes.</li>
+        <li>Note that mobile signal may be limited in the area, so inform others of your plans in advance.</li>
+        <li>If you have any specific dietary needs, please inform us at the time of booking.</li>`,
+            rules: `<li>This tour is not suitable for children under 10 years old.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;The tour accommodates up to 10 participants for a more personalized experience.</li>
+        <li>Not recommended for those with limited mobility or heart conditions.</li>
+        <li>All participants must sign a liability waiver before taking part in the tour.</li>
+        <li>Tour schedules may be adjusted or canceled due to extreme weather. If canceled, a full refund or alternative date will be offered.</li>`
+        },
+        {
+            img: './src/img/product-img-6.png',
+            imgBig: './src/img/product-big-img-6.png',
+            title: 'Mývatn Geothermal Tour',
+            price: 18,
+            brief: 'North',
+            briefLong: 'Mývatn Geothermal and Nature Reserve, located in northeastern Iceland, is a geothermal paradise known for its unique volcanic landscapes, bubbling mud pools, and diverse birdlife, especially during the summer months.',
+            aboutTheTour: 'Join us for a fascinating tour through Mývatn Geothermal and Nature Reserve, a place where nature’s raw energy is on full display. During this tour, you will explore the geothermal hot springs, fumaroles, and volcanic craters that define this region. Our expert guide will lead you through the area, explaining the geothermal processes and the history behind the formation of the landscape. You’ll also have the chance to spot the diverse bird species that thrive in the area, making it a must-see destination for nature lovers.',
+            quantity: 1,
+            duration: '9 hours (including round-trip transportation)',
+            time: 'Approximately 5 hours',
+            startTime: '9:00 AM',
+            location: 'Mývatn Lake, meeting point at the parking lot near the Nature Baths',
+            meetingTime: '20 minutes before the tour starts',
+            groupSize: 12,
+            beforeYouGo: `
+        <li>Wear warm, waterproof clothing and comfortable hiking shoes.</li>
+        <li>Bring a swimsuit if you plan to visit the Nature Baths.</li>
+        <li>Carry a camera to capture the beautiful geothermal landscapes.</li>
+        <li>Be prepared for limited mobile signal during some parts of the tour.</li>
+        <li>If you have any specific dietary preferences, please inform us at the time of booking.</li>`,
+            rules: `
+        <li>This tour is not recommended for children under 10 years old.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;The tour accommodates up to 12 participants for a more intimate and enjoyable experience.</li>
+        <li>Not suitable for pregnant individuals or those with heart conditions.</li>
+        <li>All participants are required to sign a liability waiver before joining the tour.</li>
+        <li>The tour may be adjusted or canceled due to adverse weather conditions. If canceled, a full refund or alternative date will be offered.</li>`
+        },
+        {
+            img: './src/img/product-img-7.png',
+            imgBig: './src/img/product-big-img-7.png',
+            title: 'Snæfellsnes Coastal Ecology Walk',
+            price: 15,
+            brief: 'West',
+            briefLong: 'Snæfellsnes Peninsula, located in western Iceland, is known for its diverse coastal ecosystems, rugged cliffs, black sand beaches, and the iconic Snæfellsjökull volcano, which is surrounded by a rich array of plant and animal life.',
+            aboutTheTour: 'Embark on a peaceful and educational walk along the stunning coastline of Snæfellsnes Peninsula. During this tour, you’ll explore dramatic cliffs, black sand beaches, and observe the diverse ecology of the area, including seabirds, marine life, and wildflowers. Our experienced guide will share fascinating insights into the region’s unique natural history and geology, as well as its connection to Icelandic folklore and mythology. This tour offers a perfect blend of nature, culture, and history, ideal for nature enthusiasts and those seeking tranquility.',
+            quantity: 1,
+            duration: '6 hours (including round-trip transportation)',
+            time: 'Approximately 3 hours',
+            startTime: '9:00 AM',
+            location: 'Snæfellsnes Peninsula, meeting point at the parking lot near Arnarstapi village',
+            meetingTime: '20 minutes before the tour starts',
+            groupSize: 12,
+            beforeYouGo: `
+        <li>Wear comfortable walking shoes and weather-appropriate clothing, as conditions can change rapidly.</li>
+        <li>Bring water, snacks, and a camera to capture the scenic beauty.</li>
+        <li>There may be limited mobile service during the tour, so inform family or friends of your plans in advance.</li>
+        <li>If you have any dietary restrictions, please inform us at the time of booking.</li>`,
+            rules: `
+        <li>This tour is not recommended for children under 10 years old.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;The tour is limited to 12 participants to ensure a more personalized experience.</li>
+        <li>Not suitable for those with mobility issues or heart conditions.</li>
+        <li>All participants are required to sign a liability waiver before joining the tour.</li>
+        <li>The schedule may be subject to change or cancellation due to weather conditions. In case of cancellation due to severe weather, we will offer a full refund or an alternative date.</li>`
+        },
+        {
+            img: './src/img/product-img-8.png',
+            imgBig: './src/img/product-big-img-8.png',
+            title: 'Golden Circle Tour',
+            price: 18,
+            brief: 'Southwest',
+            briefLong: 'The Golden Circle is one of Iceland’s most popular tourist routes, featuring stunning natural attractions such as Þingvellir National Park, the Geysir geothermal area, and the powerful Gullfoss waterfall.',
+            aboutTheTour: 'Join us for a memorable journey through the Golden Circle, where you will experience some of Iceland’s most iconic landmarks. Our tour will take you to Þingvellir National Park, a UNESCO World Heritage Site, where you can witness the rift between the Eurasian and North American tectonic plates. You’ll also visit the famous Geysir geothermal area, home to the erupting Strokkur geyser, and the breathtaking Gullfoss waterfall, where water cascades dramatically into a deep canyon. Along the way, your knowledgeable guide will provide fascinating insights into Iceland’s history, geology, and natural wonders.',
+            quantity: 1,
+            duration: '9 hours (including round-trip transportation)',
+            time: 'Approximately 5 hours',
+            startTime: '9:00 AM',
+            location: 'Thingvellir National Park Visitor Center',
+            meetingTime: '20 minutes before the tour starts',
+            groupSize: 15,
+            beforeYouGo: `
+        <li>Wear warm, waterproof clothing and comfortable walking shoes.</li>
+        <li>Bring a camera to capture the stunning landscapes.</li>
+        <li>Ensure your phone or camera is protected from water and cold temperatures.</li>
+        <li>Inform others of your plans in advance, as mobile signal may be limited in some areas.</li>
+        <li>If you have any specific dietary needs, please notify us at the time of booking.</li>`,
+            rules: `
+        <li>This tour is not recommended for children under 8 years old.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;The tour accommodates up to 15 participants to ensure a comfortable and enjoyable experience.</li>
+        <li>Not suitable for those with limited mobility or severe health conditions.</li>
+        <li>All participants are required to sign a liability waiver before joining the tour.</li>
+        <li>The schedule may be subject to change or cancellation due to weather conditions. If the tour is canceled due to extreme weather, a full refund or alternative date will be offered.</li>`
+        },
+        {
+            img: './src/img/product-img-9.png',
+            imgBig: './src/img/product-big-img-9.png',
+            title: 'Dalvík Snowboarding',
+            price: 18,
+            brief: 'North',
+            briefLong: 'Dalvík, a charming town in northern Iceland, is renowned for its excellent snowboarding slopes, surrounded by picturesque mountains and the stunning fjords of Eyjafjörður.',
+            aboutTheTour: 'Experience the thrill of snowboarding in Dalvík, one of Iceland’s best winter sports destinations. Nestled in the heart of the stunning Eyjafjörður fjord, this tour offers a variety of slopes suitable for all skill levels. Whether you’re a beginner or an experienced snowboarder, you’ll enjoy breathtaking views of the surrounding mountains and the Arctic waters. Our expert instructors will guide you through the slopes, ensuring safety and providing tips to improve your technique. After an exhilarating day on the slopes, relax and take in the unique beauty of the Northern Lights, a perfect way to end your adventure in Dalvík.',
+            quantity: 1,
+            duration: '6 hours (including round-trip transportation)',
+            time: 'Approximately 3 hours',
+            startTime: '9:00 AM',
+            location: 'Dalvík Ski Resort, Dalvík, Iceland',
+            meetingTime: '30 minutes before the tour starts',
+            groupSize: 10,
+            beforeYouGo: `<li>Wear appropriate snowboarding gear, including a waterproof jacket, pants, and gloves.</li>
+        <li>Bring a helmet and any personal snowboarding equipment, though rentals are available.</li>
+        <li>Ensure your phone or camera is properly protected from snow and moisture.</li>
+        <li>If you have any medical conditions, please inform the guide beforehand.</li>`,
+            rules: `<li>This tour is not recommended for beginners or children under 12 years old.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;The tour is limited to 10 participants to ensure a personalized experience.</li>
+        <li>Not suitable for pregnant individuals or those with severe joint or heart conditions.</li>
+        <li>All participants must sign a liability waiver before taking part in the tour.</li>
+        <li>The schedule may be subject to change or cancellation due to weather conditions. If the tour is canceled due to severe weather, a full refund or alternative date will be offered.</li>`
+        },
+        {
+            img: './src/img/product-img-10.png',
+            imgBig: './src/img/product-big-img-10.png',
+            title: 'Westfjords Kayaking',
+            price: 12,
+            brief: 'North',
+            briefLong: 'The Westfjords of Iceland are a remote paradise for kayaking enthusiasts, featuring dramatic coastlines, hidden fjords, and abundant wildlife, including seals and seabirds.',
+            aboutTheTour: 'Embark on a kayaking adventure through the pristine waters of the Westfjords, one of Iceland’s most secluded and untouched regions. This tour will take you along the rugged coastlines, where you’ll paddle through serene fjords, explore dramatic cliffs, and get up close to the abundant wildlife, such as seals and a variety of seabirds. With your experienced guide, you’ll navigate through calm waters, taking in the breathtaking scenery of the Westfjords’ dramatic landscapes. This tour offers a unique perspective of Iceland’s natural beauty, perfect for those seeking adventure and tranquility in one of the country’s most beautiful regions.',
+            quantity: 1,
+            duration: '6 hours (including round-trip transportation)',
+            time: 'Approximately 3 hours',
+            startTime: '9:00 AM',
+            location: 'The kayaking departure point in Patreksfjörður harbor',
+            meetingTime: '15 minutes before the tour starts',
+            groupSize: 12,
+            beforeYouGo: `<li>Wear waterproof clothing and shoes suitable for wet conditions.</li>
+        <li>Bring a water bottle and light snacks to keep hydrated and energized.</li>
+        <li>Be prepared for cold weather; layers are recommended.</li>
+        <li>Note that mobile signal might be unavailable during the tour, so inform someone of your plans beforehand.</li>
+        <li>If you have any special dietary needs, please let us know during booking.</li>`,
+            rules: `<li>This tour is not recommended for children under 10 years old.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;The tour is limited to 12 participants to maintain a small group experience.</li>
+        <li>Not suitable for individuals with back problems, heart conditions, or limited mobility.</li>
+        <li>All participants are required to sign a liability waiver before taking part in the tour.</li>
+        <li>The tour may be canceled or rescheduled due to unfavorable weather conditions. If canceled, we will offer a full refund or alternative date.</li>`
+        },
+        {
+            img: './src/img/product-img-11.png',
+            imgBig: './src/img/product-big-img-11.png',
+            title: 'Eldhestar Horseback Riding',
+            price: 20,
+            brief: 'West',
+            briefLong: 'Located in the heart of Iceland, Eldhestar offers a unique horseback riding experience through stunning volcanic landscapes, valleys, and rivers.',
+            aboutTheTour: 'Discover the magic of Iceland on horseback with Eldhestar Horseback Riding. This tour will take you through some of the most scenic and diverse landscapes in Iceland, from volcanic terrains and rugged valleys to serene rivers. You’ll ride Icelandic horses, known for their gentle nature and unique gait, offering a comfortable and memorable experience. Your expert guide will share fascinating insights into the region’s history, geology, and wildlife as you explore the natural beauty of the Icelandic countryside. Whether you’re a seasoned rider or a beginner, this tour offers an unforgettable adventure in the heart of Iceland.',
+            quantity: 1,
+            duration: '5 hours (including round-trip transportation)',
+            time: 'Approximately 2 hours',
+            startTime: '9:00 AM',
+            location: 'Eldhestar stables, located just outside Hveragerði',
+            meetingTime: '20 minutes before the tour starts',
+            groupSize: 10,
+            beforeYouGo: `
+        <li>Wear comfortable clothes suitable for horseback riding and closed-toe shoes.</li>
+        <li>Bring a light jacket, as temperatures can vary during the ride.</li>
+        <li>It is recommended to bring sunscreen and sunglasses for protection from the sun.</li>
+        <li>Note that there is limited mobile signal in the area; inform family or friends of your plans in advance.</li>
+        <li>If you have any special dietary needs or medical conditions, please notify us during booking.</li>`,
+            rules: `
+        <li>This tour is not suitable for children under 8 years old.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;The tour is limited to 10 participants to ensure a personalized experience.</li>
+        <li>Not recommended for pregnant individuals or those with severe back problems.</li>
+        <li>All participants must sign a liability waiver before taking part in the tour.</li>
+        <li>The tour may be canceled or adjusted due to weather conditions. In case of cancellation, a full refund or alternative date will be offered.</li>`
+        },
+        {
+            img: './src/img/product-img-12.png',
+            imgBig: './src/img/product-big-img-12.png',
+            title: 'Vestmannaeyjar Puffins Viewing',
+            price: 8,
+            brief: 'South',
+            briefLong: 'Located off the southern coast of Iceland, Vestmannaeyjar is a paradise for birdwatching enthusiasts, offering a unique opportunity to observe puffins up close in their natural habitat.',
+            aboutTheTour: 'Embark on an unforgettable puffin viewing tour in Vestmannaeyjar, one of Iceland’s most iconic birdwatching destinations. During the summer months, thousands of puffins return to the islands to nest, creating a stunning display of wildlife. This tour will take you to the best viewing spots where you can observe these charming seabirds as they perch on the cliffs and soar over the waters. With the help of a knowledgeable guide, you’ll learn about the puffins’ lifecycle, their role in the local ecosystem, and the importance of conservation efforts. Whether you’re a birdwatching enthusiast or simply in awe of nature, this tour offers a rare and unforgettable experience in one of Iceland’s most beautiful settings.',
+            quantity: 1,
+            duration: '6 hours (including round-trip transportation)',
+            time: 'Approximately 3 hours',
+            startTime: '9:00 AM',
+            location: 'The main harbor in Heimaey, Vestmannaeyjar',
+            meetingTime: '15 minutes before the tour starts',
+            groupSize: 12,
+            beforeYouGo: `
+        <li>Dress warmly, as temperatures can be cool even in summer.</li>
+        <li>Bring binoculars or a camera with a zoom lens for the best puffin viewing experience.</li>
+        <li>Wear comfortable shoes suitable for walking on rocky terrain.</li>
+        <li>Be prepared for occasional sea spray, so waterproof gear is recommended.</li>
+        <li>If you have any dietary restrictions, please inform us when booking.</li>`,
+            rules: `
+        <li>This tour is not suitable for children under 10 years old.</li>
+        <li><b>Maximum Group Size:</b>&nbsp;&nbsp;The tour is limited to 12 participants to ensure an intimate experience.</li>
+        <li>Not suitable for those with severe mobility issues.</li>
+        <li>All participants must sign a liability waiver before joining the tour.</li>
+        <li>The tour may be delayed or canceled due to weather conditions. In such cases, a full refund or rescheduled tour date will be offered.</li>`
+        }
+    ];
+
+    const productTemplate = document.querySelector('#productTemplate');
+    const productContainer = document.querySelector('#productContainer');
+
+    products.forEach((item) => {
+        const clone = productTemplate.content.cloneNode(true);
+
+        clone.querySelector('#productImg').src = item.img;
+        clone.querySelector('#productTitle').textContent = item.title;
+        clone.querySelector('#productPrice').textContent = item.price;
+        clone.querySelector('#productBrief').textContent = item.brief;
+
+        // 取得 <a> 標籤，並設置 href 屬性
+        const link = clone.querySelector('a');
+        const queryParams = new URLSearchParams(item).toString(); // 將商品資料轉換為查詢字串
+        link.href = `product-detail.html?${queryParams}`; // 正確設置商品詳情頁的 URL
+
+        productContainer.appendChild(clone);
+
+    })
+</script>
+
+</html>

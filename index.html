@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorer</title>
+    <link rel="icon" href="./src/img/logo.png">
+    <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+</head>
+
+<body class="w-screen h-screen relative border-box bg-lightGray font-krona">
+    <header class="w-full h-full bg-banner bg-no-repeat bg-cover">
+        <nav class="bg-white/50 shadow fixed top-0 left-0 right-0 z-20">
+            <div class="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
+                <div class="relative flex h-16 justify-between">
+
+                    <!-- ham dropdown menu button -->
+                    <div id="hamBtn" class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                        <button type="button"
+                            class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-40 hover:bg-lightGray hover:text-subPurple active:opacity-60"
+                            aria-controls="mobile-menu" aria-expanded="false">
+
+                            <svg class="block size-7" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" aria-hidden="true" data-slot="icon">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- logo -->
+                    <div class="flex flex-1 items-center justify-center sm:justify-start gap-6">
+                        <div class="flex shrink-0 items-center">
+                            <a href="#"><img class="h-7 w-auto" src="./src/img/logo.png" alt="Company Logo"></a>
+                        </div>
+
+                        <!-- nav select -->
+                        <div class="hidden sm:ml-6 sm:flex sm:space-x-3">
+
+                            <div class="nav-btn flex justify-center items-center">
+                                <a href=""
+                                    class="inline-flex items-center px-3 py-2 text-sm text-gray-900 hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">Concept</a>
+                            </div>
+                            <div class="nav-btn flex justify-center items-center">
+                                <a href="./shop.html"
+                                    class="inline-flex items-center px-3 py-2 text-sm text-gray-900  hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">Shop</a>
+                            </div>
+                            <div class="nav-btn flex justify-center items-center">
+                                <a href=""
+                                    class="inline-flex items-center px-3 py-2 text-sm text-gray-900  hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">Contact
+                                    us</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- cart icon -->
+                    <a href="./shop.html" class="absolute top-3 right-0">
+                        <button type="button"
+                            class="w-10 h-10 rounded-full text-gray-800 hover:text-subPurple hover:bg-lightGray active:opacity-60 flex justify-center items-center">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </button>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Mobile ham menu -->
+            <div class="sm:hidden" id="mobile-menu">
+                <div class="space-y-1 pb-4 pt-2">
+                    <a href=""
+                        class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 pl-3 pr-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">Concept</a>
+                    <a href="./shop.html"
+                        class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 pl-3 pr-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">Shop</a>
+                    <a href=""
+                        class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 pl-3 pr-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">Contact
+                        us</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- go top btn -->
+        <div class="fixed end-16 bottom-20 hidden md:block z-30">
+            <a href="#"
+                class=" w-12 h-12 text-subPurple bg-lightGray hover:bg-mainYellow hover:text-subPurple rounded-full flex justify-center items-center">top</a>
+        </div>
+
+        <!-- banner -->
+        <!-- banner-top + title -->
+        <div
+            class="w-screen h-[45%] flex flex-col justify-center items-center pt-[120px] md:pt-[140px] lg:pt-[150px] lg:mb-14">
+            <h1
+                class="font-libreBodoni_boldItalic text-mainYellow text-[70px] sm:text-[100px] md:text-[120px] lg:text-[150px]">
+                <span class="">Explorer</span>
+            </h1>
+            <h2 class="font-libreBodoni_boldItalic text-lightGray text-3xl md:text-4xl lg:text-5xl  tracking-widest">in
+                Iceland</h2>
+        </div>
+
+        <!-- banner-middle + star icon -->
+        <div class="w-screen h-[15%] flex justify-center items-center">
+            <img src="./src/img/banner-icon.png" class="h-[60%] max-h-[100px] object-cover" alt="">
+        </div>
+
+        <!-- banner-botton + texts -->
+        <div class="w-screen h-[15%] mx-auto xl:max-w-7xl flex justify-center items-center gap-x-20 lg:pt-[3%]">
+            <p class="small-text text-lightGray hidden lg:block lg:text-lg">{{&nbsp;Have
+                Fun&nbsp;}}</p>
+            <p class="small-text text-lightGray text-2xl lg:text-lg">{{&nbsp;Have Fun&nbsp;}}
+            </p>
+            <p class="small-text text-lightGray hidden lg:block lg:text-lg">{{&nbsp;Have
+                Fun&nbsp;}}</p>
+        </div>
+
+        <!-- banner-botton + arrow icon  -->
+        <div class="icon-arrow flex justify-center h-[5%] lg:items-center">
+            <img src="./src/img/banner-icon-arrow.png" class="h-8" alt="arrow icon">
+        </div>
+    </header>
+
+    <main class="w-screen min-h-screen">
+        <!-- main-1-bg -->
+        <section class="w-full h-[400px] bg-main-1-bg bg-no-repeat bg-cover md:h-[700px] lg:h-screen md:bg-cover">
+            <div class="w-screen h-[45%] text-mainYellow flex justify-center items-center pt-[15%]">
+                <div
+                    class="text-3xl flex flex-col justify-center items-center space-y-3 md:space-y-5 md:text-5xl lg:text-7xl">
+                    <p>Vestrahorn</p>
+                </div>
+            </div>
+
+            <!-- main-1-middle star icon -->
+            <div class="w-screen h-[15%] flex justify-center items-center opacity-80">
+                <img src="./src/img/banner-icon.png" class="h-[60%] max-h-[100px] object-cover" alt="">
+            </div>
+
+            <!-- main-1-botton + texts-->
+            <div
+                class="w-screen h-[15%] text-sm text-lightGray flex flex-col justify-center items-center space-y-3 mx-auto pt-[6%] md:space-y-4 md:text-2xl lg:space-y-6 lg:pt-[5%] lg:text-3xl">
+                <p>Kerid Crater Lake, a natural wonder</p>
+                <p>for trail Exploration</p>
+            </div>
+        </section>
+
+        <!-- main-2-bg -->
+        <section class="w-full h-[400px] bg-main-2-bg bg-no-repeat bg-cover md:h-[700px] lg:h-screen md:bg-cover">
+            <div class="w-screen h-[45%] text-mainYellow flex justify-center items-center pt-[15%]">
+                <div
+                    class="text-3xl flex flex-col justify-center items-center space-y-3 md:space-y-5 md:text-5xl lg:text-7xl">
+                    <p>Klausturholar</p>
+                </div>
+            </div>
+
+            <!-- main-2-middle star icon -->
+            <div class="w-screen h-[15%] flex justify-center items-center opacity-80">
+                <img src="./src/img/banner-icon.png" class="h-[60%] max-h-[100px] object-cover" alt="">
+            </div>
+
+            <!-- main-2-botton + texts-->
+            <div
+                class="w-screen h-[15%] text-sm text-lightGray flex flex-col justify-center items-center space-y-3 mx-auto pt-[6%] md:space-y-4 md:text-2xl lg:space-y-6 lg:pt-[5%] lg:text-3xl">
+                <p>A Majestic Mountain</p>
+                <p>for photography and hiking</p>
+            </div>
+        </section>
+
+        <!-- main-3-bg -->
+        <section class="w-full h-[400px] bg-main-3-bg bg-no-repeat bg-cover md:h-[700px] lg:h-screen md:bg-cover">
+            <div class="w-screen h-[45%] text-mainYellow flex justify-center items-center pt-[15%]">
+                <div
+                    class="text-3xl flex flex-col justify-center items-center space-y-3 md:space-y-5 md:text-5xl lg:text-7xl">
+                    <p>Vík</p>
+                </div>
+            </div>
+
+            <!-- main-3-middle star icon -->
+            <div class="w-screen h-[15%] flex justify-center items-center opacity-80">
+                <img src="./src/img/banner-icon.png" class="h-[60%] max-h-[100px] object-cover" alt="">
+            </div>
+
+            <!-- main-3-botton + texts-->
+            <div
+                class="w-screen h-[15%] text-sm text-lightGray flex flex-col justify-center items-center space-y-3 mx-auto pt-[6%] md:space-y-4 md:text-2xl lg:space-y-6 lg:pt-[5%] lg:text-3xl">
+                <p>A Charming Village</p>
+                <p>for Northern Lights Viewing</p>
+            </div>
+        </section>
+
+        <!-- main-4 marquee -->
+        <section class="h-[140px] text-subPurple text-4xl md:text-5xl md:h-[180px] lg:h-[220px] lg:text-7xl">
+            <div class="relative w-screen max-w-full h-full overflow-x-hidden flex items-center">
+                <div class="absolute whitespace-nowrap will-change-transform animate-marquee">
+                    <div class="inline-block">
+                        &nbsp;Iceland&nbsp;&nbsp;
+                        <i class="fa-solid fa-person-hiking"></i>&nbsp;&nbsp;Iceland&nbsp;&nbsp;
+                        <i class="fa-solid fa-person-hiking"></i>&nbsp;&nbsp;Iceland&nbsp;&nbsp;
+                        <i class="fa-solid fa-person-hiking"></i>&nbsp;&nbsp;Iceland&nbsp;&nbsp;
+                        <i class="fa-solid fa-person-hiking"></i>&nbsp;&nbsp;Iceland&nbsp;&nbsp;
+                        <i class="fa-solid fa-person-hiking"></i>&nbsp;&nbsp;Iceland
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- main-5-bg -->
+        <section class="w-screen h-[480px] md:h-[680px] lg:h-screen">
+            <div class="lg:hidden w-full h-[45%] flex justify-center mb-5 md:mb-16">
+                <div class="w-[75%] h-[90%] md:h-[100%] md:w-[80%]">
+                    <img src="./src/img/main-5.png" class="rounded-2xl w-full h-full object-cover" alt="">
+                </div>
+            </div>
+
+            <!-- main-5 middle texts -->
+            <div class="lg:hidden h-[55%] flex flex-col items-center">
+                <p class="text-subPurple text-2xl md:text-4xl mb-6 md:mb-8">We Provide</p>
+                <div class="text-sm md:text-xl flex flex-col items-center space-y-2 mb-10">
+                    <p>Glacier Hiking</p>
+                    <p>Volcanoes Guide</p>
+                    <p>Ice Cave Exploration</p>
+                </div>
+                <div class="h-[10%] flex justify-center">
+                    <img src="./src/img/main-5-icon.png" class="h-[70%] object-cover" alt="">
+                </div>
+            </div>
+
+            <!-- main-5 lg only -->
+            <div class="hidden lg:block w-screen h-screen">
+                <div class="grid grid-cols-12 h-full">
+                    <div class="col-span-6 w-full h-full ps-32 pb-20">
+                        <div class="bg-main-5 bg-no-repea bg-cover w-full h-full"></div>
+                    </div>
+                    <div class="col-span-6 flex flex-col justify-center items-center pb-20">
+                        <div class="main-5-line-1 w-[20%] h-1 bg-subPurple mb-28 opacity-50"></div>
+                        <p class="text-subPurple text-3xl lg:text-5xl mb-14">We Provide</p>
+                        <div class="text-2xl flex flex-col items-center space-y-4 mb-14">
+                            <p>Glacier Hiking</p>
+                            <p>Volcanoes Guide</p>
+                            <p>Ice Cave Exploration</p>
+                        </div>
+                        <div class="h-[6%] flex justify-center mb-28">
+                            <img src="./src/img/main-5-icon.png" class="h-[70%] max-h-[100px] object-cover" alt="">
+                        </div>
+                        <div class="main-5-line-1 w-[20%] h-1 bg-subPurple opacity-50"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- main-6-bg -->
+        <section class="w-screen h-[480px] md:h-[680px] lg:h-screen">
+            <div class="lg:hidden w-full h-[45%] flex justify-center mb-5 md:mb-16">
+                <div class="w-[75%] h-[90%] md:h-[100%] md:w-[80%]">
+                    <img src="./src/img/main-6.png" class="rounded-2xl w-full h-full object-cover" alt="">
+                </div>
+            </div>
+
+            <!-- main-6 middle texts -->
+            <div class="lg:hidden h-[55%] flex flex-col items-center">
+                <p class="text-subPurple text-2xl md:text-4xl mb-6 md:mb-8">You Can Find</p>
+                <div class="text-sm md:text-xl flex flex-col items-center space-y-2 mb-10">
+                    <p>Ecotourism</p>
+                    <p>Culture Experience</p>
+                    <p>Outdoor Sports</p>
+                </div>
+                <div class="h-[10%] flex justify-center">
+                    <img src="./src/img/main-5-icon.png" class="h-[70%] max-h-[100px] object-cover" alt="">
+                </div>
+            </div>
+
+            <!-- main-6 lg only -->
+            <div class="hidden lg:block w-screen h-screen">
+                <div class="grid grid-cols-12 h-full">
+                    <div class="col-span-6 w-full h-full ps-32 pb-20">
+                        <div class="bg-main-6 bg-no-repea bg-cover w-full h-full"></div>
+                    </div>
+                    <div class="col-span-6 flex flex-col justify-center items-center pb-20">
+                        <div class="main-5-line-1 w-[20%] h-1 bg-subPurple mb-28 opacity-50"></div>
+                        <p class="text-subPurple text-3xl lg:text-5xl mb-14">You Can Find</p>
+                        <div class="text-2xl flex flex-col items-center space-y-4 mb-14">
+                            <p>Ecotourism</p>
+                            <p>Culture Experience</p>
+                            <p>Outdoor Sports</p>
+                        </div>
+                        <div class="h-[6%] flex justify-center mb-28">
+                            <img src="./src/img/main-5-icon.png" class="h-[70%] max-h-[100px] object-cover" alt="">
+                        </div>
+                        <div class="main-5-line-1 w-[20%] h-1 bg-subPurple opacity-50"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- main-7-bg -->
+        <section
+            class="w-full h-screen relative max-h-[400px] lg:h-[900px] bg-main-7-bg bg-no-repeat bg-cover flex justify-center items-center md:max-h-[600px] lg:max-h-full">
+            <div class="w-[70%] md:w-[60%] h-[30%] lg:h-[35%] flex justify-center">
+                <video src="./src/video/main-video.mp4" autoplay loop muted
+                    class="w-full h-full rounded-xl object-cover"></video>
+            </div>
+            <div class="absolute top-20 md:top-28 lg:top-36 text-mainYellow text-3xl md:text-6xl lg:text-8xl">
+                <p>Start a Journey</p>
+            </div>
+
+            <div class="absolute top-[calc(50%-27px)] w-14 md:w-16 lg:w-24">
+                <button type="button"><img src="./src/img/main-7-button.png" class="videoBtn w-full h-full object-cover"
+                        alt=""></button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-400 text-lightGray">
+        <section class="w-screen h-[350px] md:h-[250px]">
+            <div class="grid grid-row-12 px-8 py-14 md:py-12 justify-center items-center">
+                <!-- footer logo -->
+                <div class="row-span-7 flex flex-col justify-center items-center space-y-4 mb-6">
+                    <img src="./src/img/logo.png" class="max-w-[40px] max-h-[40px]" alt="company logo">
+                    <p class="text-sm">Explore &copy;</p>
+                </div>
+
+                <!-- footer select -->
+                <div
+                    class="row-span-5 flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-5 text-md">
+                    <div class="md:hidden line w-52 h-[1px] bg-lightGray"></div>
+                    <a href="" class="hover:text-mainYellow">
+                        <p>Concept</p>
+                    </a>
+                    <p class="hidden md:block">|</p>
+                    <a href="" class="hover:text-mainYellow">
+                        <p>Shop</p>
+                    </a>
+                    <p class="hidden md:block">|</p>
+                    <a href="" class="hover:text-mainYellow">
+                        <p>Contact us</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </footer>
+
+    <script>
+        //nav 點開漢堡標選單
+        const hamBtn = document.querySelector('#hamBtn');
+        const mobileMenu = document.querySelector('#mobile-menu');
+
+        mobileMenu.style.display = 'none';
+
+        hamBtn.addEventListener('click', function () {
+            if (mobileMenu.style.display === 'none') {
+                mobileMenu.style.display = 'block';
+            } else if (mobileMenu.style.display === 'block') {
+                mobileMenu.style.display = 'none';
+            }
+        })
+
+        // main-7 按鈕 hover 事件
+        const videoBtn = document.querySelector('.videoBtn');
+        videoBtn.addEventListener('mouseenter', () => {
+            if (videoBtn.src.includes('main-7-button.png')) {
+                videoBtn.src = './src/img/main-7-button-2.png'
+            }
+        })
+
+        videoBtn.addEventListener('mouseleave', () => {
+            if (videoBtn.src.includes('main-7-button-2.png')) {
+                videoBtn.src = './src/img/main-7-button.png'
+            }
+        })
+    </script>
+</body>
+
+</html>
