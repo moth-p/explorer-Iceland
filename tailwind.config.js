@@ -38,7 +38,6 @@ module.exports = {
         marquee: 'marquee 32s linear infinite',
         fadeIn: 'fadeIn 2s ease-in-out forwards',
         fadeInSlow: 'fadeInTitle 3s ease-in-out forwards',
-        fadeInFast: 'fadeInTitle 2s ease-out forwards',
         rotateStar: 'rotateStar 2.5s ease-out forwards',
       },
       keyframes: {
@@ -51,10 +50,6 @@ module.exports = {
           '100%': { opacity: '1' },
         },
         fadeInSlow: {
-          '0%': { opacity: '0', transform: 'translateY(-50px)' },
-          '100%': { opacity: '1', transform: 'translateY(0px)' },
-        },
-        fadeInFast: {
           '0%': { opacity: '0', transform: 'translateY(-50px)' },
           '100%': { opacity: '1', transform: 'translateY(0px)' },
         },
