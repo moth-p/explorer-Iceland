@@ -41,4 +41,13 @@
     font-style: normal;
   }
 
+* {
+  scroll-behavior: smooth;
+}
+
+#detailsTitle {
+  line-height: 50px;
+}
+
+
   
