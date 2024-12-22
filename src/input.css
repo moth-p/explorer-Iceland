@@ -1,6 +1,9 @@
+@import 'animate.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @layer utilities {
   /* Chrome, Safari, Edge, Opera */
