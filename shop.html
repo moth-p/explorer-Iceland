@@ -304,17 +304,19 @@
                                                         <li class="flex py-8 text-sm sm:items-center">
                                                             <img id="cartImg" src="" alt=""
                                                                 class="size-24 flex-none rounded-lg border border-gray-200 sm:size-32">
-                                                            <div class="w-full grid grid-cols-12 ps-8">
-                                                                <div class="col-span-10">
+                                                            <div class="w-full grid grid-rows-12 md:grid-cols-12 ps-8">
+                                                                <div class="row-span-7 md:col-span-10">
                                                                     <h3 class="text-md text-gray-900">
                                                                         <a id="cartTitle" href="#"></a>
                                                                     </h3>
-                                                                    <p class="mt-1 text-[14px] font-sans text-gray-400">
-                                                                        Date:&nbsp;<span id="cartDate"></span>&nbsp;&nbsp;/&nbsp;&nbsp;Group
-                                                                        Size:&nbsp;<span id="cartGroupSize"></span>
+                                                                    <p
+                                                                        class="mt-1 text-[14px] font-sans text-gray-400 mb-3 sm:mb-0">
+                                                                        Date:&nbsp;<span id="cartDate"></span><br>
+                                                                        Group Size:&nbsp;<span
+                                                                            id="cartGroupSize"></span>
                                                                     </p>
                                                                 </div>
-                                                                <div class="col-span-2">
+                                                                <div class="row-span-5 md:col-span-2">
                                                                     <p
                                                                         class="text-md text-gray-800 sm:w-1/3 sm:flex-none sm:text-right">
                                                                         €&nbsp;<span id="cartPrice"></span></p>
@@ -324,6 +326,7 @@
                                                                         <span>Remove</span>
                                                                     </button>
                                                                 </div>
+
                                                             </div>
                                                         </li>
                                                         <hr><br>
@@ -333,7 +336,8 @@
 
                                             <section id="cartContainer"></section>
 
-                                            <section id="cartTotal" aria-labelledby="summary-heading" class="hidden mt-auto sm:px-6 lg:px-8">
+                                            <section id="cartTotal" aria-labelledby="summary-heading"
+                                                class="hidden mt-auto sm:px-6 lg:px-8">
                                                 <div class="bg-gray-50 p-6 sm:rounded-lg sm:p-8">
                                                     <h2 id="summary-heading" class="sr-only">Order summary</h2>
 
@@ -341,7 +345,7 @@
                                                         <dl class="-my-4 divide-y divide-gray-200 text-sm">
                                                             <div class="flex items-center justify-between py-4">
                                                                 <dt class="text-gray-400">Subtotal</dt>
-                                                                <dd  class="font-medium text-gray-400">
+                                                                <dd class="font-medium text-gray-400">
                                                                     €&nbsp;<span id="cartSubtotal"></span></dd>
                                                             </div>
                                                             <div class="flex items-center justify-between py-4">
@@ -356,8 +360,7 @@
                                                                 <dt class="text-base font-medium text-gray-800">Order
                                                                     total
                                                                 </dt>
-                                                                <dd 
-                                                                    class="text-base font-medium text-gray-800">
+                                                                <dd class="text-base font-medium text-gray-800">
                                                                     €&nbsp;<span id="cartOrderTotal"></span>
                                                                 </dd>
                                                             </div>
