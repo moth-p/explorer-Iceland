@@ -36,12 +36,27 @@ module.exports = {
       },
       animation: {
         marquee: 'marquee 32s linear infinite',
+        fadeIn: 'fadeIn 2s ease-in-out forwards',
+        fadeInTitle: 'fadeInTitle 2s ease-in-out forwards',
+        rotateStar: 'rotateStar 2.5s ease-out forwards',
       },
       keyframes: {
         marquee: {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-50%)' },
-        }
+        },
+        fadeIn: {
+          '0%': { opacity: '0'},
+          '100%': { opacity: '1' },
+        },
+        fadeInTitle: {
+          '0%': { opacity: '0', transform: 'translateY(-50px)' },
+          '100%': { opacity: '1', transform: 'translateY(0px)' },
+        },
+        rotateStar: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
       },
   plugins: [
     require('flowbite/plugin'),

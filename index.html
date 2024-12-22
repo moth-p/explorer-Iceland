@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
 </head>
 
-<body class="w-screen h-screen relative border-box bg-lightGray font-krona">
+<body class="animate-fadeIn w-screen h-screen relative border-box bg-lightGray font-krona">
     <header class="w-full h-full bg-banner bg-no-repeat bg-cover">
         <nav class="bg-white/50 shadow fixed top-0 left-0 right-0 z-20">
             <div class="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
@@ -41,7 +41,7 @@
 
                             <div class="nav-btn flex justify-center items-center">
                                 <a href=""
-                                    class="inline-flex items-center px-3 py-2 text-sm text-gray-900 hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">Concept</a>
+                                    class="inline-flex items-center px-3 py-2 text-sm text-gray-900 hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">About</a>
                             </div>
                             <div class="nav-btn flex justify-center items-center">
                                 <a href="./shop.html"
@@ -63,13 +63,19 @@
                         </button>
                     </a>
                 </div>
+
+                <!-- go top button -->
+                <div id="goTopBtn" class="hidden fixed end-8 bottom-8 md:end-20 md:bottom-20 z-30">
+                    <a href="#"
+                        class="text-[12px] w-10 h-10 text-subPurple bg-lightGray hover:bg-mainYellow hover:text-subPurple rounded-full flex justify-center items-center">top</a>
+                </div>
             </div>
 
             <!-- Mobile ham menu -->
             <div class="sm:hidden" id="mobile-menu">
                 <div class="space-y-1 pb-4 pt-2">
                     <a href=""
-                        class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 pl-3 pr-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">Concept</a>
+                        class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 pl-3 pr-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">About</a>
                     <a href="./shop.html"
                         class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 pl-3 pr-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">Shop</a>
                     <a href=""
@@ -79,19 +85,13 @@
             </div>
         </nav>
 
-        <!-- go top btn -->
-        <div class="fixed end-16 bottom-20 hidden md:block z-30">
-            <a href="#"
-                class=" w-12 h-12 text-subPurple bg-lightGray hover:bg-mainYellow hover:text-subPurple rounded-full flex justify-center items-center">top</a>
-        </div>
-
         <!-- banner -->
         <!-- banner-top + title -->
         <div
             class="w-screen h-[45%] flex flex-col justify-center items-center pt-[120px] md:pt-[140px] lg:pt-[150px] lg:mb-14">
             <h1
                 class="font-libreBodoni_boldItalic text-mainYellow text-[70px] sm:text-[100px] md:text-[120px] lg:text-[150px]">
-                <span class="">Explorer</span>
+                <span class="animate-fadeInTitle">Explorer</span>
             </h1>
             <h2 class="font-libreBodoni_boldItalic text-lightGray text-3xl md:text-4xl lg:text-5xl  tracking-widest">in
                 Iceland</h2>
@@ -99,11 +99,11 @@
 
         <!-- banner-middle + star icon -->
         <div class="w-screen h-[15%] flex justify-center items-center">
-            <img src="./src/img/banner-icon.png" class="h-[60%] max-h-[100px] object-cover" alt="">
+            <img src="./src/img/banner-icon.png" class="h-[60%] max-h-[70px] animate-rotateStar object-cover" alt="">
         </div>
 
         <!-- banner-botton + texts -->
-        <div class="w-screen h-[15%] mx-auto xl:max-w-7xl flex justify-center items-center gap-x-20 lg:pt-[3%]">
+        <div class="w-screen h-[15%] mx-auto xl:max-w-7xl flex justify-center items-center gap-x-20 lg:pt-[3%] mb-3">
             <p class="small-text text-lightGray hidden lg:block lg:text-lg">{{&nbsp;Have
                 Fun&nbsp;}}</p>
             <p class="small-text text-lightGray text-2xl lg:text-lg">{{&nbsp;Have Fun&nbsp;}}
@@ -113,8 +113,8 @@
         </div>
 
         <!-- banner-botton + arrow icon  -->
-        <div class="icon-arrow flex justify-center h-[5%] lg:items-center">
-            <img src="./src/img/banner-icon-arrow.png" class="h-8" alt="arrow icon">
+        <div class="animate-bounce flex justify-center h-[5%] lg:items-center">
+            <img src="./src/img/banner-icon-arrow.png" class="h-6" alt="arrow icon">
         </div>
     </header>
 
@@ -232,9 +232,9 @@
                         <div class="main-5-line-1 w-[20%] h-1 bg-subPurple mb-28 opacity-50"></div>
                         <p class="text-subPurple text-3xl lg:text-5xl mb-14">We Provide</p>
                         <div class="text-2xl flex flex-col items-center space-y-4 mb-14">
-                            <p>Glacier Hiking</p>
-                            <p>Volcanoes Guide</p>
-                            <p>Ice Cave Exploration</p>
+                            <p>Professional Guide</p>
+                            <p>In-Depth Tours</p>
+                            <p>Ecological Interpretation</p>
                         </div>
                         <div class="h-[6%] flex justify-center mb-28">
                             <img src="./src/img/main-5-icon.png" class="h-[70%] max-h-[100px] object-cover" alt="">
@@ -257,7 +257,7 @@
             <div class="lg:hidden h-[55%] flex flex-col items-center">
                 <p class="text-subPurple text-2xl md:text-4xl mb-6 md:mb-8">You Can Find</p>
                 <div class="text-sm md:text-xl flex flex-col items-center space-y-2 mb-10">
-                    <p>Ecotourism</p>
+                    <p>Glacier Hikes</p>
                     <p>Culture Experience</p>
                     <p>Outdoor Sports</p>
                 </div>
@@ -276,7 +276,7 @@
                         <div class="main-5-line-1 w-[20%] h-1 bg-subPurple mb-28 opacity-50"></div>
                         <p class="text-subPurple text-3xl lg:text-5xl mb-14">You Can Find</p>
                         <div class="text-2xl flex flex-col items-center space-y-4 mb-14">
-                            <p>Ecotourism</p>
+                            <p>Glacier Hikes</p>
                             <p>Culture Experience</p>
                             <p>Outdoor Sports</p>
                         </div>
@@ -301,40 +301,52 @@
             </div>
 
             <div class="absolute top-[calc(50%-27px)] w-14 md:w-16 lg:w-24">
-                <button type="button"><img src="./src/img/main-7-button.png" class="videoBtn w-full h-full object-cover"
-                        alt=""></button>
+                <a href="./shop.html""><img src=" ./src/img/main-7-button.png"
+                    class="videoBtn w-20 object-cover" alt=""></a>
             </div>
         </section>
     </main>
 
-    <footer class="bg-gray-400 text-lightGray">
-        <section class="w-screen h-[350px] md:h-[250px]">
-            <div class="grid grid-row-12 px-8 py-14 md:py-12 justify-center items-center">
-                <!-- footer logo -->
-                <div class="row-span-7 flex flex-col justify-center items-center space-y-4 mb-6">
-                    <img src="./src/img/logo.png" class="max-w-[40px] max-h-[40px]" alt="company logo">
-                    <p class="text-sm">Explore &copy;</p>
-                </div>
-
-                <!-- footer select -->
-                <div
-                    class="row-span-5 flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-5 text-md">
-                    <div class="md:hidden line w-52 h-[1px] bg-lightGray"></div>
-                    <a href="" class="hover:text-mainYellow">
-                        <p>Concept</p>
-                    </a>
-                    <p class="hidden md:block">|</p>
-                    <a href="" class="hover:text-mainYellow">
-                        <p>Shop</p>
-                    </a>
-                    <p class="hidden md:block">|</p>
-                    <a href="" class="hover:text-mainYellow">
-                        <p>Contact us</p>
-                    </a>
-                </div>
+    <footer>
+        <div class="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
+            <div class="flex justify-center items-center mb-14">
+                <img src="./src/img/shop-logo.png" alt="" class="w-[150px]">
             </div>
-        </section>
+            <nav class="-mb-6 flex flex-wrap justify-center gap-x-12 gap-y-3 text-sm/6" aria-label="Footer">
+                <a href="#" class="text-gray-600 hover:text-subPurple">About</a>
+                <a href="./shop.html" class="text-gray-600 hover:text-subPurple">Shop</a>
+                <a href="#" class="text-gray-600 hover:text-subPurple">Contact us</a>
+            </nav>
+            <div class="mt-16 flex justify-center gap-x-10">
+                <a href="#" class="text-gray-600 hover:text-gray-400">
+                    <span class="sr-only">Facebook</span>
+                    <svg class="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-600 hover:text-gray-400">
+                    <span class="sr-only">Instagram</span>
+                    <svg class="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                            d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
+                <a href="#" class="text-gray-600 hover:text-gray-400">
+                    <span class="sr-only">X</span>
+                    <svg class="size-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z" />
+                    </svg>
+                </a>
+            </div>
+            <p class="font-sans mt-10 text-center text-sm/6 text-gray-600">&copy; 2024 Explorer, Inc. All rights
+                reserved.</p>
+        </div>
     </footer>
+
 
     <script>
         //nav 點開漢堡標選單
@@ -351,7 +363,19 @@
             }
         })
 
-        // main-7 按鈕 hover 事件
+        // go top button
+        const goTopBtn = document.querySelector('#goTopBtn');
+
+        // 當滾動事件發生時觸發
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) { // 滾動超過 200px 時顯示按鈕
+                goTopBtn.style.display = 'block';
+            } else {
+                goTopBtn.style.display = 'none';
+            }
+        });
+
+        // main-7 按鈕 hover 
         const videoBtn = document.querySelector('.videoBtn');
         videoBtn.addEventListener('mouseenter', () => {
             if (videoBtn.src.includes('main-7-button.png')) {

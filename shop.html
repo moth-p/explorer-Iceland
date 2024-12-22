@@ -8,8 +8,7 @@
     <link rel="icon" href="./src/img/logo.png">
     <link rel="stylesheet" href="./src/output.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" </head>
 
 <body class="w-screen h-screen relative border-box bg-lightGray font-krona">
     <header class="w-full max-h-[1080px] lg:mb-5">
@@ -435,9 +434,10 @@
             </div>
         </section>
 
-        <div class="fixed end-16 bottom-20 hidden md:block z-30">
+        <!-- go top button -->
+        <div id="goTopBtn" class="hidden fixed end-20 bottom-20 z-30">
             <a href="#"
-                class=" w-12 h-12 text-subPurple bg-lightGray hover:bg-mainYellow hover:text-subPurple rounded-full flex justify-center items-center">top</a>
+                class="text-[12px] w-10 h-10 text-subPurple bg-lightGray hover:bg-mainYellow hover:text-subPurple rounded-full flex justify-center items-center">top</a>
         </div>
     </header>
 
@@ -623,6 +623,18 @@
 </body>
 
 <script>
+    // go top button
+    const goTopBtn = document.querySelector('#goTopBtn');
+
+    // 當滾動事件發生時觸發
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) { // 滾動超過 200px 時顯示按鈕
+            goTopBtn.style.display = 'block';
+        } else {
+            goTopBtn.style.display = 'none';
+        }
+    });
+
     // main 商品卡片 template 模板
     const products = [
         {
