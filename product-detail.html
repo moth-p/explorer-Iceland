@@ -133,7 +133,8 @@
                                     Booking&nbsp;&nbsp;<span id="plusIcon"><i class="fa-solid fa-plus"></i></span></p>
 
                                 <!-- ham menu accordion all -->
-                                <div id="accordionContext" class="animate__animated animate__fadeIn animate__fast hidden ps-8 py-2">
+                                <div id="accordionContext"
+                                    class="animate__animated animate__fadeIn animate__fast hidden ps-8 py-2">
                                     <!-- ham menu - accordion 1 -->
                                     <h4 class="text-subPurple mb-3">
                                         <a href="" class="group">Hiking</a>
@@ -396,6 +397,12 @@
                 </template>
             </section>
         </nav>
+
+        <!-- go top button -->
+        <div id="goTopBtn" class="hidden fixed end-20 bottom-20 z-30">
+            <a href="#"
+                class="text-[12px] w-10 h-10 text-subPurple bg-lightGray hover:bg-mainYellow hover:text-subPurple rounded-full flex justify-center items-center">top</a>
+        </div>
     </header>
 
     <main>
@@ -480,9 +487,6 @@
                         <div class="mt-4 space-y-6 break-words text-wrap">
                             <p id="detailsBrief" class="font-sans text-gray-500"></p>
                         </div>
-                        <div>
-
-                        </div>
                     </section>
                 </div>
 
@@ -538,10 +542,8 @@
                             </div>
                         </div>
                     </section>
-
                 </div>
             </div>
-
         </div>
 
         <!--下方文字區 -->
@@ -697,7 +699,7 @@
         <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
             <div class="xl:grid xl:grid-cols-12 xl:gap-8">
                 <div class="space-y-8 xl:col-span-4 mb-12 xl:mb-0 flex flex-col items-center xl:items-start">
-                    <a href="./shop.html"><img class="h-9" src="./src/img/shop-logo.png" alt="Company name"></a>
+                    <img class="h-9" src="./src/img/shop-logo.png" alt="Company name">
                     <p class="font-krona text-balance text-sm/6 text-gray-600 text-center xl:text-left">"Small groups,
                         local guides—step into
                         Iceland's grandeur and hidden wonders to uncover stories only nature can tell."</p>
@@ -729,51 +731,51 @@
                 </div>
                 <div class="sm:col-span-8 grid sm:grid-cols-3 xl:gap-5">
                     <div class="col-span-1 flex flex-col items-center text-center">
-                        <a href="" class="text-xl font-semibold text-subPurple">Hiking</a>
-                        <ul role="list" class="font-mono mt-4 space-y-4">
+                        <a href="" class="font-krona text-xl font-semibold text-subPurple">Hiking</a>
+                        <ul role="list" class="font-mono mt-4 space-y-2">
                             <li>
-                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Laugavegur</a>
+                                <a href="#" class="text-sm/6 text-gray-600 hover:text-subPurple">Laugavegur</a>
                             </li>
                             <li>
-                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Hornstrandir</a>
+                                <a href="#" class="text-sm/6 text-gray-600 hover:text-subPurple">Hornstrandir</a>
                             </li>
                             <li>
-                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Skaftafell</a>
+                                <a href="#" class="text-sm/6 text-gray-600 hover:text-subPurple">Skaftafell</a>
                             </li>
                             <li>
-                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Ásbyrgi Canyon</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-span-1 mt-8 sm:mt-0 flex flex-col items-center text-center">
-                        <a href="" class="text-xl font-semibold text-subPurple">Sightseeing</a>
-                        <ul role="list" class="font-mono mt-4 space-y-4">
-                            <li>
-                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Boat Tour</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Nature Reserve Tour</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Ecotourism</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Culture Tour</a>
+                                <a href="#" class="text-sm/6 text-gray-600 hover:text-subPurple">Ásbyrgi Canyon</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-span-1 mt-8 sm:mt-0 flex flex-col items-center text-center">
-                        <a href="" class="text-xl font-semibold text-subPurple">Outdoor Sport</a>
-                        <ul role="list" class="font-mono mt-4 space-y-4">
+                        <a href="" class="font-krona text-xl font-semibold text-subPurple">Sightseeing</a>
+                        <ul role="list" class="font-mono mt-4 space-y-2">
                             <li>
-                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Skiing and
+                                <a href="#" class="text-sm/6 text-gray-600 hover:text-subPurple">Boat Tour</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-sm/6 text-gray-600 hover:text-subPurple">Nature Reserve Tour</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-sm/6 text-gray-600 hover:text-subPurple">Ecotourism</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-sm/6 text-gray-600 hover:text-subPurple">Culture Tour</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-span-1 mt-8 sm:mt-0 flex flex-col items-center text-center">
+                        <a href="" class="font-krona text-xl font-semibold text-subPurple">Outdoor Sport</a>
+                        <ul role="list" class="font-mono mt-4 space-y-2">
+                            <li>
+                                <a href="#" class="text-sm/6 text-gray-600 hover:text-subPurple">Skiing and
                                     Snowboarding</a>
                             </li>
                             <li>
-                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Kayaking</a>
+                                <a href="#" class="text-sm/6 text-gray-600 hover:text-subPurple">Kayaking</a>
                             </li>
                             <li>
-                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Horseback Riding</a>
+                                <a href="#" class="text-sm/6 text-gray-600 hover:text-subPurple">Horseback Riding</a>
                             </li>
                         </ul>
                     </div>
@@ -792,6 +794,18 @@
     <script src="./src/js/productsDatas.js"></script>
 
     <script>
+        // go top button
+        const goTopBtn = document.querySelector('#goTopBtn');
+
+        // 當滾動事件發生時觸發
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) { // 滾動超過 200px 時顯示按鈕
+                goTopBtn.style.display = 'block';
+            } else {
+                goTopBtn.style.display = 'none';
+            }
+        });
+
         // 解析 URL 的查詢字串
         const urlParams = new URLSearchParams(window.location.search);
         const product = Object.fromEntries(urlParams.entries());
