@@ -38,12 +38,20 @@
                             <div class="flex flex-1 justify-center items-center sm:justify-start gap-6">
                                 <!-- logo -->
                                 <div class="flex shrink-0 item-center">
-                                    <a href="#"><img class="h-7 w-auto" src="./src/img/logo.png" alt="Company Logo"></a>
+                                    <a href="./shop.html"><img class="h-7 w-auto" src="./src/img/logo.png"
+                                            alt="Company Logo"></a>
                                 </div>
 
                                 <!-- nav select -->
                                 <div class="hidden sm:ml-6 sm:flex sm:space-x-3">
-
+                                    <div class="nav-btn flex justify-center item-center">
+                                        <a href="./index.html"
+                                            class="inline-flex item-center px-3 py-2 text-sm text-gray-800  hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">Concept</a>
+                                    </div>
+                                    <div class="nav-btn flex justify-center item-center">
+                                        <a href="./about.html"
+                                            class="inline-flex item-center px-3 py-2 text-sm text-gray-800  hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">About</a>
+                                    </div>
                                     <div id="booking" class="cursor-pointer flex justify-center item-center">
                                         <p
                                             class=" px-3 py-2 text-sm text-gray-900 hover:bg-lightGray hover:text-subPurple hover:rounded-md">
@@ -116,13 +124,16 @@
                         <!-- Mobile ham menu -->
                         <div class="sm:hidden w-screen" id="hamMenu">
                             <div class="p-5 space-y-1 pb-5 bg-lightGray w-screen h-screen overflow-y-auto">
-
+                                <a href="./index.html"
+                                    class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 ps-3 pe-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">Concept</a>
+                                <a href="./about.html"
+                                    class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 ps-3 pe-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">About</a>
                                 <p id="accordionBtn"
                                     class="block cursor-pointer border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 ps-3 pe-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">
                                     Booking&nbsp;&nbsp;<span id="plusIcon"><i class="fa-solid fa-plus"></i></span></p>
 
                                 <!-- ham menu accordion all -->
-                                <div id="accordionContext" class="hidden ps-8 py-2">
+                                <div id="accordionContext" class="animate__animated animate__fadeIn animate__fast hidden ps-8 py-2">
                                     <!-- ham menu - accordion 1 -->
                                     <h4 class="text-subPurple mb-3">
                                         <a href="" class="group">Hiking</a>
@@ -180,7 +191,7 @@
 
                                 <!-- ham menu 最下面的logo和超連結 -->
                                 <div class="w-full h-80 pt-8 flex flex-col items-center gap-5">
-                                    <img src="./src/img/shop-logo.png" class="w-[120px]" alt="">
+                                    <a href=""><img src="./src/img/shop-logo.png" class="w-[120px]" alt=""></a>
                                     <p class="text-sm text-gray-400 mb-5">Explore &copy;</p>
                                     <div class="flex justify-center gap-10 text-gray-400 text-2xl">
                                         <a href=""><i class="fa-brands fa-square-facebook"></i></a>
@@ -311,9 +322,11 @@
                                                                     <h3 class="text-md text-gray-900">
                                                                         <a id="cartTitle" href="#"></a>
                                                                     </h3>
-                                                                    <p class="mt-1 text-[14px] font-sans text-gray-400 mb-3 sm:mb-0">
+                                                                    <p
+                                                                        class="mt-1 text-[14px] font-sans text-gray-400 mb-3 sm:mb-0">
                                                                         Date:&nbsp;<span id="cartDate"></span><br>
-                                                                        Group Size:&nbsp;<span id="cartGroupSize"></span>
+                                                                        Group Size:&nbsp;<span
+                                                                            id="cartGroupSize"></span>
                                                                     </p>
                                                                 </div>
                                                                 <div class="row-span-5 md:col-span-2">
@@ -326,7 +339,7 @@
                                                                         <span>Remove</span>
                                                                     </button>
                                                                 </div>
-                                                                
+
                                                             </div>
                                                         </li>
                                                         <hr><br>
@@ -336,7 +349,8 @@
 
                                             <section id="cartContainer"></section>
 
-                                            <section id="cartTotal" aria-labelledby="summary-heading" class="hidden mt-auto sm:px-6 lg:px-8">
+                                            <section id="cartTotal" aria-labelledby="summary-heading"
+                                                class="hidden mt-auto sm:px-6 lg:px-8">
                                                 <div class="bg-gray-50 p-6 sm:rounded-lg sm:p-8">
                                                     <h2 id="summary-heading" class="sr-only">Order summary</h2>
 
@@ -344,7 +358,7 @@
                                                         <dl class="-my-4 divide-y divide-gray-200 text-sm">
                                                             <div class="flex items-center justify-between py-4">
                                                                 <dt class="text-gray-400">Subtotal</dt>
-                                                                <dd  class="font-medium text-gray-400">
+                                                                <dd class="font-medium text-gray-400">
                                                                     €&nbsp;<span id="cartSubtotal"></span></dd>
                                                             </div>
                                                             <div class="flex items-center justify-between py-4">
@@ -359,8 +373,7 @@
                                                                 <dt class="text-base font-medium text-gray-800">Order
                                                                     total
                                                                 </dt>
-                                                                <dd 
-                                                                    class="text-base font-medium text-gray-800">
+                                                                <dd class="text-base font-medium text-gray-800">
                                                                     €&nbsp;<span id="cartOrderTotal"></span>
                                                                 </dd>
                                                             </div>
@@ -559,23 +572,13 @@
                                             class="flex w-full items-start justify-between text-left text-gray-900"
                                             aria-controls="faq-0" aria-expanded="false">
                                             <span class="text-2xl font-semibold">Tour Duration</span>
-                                            <span class="ml-6 flex h-7 items-center">
-
-                                                <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor" aria-hidden="true" data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M12 6v12m6-6H6" />
-                                                </svg>
-
-                                                <svg class="hidden size-6" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                                    data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                                </svg>
+                                            <span id="minusIcon1" class="ml-6 flex h-7 items-center">
+                                                <i class="fa-solid fa-minus"></i>
                                             </span>
                                         </button>
                                     </dt>
-                                    <dd class="mt-2 ps-8" id="faq-0">
+                                    <dd id="foldaccordion1"
+                                        class="animate__animated animate__fadeIn animate__faster mt-2 ps-8" id="faq-0">
                                         <ul class="text-base/7 text-gray-600 list-disc">
                                             <li><b>Total Duration:&nbsp;&nbsp;</b><span id="duration"></span></li>
                                             <li><b>Time:&nbsp;&nbsp;</b><span id="time"></span>
@@ -592,23 +595,13 @@
                                             class="flex w-full items-start justify-between text-left text-gray-900"
                                             aria-controls="faq-0" aria-expanded="false">
                                             <span class="text-2xl font-semibold">Meeting Point</span>
-                                            <span class="ml-6 flex h-7 items-center">
-
-                                                <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor" aria-hidden="true" data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M12 6v12m6-6H6" />
-                                                </svg>
-
-                                                <svg class="hidden size-6" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                                    data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                                </svg>
+                                            <span id="minusIcon2" class="ml-6 flex h-7 items-center">
+                                                <i class="fa-solid fa-minus"></i>
                                             </span>
                                         </button>
                                     </dt>
-                                    <dd class="mt-2 ps-8" id="faq-0">
+                                    <dd id="foldaccordion2"
+                                        class="animate__animated animate__fadeIn animate__faster mt-2 ps-8" id="faq-0">
                                         <ul class="text-base/7 text-gray-600 list-disc">
                                             <li><b>Location:&nbsp;&nbsp;</b><span id="location"></span></li>
                                             <li><b>Meeting Time:&nbsp;&nbsp;</b><span id="meetingTime"></span></li>
@@ -623,22 +616,13 @@
                                             class="flex w-full items-start justify-between text-left text-gray-900"
                                             aria-controls="faq-0" aria-expanded="false">
                                             <span class="text-2xl font-semibold">Before You Go</span>
-                                            <span class="ml-6 flex h-7 items-center">
-
-                                                <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor" aria-hidden="true" data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M12 6v12m6-6H6" />
-                                                </svg>
-                                                <svg class="hidden size-6" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                                    data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                                </svg>
+                                            <span id="minusIcon3" class="ml-6 flex h-7 items-center">
+                                                <i class="fa-solid fa-minus"></i>
                                             </span>
                                         </button>
                                     </dt>
-                                    <dd class="mt-2 ps-8" id="faq-0">
+                                    <dd id="foldaccordion3"
+                                        class="animate__animated animate__fadeIn animate__faster mt-2 ps-8" id="faq-0">
                                         <ol class="text-base/7 text-gray-600 list-disc">
                                             <div id="beforeYouGo"></div>
                                         </ol>
@@ -652,22 +636,13 @@
                                             class="flex w-full items-start justify-between text-left text-gray-900"
                                             aria-controls="faq-0" aria-expanded="false">
                                             <span class="text-2xl font-semibold">Cancellation Policy</span>
-                                            <span class="ml-6 flex h-7 items-center">
-
-                                                <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor" aria-hidden="true" data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M12 6v12m6-6H6" />
-                                                </svg>
-                                                <svg class="hidden size-6" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                                    data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                                </svg>
+                                            <span id="minusIcon4" class="ml-6 flex h-7 items-center">
+                                                <i class="fa-solid fa-minus"></i>
                                             </span>
                                         </button>
                                     </dt>
-                                    <dd class="mt-2 ps-8" id="faq-0">
+                                    <dd id="foldaccordion4"
+                                        class="animate__animated animate__fadeIn animate__faster mt-2 ps-8" id="faq-0">
                                         <ol class="text-base/7 text-gray-600 list-disc">
                                             <div>
                                                 <li><b>Free Cancellation:&nbsp;&nbsp;</b>Full refund for cancellations
@@ -696,23 +671,13 @@
                                             class="flex w-full items-start justify-between text-left text-gray-900"
                                             aria-controls="faq-0" aria-expanded="false">
                                             <span class="text-2xl font-semibold">Rules</span>
-                                            <span class="ml-6 flex h-7 items-center">
-
-                                                <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                                    stroke="currentColor" aria-hidden="true" data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M12 6v12m6-6H6" />
-                                                </svg>
-
-                                                <svg class="hidden size-6" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" aria-hidden="true"
-                                                    data-slot="icon">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 12H6" />
-                                                </svg>
+                                            <span id="minusIcon5" class="ml-6 flex h-7 items-center">
+                                                <i class="fa-solid fa-minus"></i>
                                             </span>
                                         </button>
                                     </dt>
-                                    <dd class="mt-2 ps-8" id="faq-0">
+                                    <dd id="foldaccordion5"
+                                        class="animate__animated animate__fadeIn animate__faster mt-2 ps-8" id="faq-0">
                                         <ol class="text-base/7 text-gray-600 list-disc">
                                             <div id="rules"></div>
                                         </ol>
@@ -725,14 +690,14 @@
                 </div>
             </template>
         </section>
-
+        <hr>
     </main>
 
     <footer>
         <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
             <div class="xl:grid xl:grid-cols-12 xl:gap-8">
                 <div class="space-y-8 xl:col-span-4 mb-12 xl:mb-0 flex flex-col items-center xl:items-start">
-                    <img class="h-9" src="./src/img/shop-logo.png" alt="Company name">
+                    <a href="./shop.html"><img class="h-9" src="./src/img/shop-logo.png" alt="Company name"></a>
                     <p class="font-krona text-balance text-sm/6 text-gray-600 text-center xl:text-left">"Small groups,
                         local guides—step into
                         Iceland's grandeur and hidden wonders to uncover stories only nature can tell."</p>
@@ -765,20 +730,20 @@
                 <div class="sm:col-span-8 grid sm:grid-cols-3 xl:gap-5">
                     <div class="col-span-1 flex flex-col items-center text-center">
                         <a href="" class="text-xl font-semibold text-subPurple">Hiking</a>
-                            <ul role="list" class="font-mono mt-4 space-y-4">
-                                <li>
-                                    <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Laugavegur</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Hornstrandir</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Skaftafell</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Ásbyrgi Canyon</a>
-                                </li>
-                            </ul>
+                        <ul role="list" class="font-mono mt-4 space-y-4">
+                            <li>
+                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Laugavegur</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Hornstrandir</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Skaftafell</a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-sm/6 text-gray-800 hover:text-subPurple">Ásbyrgi Canyon</a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="col-span-1 mt-8 sm:mt-0 flex flex-col items-center text-center">
                         <a href="" class="text-xl font-semibold text-subPurple">Sightseeing</a>
@@ -987,6 +952,70 @@
             // 清空輸入欄位
             groupSizeInput.value = '';
         });
+
+        const minusIcon1 = document.querySelector('#minusIcon1');
+        const minusIcon2 = document.querySelector('#minusIcon2');
+        const minusIcon3 = document.querySelector('#minusIcon3');
+        const minusIcon4 = document.querySelector('#minusIcon4');
+        const minusIcon5 = document.querySelector('#minusIcon5');
+        const foldaccordion1 = document.querySelector('#foldaccordion1');
+        const foldaccordion2 = document.querySelector('#foldaccordion2');
+        const foldaccordion3 = document.querySelector('#foldaccordion3');
+        const foldaccordion4 = document.querySelector('#foldaccordion4');
+        const foldaccordion5 = document.querySelector('#foldaccordion5');
+
+        minusIcon1.addEventListener('click', () => {
+            if (foldaccordion1.style.display !== 'none') {
+                foldaccordion1.style.display = 'none';
+            } else {
+                foldaccordion1.style.display = 'block';
+            }
+
+            minusIcon1.innerHTML = `<i class="fa-solid fa-plus"></i>`
+        })
+
+        minusIcon2.addEventListener('click', () => {
+            if (foldaccordion2.style.display !== 'none') {
+                foldaccordion2.style.display = 'none';
+            } else {
+                foldaccordion2.style.display = 'block';
+            }
+
+            minusIcon2.innerHTML = `<i class="fa-solid fa-plus"></i>`
+        })
+
+        minusIcon3.addEventListener('click', () => {
+            if (foldaccordion3.style.display !== 'none') {
+                foldaccordion3.style.display = 'none';
+            } else {
+                foldaccordion3.style.display = 'block';
+            }
+
+            minusIcon1.innerHTML = `<i class="fa-solid fa-plus"></i>`
+        })
+
+        minusIcon4.addEventListener('click', () => {
+            if (foldaccordion4.style.display !== 'none') {
+                foldaccordion4.style.display = 'none';
+            } else {
+                foldaccordion4.style.display = 'block';
+            }
+
+            minusIcon4.innerHTML = `<i class="fa-solid fa-plus"></i>`
+        })
+
+        minusIcon5.addEventListener('click', () => {
+            if (foldaccordion5.style.display !== 'none') {
+                foldaccordion5.style.display = 'none';
+            } else {
+                foldaccordion5.style.display = 'block';
+            }
+
+            minusIcon5.innerHTML = `<i class="fa-solid fa-plus"></i>`
+        })
+
+
+
 
     </script>
 </body>
