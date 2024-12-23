@@ -102,7 +102,6 @@ function updateTotal() {
 }
 
 
-
 // 刷新頁面時，讀取到 localStorage 存放的資料
 document.addEventListener('DOMContentLoaded', () => {
 

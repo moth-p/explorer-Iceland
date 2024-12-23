@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>Log in</title>
     <link rel="icon" href="./src/img/logo.png">
     <link rel="stylesheet" href="./src/output.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -382,9 +382,9 @@
                                                     </div>
                                                 </div>
                                                 <div class="mt-8 flex justify-end px-4 sm:px-6 lg:px-8">
-                                                    <a id="continueToPay" href="./login.html"
+                                                    <button type="submit"
                                                         class="rounded-md border border-transparent bg-subPurple px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-mainYellow hover:text-gray-800 active:opacity-50">Continue
-                                                        to Payment</a>
+                                                        to Payment</button>
                                                 </div>
                                             </section>
 
@@ -405,294 +405,111 @@
         </div>
     </header>
 
-    <main>
-        <!-- 商品詳情 -->
-        <div class="leading-loose">
-            <div
-                class="font-krona mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
-
-                <div class="lg:max-w-lg lg:self-end">
-                    <nav>
-                        <ol role="list" class="flex items-center space-x-2">
-                            <li>
-                                <div class="flex items-center text-sm">
-                                    <a href="#" class="font-medium text-gray-500 hover:text-gray-900">Hiking</a>
-                                    <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
-                                        class="ml-2 size-5 shrink-0 text-gray-300">
-                                        <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
-                                    </svg>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="flex items-center text-sm">
-                                    <a href="#" class="font-medium text-gray-500 hover:text-gray-800">Guide</a>
-                                </div>
-                            </li>
-                        </ol>
-                    </nav>
-
-                    <div class="mt-5 break-words text-wrap">
-                        <h1 id="detailsTitle" class="text-3xl font-bold text-gray-800 sm:text-4xl"></h1>
-                    </div>
-
-                    <!-- 星星數＋reviews -->
-                    <section aria-labelledby="information-heading" class="mt-4">
-
-                        <div class="flex items-center font-sans font-medium">
-                            <p class="text-lg text-gray-800 sm:text-xl">€&nbsp;<span id="detailsPrice"></span></p>
-
-                            <div class="ml-4 border-l border-gray-300 pl-4">
-                                <h2 class="sr-only">Reviews</h2>
-                                <div class="flex items-center">
-                                    <div>
-                                        <div class="flex items-center">
-
-                                            <svg class="size-5 shrink-0 text-yellow-400" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true" data-slot="icon">
-                                                <path fill-rule="evenodd"
-                                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <svg class="size-5 shrink-0 text-yellow-400" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true" data-slot="icon">
-                                                <path fill-rule="evenodd"
-                                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <svg class="size-5 shrink-0 text-yellow-400" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true" data-slot="icon">
-                                                <path fill-rule="evenodd"
-                                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <svg class="size-5 shrink-0 text-yellow-400" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true" data-slot="icon">
-                                                <path fill-rule="evenodd"
-                                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                            <svg class="size-5 shrink-0 text-gray-300" viewBox="0 0 20 20"
-                                                fill="currentColor" aria-hidden="true" data-slot="icon">
-                                                <path fill-rule="evenodd"
-                                                    d="M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401Z"
-                                                    clip-rule="evenodd" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <p class="ml-2 text-sm text-gray-500">1624 reviews</p>
-                                </div>
-                            </div>
+    <main class="animate__animated animate__fadeIn">
+        <!-- sign in -->
+        <div class="flex min-h-full flex-col justify-center py-12 sm:px-6 lg:px-8">
+            <div class="font-sans mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+                <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+                    <form class="space-y-6" action="#" method="POST">
+                        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                            <h2 class="font-krona text-xl text-center font-bold tracking-tight text-gray-800">Log in to your
+                                account</h2>
                         </div>
-
-                        <div class="mt-4 space-y-6 break-words text-wrap">
-                            <p id="detailsBrief" class="font-sans text-gray-500"></p>
-                        </div>
-                    </section>
-                </div>
-
-                <!-- 商品圖 -->
-                <div class="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
-                    <img id="detailsImg" src="" alt="" class="aspect-square w-full rounded-lg object-cover">
-                </div>
-
-                <!--input 日期選擇器 人數 -->
-                <div class="mt-10 lg:col-start-1 lg:row-start-2 lg:max-w-lg lg:self-start">
-                    <section aria-labelledby="options-heading mb-10">
                         <div>
-                            <div class="relative sm:flex sm:justify-start">
-                                <!-- date picker 日期選擇器 -->
-                                <p class="font-sans text-md">Date:&nbsp;&nbsp;<input required id="datePicker"
-                                        type="text"
-                                        class="font-sans w-44 h-8 p-2 me-8 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-subPurple mb-5 md:mb-0"
-                                        placeholder="Select a date"></p>
-                                <!-- 人數 -->
-                                <p class="font-sans text-md">Group Size:&nbsp;&nbsp;<input required id="groupSizeInput"
-                                        type="number" min="1" max="8" placeholder="2"
-                                        class="font-sans p-2 w-20 h-8 border rounded-md focus:outline-none focus:ring-2 focus:ring-subPurple">&nbsp;&nbsp;people
-                                </p>
-                            </div>
-                            <div class="mt-4">
-                                <a href="#" class="group inline-flex text-sm text-gray-500 hover:text-gray-700">
-                                    <span class="font-sans">What should prepare before the tour?</span>
-                                    <svg class="ml-2 size-5 shrink-0 text-gray-400 group-hover:text-gray-500"
-                                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                                        <path fill-rule="evenodd"
-                                            d="M18 10a8 8 0 1 1-16 0 8 8 0 0 1 16 0ZM8.94 6.94a.75.75 0 1 1-1.061-1.061 3 3 0 1 1 2.871 5.026v.345a.75.75 0 0 1-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 1 0 8.94 6.94ZM10 15a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </div>
-
-                            <!-- 按鈕：加入購物車 -->
-                            <div class="mt-10">
-                                <button type="button" id="addToCartBtn"
-                                    class="flex w-full items-center justify-center rounded-md border border-transparent bg-subPurple px-8 py-3 text-base font-medium text-white hover:bg-mainYellow hover:text-gray-800 active:opacity-50 focus:outline-none focus:ring-2 focus:ring-subPurple focus:ring-offset-2 focus:ring-offset-gray-50">Add
-                                    to cart</button>
-                            </div>
-                            <div class="mt-6 text-center">
-                                <a href="#" class="group inline-flex text-base font-medium">
-                                    <svg class="mr-2 size-6 shrink-0 text-gray-400 group-hover:text-gray-500"
-                                        fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                        aria-hidden="true" data-slot="icon">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
-                                    </svg>
-                                    <span class="font-sans text-gray-400 hover:text-gray-600">Insurance Included</span>
-                                </a>
+                            <label for="email" class="block text-sm/6 font-medium text-gray-800">Email
+                                address</label>
+                            <div class="mt-2">
+                                <input type="email" name="email" id="email" autocomplete="email" required
+                                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-800 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                             </div>
                         </div>
-                    </section>
+
+                        <div>
+                            <label for="password" class="block text-sm/6 font-medium text-gray-800">Password</label>
+                            <div class="mt-2">
+                                <input type="password" name="password" id="password" autocomplete="current-password"
+                                    required
+                                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-800 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div class="flex gap-3">
+                                <div class="flex h-6 shrink-0 items-center">
+                                    <div class="group grid size-4 grid-cols-1">
+                                        <input id="remember-me" name="remember-me" type="checkbox"
+                                            class="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto">
+                                        <svg class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
+                                            viewBox="0 0 14 14" fill="none">
+                                            <path class="opacity-0 group-has-[:checked]:opacity-100"
+                                                d="M3 8L6 11L11 3.5" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path class="opacity-0 group-has-[:indeterminate]:opacity-100" d="M3 7H11"
+                                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                </div>
+                                <label for="remember-me" class="block text-sm/6 text-gray-800">Remember me</label>
+                            </div>
+
+                            <div class="text-sm/6">
+                                <a href="#" class="font-semibold text-subPurple hover:opacity-50">Forgot
+                                    password?</a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="submit"
+                                class="font-krona flex w-full justify-center rounded-md bg-subPurple px-3 py-1.5 text-sm/6 font-semibold text-lightGray shadow-sm hover:bg-mainYellow hover:text-gray-800 active:opacity-50">Sign
+                                in</button>
+                        </div>
+                    </form>
+
+                    <div>
+                        <div class="relative mt-10">
+                            <div class="absolute inset-0 flex items-center" aria-hidden="true">
+                                <div class="w-full border-t border-gray-200"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm/6 font-medium">
+                                <span class="bg-white px-6 text-gray-800">Or continue with</span>
+                            </div>
+                        </div>
+
+                        <div class="mt-6 grid grid-cols-2 gap-4">
+                            <a href="#"
+                                class="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
+                                <svg class="h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
+                                    <path
+                                        d="M12.0003 4.75C13.7703 4.75 15.3553 5.36002 16.6053 6.54998L20.0303 3.125C17.9502 1.19 15.2353 0 12.0003 0C7.31028 0 3.25527 2.69 1.28027 6.60998L5.27028 9.70498C6.21525 6.86002 8.87028 4.75 12.0003 4.75Z"
+                                        fill="#EA4335" />
+                                    <path
+                                        d="M23.49 12.275C23.49 11.49 23.415 10.73 23.3 10H12V14.51H18.47C18.18 15.99 17.34 17.25 16.08 18.1L19.945 21.1C22.2 19.01 23.49 15.92 23.49 12.275Z"
+                                        fill="#4285F4" />
+                                    <path
+                                        d="M5.26498 14.2949C5.02498 13.5699 4.88501 12.7999 4.88501 11.9999C4.88501 11.1999 5.01998 10.4299 5.26498 9.7049L1.275 6.60986C0.46 8.22986 0 10.0599 0 11.9999C0 13.9399 0.46 15.7699 1.28 17.3899L5.26498 14.2949Z"
+                                        fill="#FBBC05" />
+                                    <path
+                                        d="M12.0004 24.0001C15.2404 24.0001 17.9654 22.935 19.9454 21.095L16.0804 18.095C15.0054 18.82 13.6204 19.245 12.0004 19.245C8.8704 19.245 6.21537 17.135 5.2654 14.29L1.27539 17.385C3.25539 21.31 7.3104 24.0001 12.0004 24.0001Z"
+                                        fill="#34A853" />
+                                </svg>
+                                <span class="text-sm/6 font-semibold">Google</span>
+                            </a>
+
+                            <a href="#"
+                                class="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent">
+                                <img src="./src/img/facebook.png" alt="" class="object-cover max-w-6 max-h-6">
+                                <span class="text-sm/6 font-semibold">Facebook</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
+
+                <p class="mt-10 text-center text-sm/6 text-gray-500">
+                    Not a member?&nbsp;&nbsp;
+                    <a href="#" class="font-semibold text-subPurple hover:opacity-50">Sign up now</a>
+                </p>
             </div>
         </div>
-
-        <!--下方文字區 -->
-        <section id="infoContainer" class="">
-            <template id="infoTemplate">
-                <div>
-                    <div class="leading-loose mx-auto max-w-7xl px-14 lg:pt-4 pb-40">
-                        <div class="flex justify-center items-center text-subPurple text-5xl mb-8"><i
-                                class="fa-solid fa-volcano"></i></div>
-                        <div class="mx-auto max-w-4xl divide-y divide-gray-900/10">
-                            <h2
-                                class="text-3xl font-krona tracking-tight text-subPurple sm:text-4xl flex justify-center items-center">
-                                About the tour</h2>
-                            <dl class="mt-12 space-y-12 divide-y divide-gray-900/10">
-                                <!--下方文字區 商品概述 -->
-                                <div class="pt-10">
-                                    <dt>
-                                        <div class="flex w-full items-start justify-between text-left text-gray-900">
-                                            <span id="aboutTheTour" class="text-lg font-medium text-gray-800"></span>
-                                        </div>
-                                    </dt>
-                                </div>
-
-                                <!-- 下方文字區 手風琴1 行程時長、出發時間 -->
-                                <div class="pt-10">
-                                    <dt>
-                                        <button type="button"
-                                            class="flex w-full items-start justify-between text-left text-gray-900"
-                                            aria-controls="faq-0" aria-expanded="false">
-                                            <span class="text-2xl font-semibold">Tour Duration</span>
-                                            <span id="minusIcon1" class="ml-6 flex h-7 items-center">
-                                                <i class="fa-solid fa-minus"></i>
-                                            </span>
-                                        </button>
-                                    </dt>
-                                    <dd id="foldaccordion1"
-                                        class="animate__animated animate__fadeIn animate__faster mt-2 ps-8" id="faq-0">
-                                        <ul class="text-base/7 text-gray-600 list-disc">
-                                            <li><b>Total Duration:&nbsp;&nbsp;</b><span id="duration"></span></li>
-                                            <li><b>Time:&nbsp;&nbsp;</b><span id="time"></span>
-                                            </li>
-                                            <li><b>Daily Start Time:&nbsp;&nbsp;</b><span id="startTime"></li>
-                                        </ul>
-                                    </dd>
-                                </div>
-
-                                <!-- 下方文字區 手風琴2 集合地點 -->
-                                <div class="pt-10">
-                                    <dt>
-                                        <button type="button"
-                                            class="flex w-full items-start justify-between text-left text-gray-900"
-                                            aria-controls="faq-0" aria-expanded="false">
-                                            <span class="text-2xl font-semibold">Meeting Point</span>
-                                            <span id="minusIcon2" class="ml-6 flex h-7 items-center">
-                                                <i class="fa-solid fa-minus"></i>
-                                            </span>
-                                        </button>
-                                    </dt>
-                                    <dd id="foldaccordion2"
-                                        class="animate__animated animate__fadeIn animate__faster mt-2 ps-8" id="faq-0">
-                                        <ul class="text-base/7 text-gray-600 list-disc">
-                                            <li><b>Location:&nbsp;&nbsp;</b><span id="location"></span></li>
-                                            <li><b>Meeting Time:&nbsp;&nbsp;</b><span id="meetingTime"></span></li>
-                                        </ul>
-                                    </dd>
-                                </div>
-
-                                <!-- 下方文字區 手風琴3 行前準備 -->
-                                <div class="pt-10">
-                                    <dt>
-                                        <button type="button"
-                                            class="flex w-full items-start justify-between text-left text-gray-900"
-                                            aria-controls="faq-0" aria-expanded="false">
-                                            <span class="text-2xl font-semibold">Before You Go</span>
-                                            <span id="minusIcon3" class="ml-6 flex h-7 items-center">
-                                                <i class="fa-solid fa-minus"></i>
-                                            </span>
-                                        </button>
-                                    </dt>
-                                    <dd id="foldaccordion3"
-                                        class="animate__animated animate__fadeIn animate__faster mt-2 ps-8" id="faq-0">
-                                        <ol class="text-base/7 text-gray-600 list-disc">
-                                            <div id="beforeYouGo"></div>
-                                        </ol>
-                                    </dd>
-                                </div>
-
-                                <!-- 下方文字區 手風琴4 取消政策 -->
-                                <div class="pt-10">
-                                    <dt>
-                                        <button type="button"
-                                            class="flex w-full items-start justify-between text-left text-gray-900"
-                                            aria-controls="faq-0" aria-expanded="false">
-                                            <span class="text-2xl font-semibold">Cancellation Policy</span>
-                                            <span id="minusIcon4" class="ml-6 flex h-7 items-center">
-                                                <i class="fa-solid fa-minus"></i>
-                                            </span>
-                                        </button>
-                                    </dt>
-                                    <dd id="foldaccordion4"
-                                        class="animate__animated animate__fadeIn animate__faster mt-2 ps-8" id="faq-0">
-                                        <ol class="text-base/7 text-gray-600 list-disc">
-                                            <div>
-                                                <li><b>Free Cancellation:&nbsp;&nbsp;</b>Full refund for cancellations
-                                                    made
-                                                    72 hours before
-                                                    the
-                                                    tour.</li>
-                                                <li><b>Partial Refund:&nbsp;&nbsp;</b>50% refund for cancellations made
-                                                    24–72 hours before
-                                                    the
-                                                    tour.</li>
-                                                <li><b>No Refund:&nbsp;&nbsp;</b>No refunds for cancellations made
-                                                    within 24
-                                                    hours of the
-                                                    tour
-                                                    start.</li>
-                                            </div>
-                                        </ol>
-                                    </dd>
-                                </div>
-
-                                <!-- 下方文字區 手風琴5 規則 -->
-                                <div class="pt-10">
-                                    <dt>
-                                        <button type="button"
-                                            class="flex w-full items-start justify-between text-left text-gray-900"
-                                            aria-controls="faq-0" aria-expanded="false">
-                                            <span class="text-2xl font-semibold">Rules</span>
-                                            <span id="minusIcon5" class="ml-6 flex h-7 items-center">
-                                                <i class="fa-solid fa-minus"></i>
-                                            </span>
-                                        </button>
-                                    </dt>
-                                    <dd id="foldaccordion5"
-                                        class="animate__animated animate__fadeIn animate__faster mt-2 ps-8" id="faq-0">
-                                        <ol class="text-base/7 text-gray-600 list-disc">
-                                            <div id="rules"></div>
-                                        </ol>
-                                    </dd>
-                                </div>
-                                <!-- More questions... -->
-                            </dl>
-                        </div>
-                    </div>
-                </div>
-            </template>
-        </section>
-        <hr>
     </main>
 
     <footer>
@@ -791,247 +608,8 @@
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./src/js/shopNav.js"></script>
-    <script src="./src/js/productsDatas.js"></script>
-
-    <script>
-        // go top button
-        const goTopBtn = document.querySelector('#goTopBtn');
-
-        // 當滾動事件發生時觸發
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 200) { // 滾動超過 200px 時顯示按鈕
-                goTopBtn.style.display = 'block';
-            } else {
-                goTopBtn.style.display = 'none';
-            }
-        });
-
-        // 解析 URL 的查詢字串
-        const urlParams = new URLSearchParams(window.location.search);
-        const product = Object.fromEntries(urlParams.entries());
-        const productTitle = urlParams.get('title');
-        const productIndex = parseInt(urlParams.get('index'));
-
-        // 設置商品詳情內容
-        document.getElementById('detailsTitle').textContent = product.title;
-        document.getElementById('detailsImg').src = product.imgBig;
-        document.getElementById('detailsPrice').textContent = product.price;
-        document.getElementById('detailsBrief').textContent = product.briefLong;
-
-        // 動態設置 <title>
-        if (productTitle) {
-            document.title = decodeURIComponent(productTitle); // 更新 <title>
-        }
-
-        //下方文字區 template
-        const infoContainer = document.querySelector('#infoContainer');
-        const infoTemplate = document.querySelector('#infoTemplate');
-        const cloneInfo = infoTemplate.content.cloneNode(true);
-
-        cloneInfo.querySelector('#aboutTheTour').textContent = product.briefLong;
-        cloneInfo.querySelector('#duration').textContent = product.duration;
-        cloneInfo.querySelector('#time').textContent = product.time;
-        cloneInfo.querySelector('#startTime').textContent = product.startTime;
-        cloneInfo.querySelector('#meetingTime').textContent = product.meetingTime;
-        cloneInfo.querySelector('#location').textContent = product.location;
-        cloneInfo.querySelector('#beforeYouGo').innerHTML = product.beforeYouGo;
-        cloneInfo.querySelector('#rules').innerHTML = product.rules;
-
-        infoContainer.appendChild(cloneInfo);
-
-        const addToCart = document.querySelector('#addToCart');
-        const groupSizeInput = document.querySelector('#groupSizeInput');
-
-        let selectedDateStr = '';
-        let disabledDates = [];
-
-        // 日期選擇器設定
-        // 計算今天 +14 天的日期
-        function getStartDay() {
-            const today = new Date();
-            const targetDate = new Date(today);
-            targetDate.setDate(today.getDate() + 14);
-            return targetDate;
-        }
-
-        const datePicker = flatpickr("#datePicker", {
-            minDate: getStartDay(), // 設定最早可選日期
-            altInput: true,
-            altFormat: "F j, Y",
-            dateFormat: "Y-m-d",
-            disable: disabledDates,
-            onChange: function (selectedDates, dateStr, instance) {
-                // `selectedDates` 是一個日期陣列，包含選中的日期物件
-                // `dateStr` 是格式化的日期字串
-                selectedDateStr = dateStr;
-            }
-        });
-
-        addToCartBtn.addEventListener('click', () => {
-            // 必填欄位檢查：date || group size 必填
-            if (datePicker.value === '' || groupSizeInput.value === '' || groupSizeInput.value <= 0) {
-                Swal.fire({
-                    title: "The Date and Group Size must be filled out.",
-                    icon: 'warning',
-                    iconColor: '#F77171',
-                    width: '450px',
-                    buttonsStyling: false,
-                    customClass: {
-                        title: 'text-[20px] font-sans my-3',
-                        confirmButton: 'font-sans font-medium w-[80px] h-[40px] rounded-lg bg-subPurple text-lightGray hover:bg-mainYellow hover:text-gray-800 active:opacity-50',
-                    },
-                    didRender: () => {
-                        const icon = document.querySelector('.swal2-icon.swal2-warning');
-                        if (icon) {
-                            icon.style.fontSize = '10px';
-                            icon.style.width = '50px';
-                            icon.style.height = '50px';
-                        }
-                    },
-                });
-                return;
-            }
-
-            // 必填欄位檢查：group size 不可大於上限
-            if (groupSizeInput.value > parseInt(product.groupSize)) {
-                Swal.fire({
-                    title: `The tour is limited to ${product.groupSize} participants.`,
-                    icon: 'warning',
-                    iconColor: '#F77171',
-                    width: '450px',
-                    buttonsStyling: false,
-                    iconStyling: false,
-                    customClass: {
-                        title: 'text-[20px] font-sans my-3',
-                        confirmButton: 'font-sans font-medium w-[80px] h-[40px] rounded-lg bg-subPurple text-lightGray hover:bg-mainYellow hover:text-gray-800 active:opacity-50',
-                    },
-                    didRender: () => {
-                        const icon = document.querySelector('.swal2-icon.swal2-warning');
-                        if (icon) {
-                            icon.style.fontSize = '10px';
-                            icon.style.width = '50px';
-                            icon.style.height = '50px';
-                        }
-                    },
-                });
-                return;
-            }
-
-            // 必填欄位檢查：成功加入購物車
-            Swal.fire({
-                title: "Add to cart successfully!",
-                icon: 'success',
-                iconColor: '#2CD4BF',
-                width: '450px',
-                buttonsStyling: false,
-                customClass: {
-                    title: 'text-[20px] font-sans my-3',
-                    confirmButton: 'font-sans font-medium w-[80px] h-[40px] rounded-lg bg-subPurple text-lightGray hover:bg-mainYellow hover:text-gray-800 active:opacity-50',
-                },
-                didRender: () => {
-                    const icon = document.querySelector('.swal2-icon.swal2-success');
-
-                    if (icon) {
-                        // 初始樣式
-                        icon.style.fontSize = '10px';
-                        icon.style.width = '50px';
-                        icon.style.height = '50px';
-                    }
-                },
-            });
-
-            const productData = {
-                title: product.title,
-                img: product.img,
-                date: selectedDateStr,
-                groupSize: groupSizeInput.value,
-                price: product.price * groupSizeInput.value,
-            };
-
-            let existingCartData = JSON.parse(localStorage.getItem('cartData')) || [];
-            existingCartData.push(productData);
-
-            // 將更新後的資料陣列儲存回 localStorage
-            localStorage.setItem('cartData', JSON.stringify(existingCartData));
-
-            updatedcartAlert();
-            updateCartUI();
-            updateTotal()
-
-            // 禁用已選中的日期
-            disabledDates.push(selectedDateStr);
-            datePicker.set('disable', disabledDates);// 禁用已選中的日期
-            datePicker.clear();
-
-            // 清空輸入欄位
-            groupSizeInput.value = '';
-        });
-
-        const minusIcon1 = document.querySelector('#minusIcon1');
-        const minusIcon2 = document.querySelector('#minusIcon2');
-        const minusIcon3 = document.querySelector('#minusIcon3');
-        const minusIcon4 = document.querySelector('#minusIcon4');
-        const minusIcon5 = document.querySelector('#minusIcon5');
-        const foldaccordion1 = document.querySelector('#foldaccordion1');
-        const foldaccordion2 = document.querySelector('#foldaccordion2');
-        const foldaccordion3 = document.querySelector('#foldaccordion3');
-        const foldaccordion4 = document.querySelector('#foldaccordion4');
-        const foldaccordion5 = document.querySelector('#foldaccordion5');
-
-        minusIcon1.addEventListener('click', () => {
-            if (foldaccordion1.style.display !== 'none') {
-                foldaccordion1.style.display = 'none';
-            } else {
-                foldaccordion1.style.display = 'block';
-            }
-
-            minusIcon1.innerHTML = `<i class="fa-solid fa-plus"></i>`
-        })
-
-        minusIcon2.addEventListener('click', () => {
-            if (foldaccordion2.style.display !== 'none') {
-                foldaccordion2.style.display = 'none';
-            } else {
-                foldaccordion2.style.display = 'block';
-            }
-
-            minusIcon2.innerHTML = `<i class="fa-solid fa-plus"></i>`
-        })
-
-        minusIcon3.addEventListener('click', () => {
-            if (foldaccordion3.style.display !== 'none') {
-                foldaccordion3.style.display = 'none';
-            } else {
-                foldaccordion3.style.display = 'block';
-            }
-
-            minusIcon1.innerHTML = `<i class="fa-solid fa-plus"></i>`
-        })
-
-        minusIcon4.addEventListener('click', () => {
-            if (foldaccordion4.style.display !== 'none') {
-                foldaccordion4.style.display = 'none';
-            } else {
-                foldaccordion4.style.display = 'block';
-            }
-
-            minusIcon4.innerHTML = `<i class="fa-solid fa-plus"></i>`
-        })
-
-        minusIcon5.addEventListener('click', () => {
-            if (foldaccordion5.style.display !== 'none') {
-                foldaccordion5.style.display = 'none';
-            } else {
-                foldaccordion5.style.display = 'block';
-            }
-
-            minusIcon5.innerHTML = `<i class="fa-solid fa-plus"></i>`
-        })
 
 
-
-
-    </script>
 </body>
 
 </html>
