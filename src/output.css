@@ -2876,6 +2876,10 @@ video {
   margin-bottom: 3.5rem;
 }
 
+.mb-16{
+  margin-bottom: 4rem;
+}
+
 .mb-2{
   margin-bottom: 0.5rem;
 }
@@ -2958,6 +2962,10 @@ video {
 
 .mt-8{
   margin-top: 2rem;
+}
+
+.mt-\[64px\]{
+  margin-top: 64px;
 }
 
 .mt-\[80px\]{
