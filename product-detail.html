@@ -784,6 +784,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./src/js/shopNav.js"></script>
     <script src="./src/js/cart.js"></script>
+    <script src="./src/js/products.js"></script>
 
     <script>
         // go top button
@@ -798,21 +799,20 @@
             }
         });
 
-        // 解析 URL 的查詢字串
         const urlParams = new URLSearchParams(window.location.search);
-        const product = Object.fromEntries(urlParams.entries());
-        const productTitle = urlParams.get('title');
-        const productIndex = parseInt(urlParams.get('index'));
+        const productId = urlParams.get('id');
 
-        // 設置商品詳情內容
-        document.getElementById('detailsTitle').textContent = product.title;
-        document.getElementById('detailsImg').src = product.imgBig;
-        document.getElementById('detailsPrice').textContent = product.price;
-        document.getElementById('detailsBrief').textContent = product.briefLong;
+        // 假設 products 陣列在全局範圍或從後端獲取
+        const product = products.find(item => item.id === productId);
 
-        // 動態設置 <title>
-        if (productTitle) {
-            document.title = decodeURIComponent(productTitle); // 更新 <title>
+        if (product) {
+            document.getElementById('detailsTitle').textContent = product.title;
+            document.getElementById('detailsImg').src = product.imgBig;
+            document.getElementById('detailsPrice').textContent = product.price;
+            document.getElementById('detailsBrief').textContent = product.briefLong;
+            document.title = product.title;
+        } else {
+            console.error('Product not found');
         }
 
         //下方文字區 template
@@ -1000,7 +1000,7 @@
                 foldaccordion3.style.display = 'block';
                 minusIcon3.innerHTML = `<i class="fa-solid fa-minus"></i>`
             }
-            
+
         })
 
         minusIcon4.addEventListener('click', () => {

@@ -1,0 +1,95 @@
+<!-- nav 內容 -->
+<nav class="bg-white/50 shadow fixed top-0 left-0 right-0 z-20">
+    <div class="mx-auto max-w-6xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 justify-between">
+
+            <!-- ham dropdown menu button -->
+            <div id="hamBtn" class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                <button type="button"
+                    class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-40 hover:bg-lightGray hover:text-subPurple active:opacity-60"
+                    aria-controls="mobile-menu" aria-expanded="false">
+
+                    <svg class="block size-7" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                        aria-hidden="true" data-slot="icon">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- logo -->
+            <div class="flex flex-1 items-center justify-center sm:justify-start gap-6">
+                <div class="flex shrink-0 items-center">
+                    <a href="#"><img class="h-7 w-auto" src="./src/img/logo.png" alt="Company Logo"></a>
+                </div>
+
+                <!-- nav select -->
+                <div class="hidden sm:ml-6 sm:flex sm:space-x-3">
+                    <div class="nav-btn flex justify-center item-center">
+                        <a href="./index.html" id="indexPointer"
+                            class="pointer-events-none inline-flex item-center px-3 py-2 text-sm text-gray-400  hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">Concept</a>
+                    </div>
+                    <div class="nav-btn flex justify-center items-center">
+                        <a href="./about.html" id="aboutPointer"
+                            class="inline-flex items-center px-3 py-2 text-sm text-gray-800 hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">About</a>
+                    </div>
+                    <div class="nav-btn flex justify-center items-center">
+                        <a href="./shop.html"
+                            class="inline-flex items-center px-3 py-2 text-sm text-gray-800  hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow">Shop</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- go top button -->
+        <div id="goTopBtn" class="hidden fixed end-8 bottom-8 md:end-20 md:bottom-20 z-30">
+            <a href="#"
+                class="text-[12px] w-10 h-10 text-subPurple bg-lightGray hover:bg-mainYellow hover:text-subPurple rounded-full flex justify-center items-center">top</a>
+        </div>
+    </div>
+
+    <!-- Mobile ham menu -->
+    <div class="sm:hidden" id="mobile-menu">
+        <div class="space-y-1 pb-4 pt-2">
+            <a href="./index.html"
+                class="pointer-events-none block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 pl-3 pr-4 text-gray-400 font-medium hover:text-subPurple active:opacity-60">Concept</a>
+            <a href="./about.html"
+                class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 pl-3 pr-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">About</a>
+            <a href="./shop.html"
+                class="block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 pl-3 pr-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60">Shop</a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    //nav 點開漢堡標選單
+    const hamBtn = document.querySelector('#hamBtn');
+    const mobileMenu = document.querySelector('#mobile-menu');
+
+    mobileMenu.style.display = 'none';
+
+    hamBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (mobileMenu.style.display === 'none') {
+            mobileMenu.style.display = 'block';
+        } else if (mobileMenu.style.display === 'block') {
+            mobileMenu.style.display = 'none';
+        }
+    })
+
+    // go top button
+    const goTopBtn = document.querySelector('#goTopBtn');
+
+    window.addEventListener('click', () => {
+        mobileMenu.style.display = 'none';
+    })
+
+    // 當滾動事件發生時觸發
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) { // 滾動超過 200px 時顯示按鈕
+            goTopBtn.style.display = 'block';
+        } else {
+            goTopBtn.style.display = 'none';
+        }
+    });
+</script>
