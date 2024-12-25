@@ -298,14 +298,6 @@
 
                         // 停止觀察該區塊
                         observer.unobserve(area);
-                        console.log('Entry properties:', {
-                            isIntersecting: entry.isIntersecting, // 是否進入視窗
-                            intersectionRatio: entry.intersectionRatio, // 進入的比例
-                            boundingClientRect: entry.boundingClientRect, // 目標邊界盒的尺寸
-                            rootBounds: entry.rootBounds, // root 的邊界盒
-                            target: entry.target, // 被觀察的目標元素
-                            time: entry.time, // 觀察的時間戳記
-                        });
                     }
                 });
             },

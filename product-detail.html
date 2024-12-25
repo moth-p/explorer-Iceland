@@ -802,7 +802,6 @@
         const urlParams = new URLSearchParams(window.location.search);
         const productId = urlParams.get('id');
 
-        // 假設 products 陣列在全局範圍或從後端獲取
         const product = products.find(item => item.id === productId);
 
         if (product) {
