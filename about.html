@@ -84,16 +84,16 @@
                     document.getElementById('nav').innerHTML = tempDiv.innerHTML;
 
                     // 根據當前頁面的 URL 動態修改 pointer-events
-                    if (window.location.pathname === '/about.html') {
-                        // 在 about.html 中設置 B 的 pointer-events: none
-                        const indexPointer = document.querySelector('#indexPointer');
-                        const aboutPointer = document.querySelector('#aboutPointer');
-                        indexPointer.classList.remove('pointer-events-none');
-                        indexPointer.classList.add('text-gray-800')
-                        aboutPointer.classList.remove('text-gray-800');
-                        aboutPointer.classList.add('text-gray-400');
-                        aboutPointer.classList.add('pointer-events-none');
-                    }
+                    // if (window.location.pathname === '/about.html') {
+                    //     // 在 about.html 中設置 B 的 pointer-events: none
+                    //     const indexPointer = document.querySelector('#indexPointer');
+                    //     const aboutPointer = document.querySelector('#aboutPointer');
+                    //     indexPointer.classList.remove('pointer-events-none');
+                    //     indexPointer.classList.add('text-gray-800')
+                    //     aboutPointer.classList.remove('text-gray-800');
+                    //     aboutPointer.classList.add('text-gray-400');
+                    //     aboutPointer.classList.add('pointer-events-none');
+                    // }
 
                     // 提取 <script> 標籤的內容並動態執行
                     const scripts = tempDiv.querySelectorAll('script');
