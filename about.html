@@ -92,7 +92,7 @@
     <main class="w-full lg:max-h-[1080px]">
         <div class="relative">
             <div class="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
-                <div class="px-6 pb-24 pt-10 sm:pb-32 lg:col-span-7 lg:px-0 lg:pb-48 lg:pt-32 xl:col-span-6">
+                <div class="px-6 pt-10 pb-8 lg:col-span-7 lg:px-0 lg:pb-48 lg:pt-32 xl:col-span-6">
                     <div class="mx-auto max-w-lg lg:mx-0">
                         <img class="h-10" src="./src/img/shop-logo.png">
                         <div class="mt-8 sm:flex">
@@ -124,7 +124,7 @@
                     </div>
                 </div>
                 <div
-                    class="relative max-h-[800px] mt-[64px] lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0">
+                    class="relative px-6 md:px-32 lg:max-h-[800px] lg:mt-[64px] lg:col-span-5 lg:-me-8 xl:absolute xl:inset-0 xl:left-1/2 xl:me-0">
                     <img class="aspect-[3/2] w-full h-full bg-gray-50 object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
                         src="./src/img/about-banner.jpg" alt="">
                 </div>
@@ -169,6 +169,38 @@
             reserved.</p>
     </div>
 
+    <script>
+        //nav 點開漢堡標選單
+        const hamBtn = document.querySelector('#hamBtn');
+        const mobileMenu = document.querySelector('#mobile-menu');
+
+        mobileMenu.style.display = 'none';
+
+        hamBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            if (mobileMenu.style.display === 'none') {
+                mobileMenu.style.display = 'block';
+            } else if (mobileMenu.style.display === 'block') {
+                mobileMenu.style.display = 'none';
+            }
+        })
+
+        // go top button
+        const goTopBtn = document.querySelector('#goTopBtn');
+
+        window.addEventListener('click', () => {
+            mobileMenu.style.display = 'none';
+        })
+
+        // 當滾動事件發生時觸發
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) { // 滾動超過 200px 時顯示按鈕
+                goTopBtn.style.display = 'block';
+            } else {
+                goTopBtn.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 
 </html>
