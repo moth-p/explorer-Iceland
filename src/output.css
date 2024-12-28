@@ -3012,11 +3012,6 @@ video {
   aspect-ratio: 1 / 1;
 }
 
-.size-24{
-  width: 6rem;
-  height: 6rem;
-}
-
 .size-3\.5{
   width: 0.875rem;
   height: 0.875rem;
@@ -3800,6 +3795,11 @@ video {
   padding-right: 1rem;
 }
 
+.px-5{
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
 .px-6{
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -3863,11 +3863,6 @@ video {
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
-}
-
-.px-5{
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
 }
 
 .pb-20{
@@ -4598,11 +4593,6 @@ video {
 
   .sm\:aspect-auto{
     aspect-ratio: auto;
-  }
-
-  .sm\:size-32{
-    width: 8rem;
-    height: 8rem;
   }
 
   .sm\:w-1\/3{

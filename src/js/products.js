@@ -1,4 +1,4 @@
-    // main 商品卡片 template 模板
+    // 商品資料
     const products = [
         {
             id:'hiking-1-Laugavegur-Trail',
