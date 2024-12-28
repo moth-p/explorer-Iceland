@@ -1,3 +1,4 @@
+//nav
 const navContainer = document.querySelector('#navContainer');
 const navTemplate = document.querySelector('.navTemplate');
 const cloneNav = navTemplate.content.cloneNode(true);
@@ -10,16 +11,6 @@ const hamMenu = document.querySelector('#hamMenu');
 const navBar = document.querySelector('#navBar');
 
 hamMenu.style.display = 'none';
-
-
-// 點擊視窗空白處，關掉ham menu, searchBox bgMask, cartShow
-window.addEventListener('click', () => {
-    // hamMenu.style.display = 'none';
-    // searchBox.style.display = 'none';
-    [hamMenu, searchBox, bgMask, cartShow].forEach(element => {
-        element.style.display = 'none';
-    })
-});
 
 // 防止ham menu事件冒泡（不要吃到 window.onclick 效果）
 hamMenu.addEventListener('click', (e) => {
@@ -120,4 +111,13 @@ cartCloseBtn.addEventListener('click', function () {
 cartShow.addEventListener('click', (e) => {
     e.stopPropagation
 })
+
+// 點擊視窗空白處，關掉ham menu, searchBox bgMask, cartShow
+window.addEventListener('click', () => {
+    // hamMenu.style.display = 'none';
+    // searchBox.style.display = 'none';
+    [hamMenu, searchBox, bgMask, cartShow].forEach(element => {
+        element.style.display = 'none';
+    })
+});
 

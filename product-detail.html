@@ -644,11 +644,89 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./src/js/shopNav.js"></script>
-    <script src="./src/js/cart.js"></script>
     <script src="./src/js/products.js"></script>
+    <script src="./src/js/cart.js"></script>
 
     <script>
+        //nav
+        const navContainer = document.querySelector('#navContainer');
+        const navTemplate = document.querySelector('.navTemplate');
+        const cloneNav = navTemplate.content.cloneNode(true);
+
+        navContainer.appendChild(cloneNav);
+
+        // nav 點開漢堡標選單
+        const hamBtn = document.querySelector('#hamBtn');
+        const hamMenu = document.querySelector('#hamMenu');
+        const navBar = document.querySelector('#navBar');
+
+        hamMenu.style.display = 'none';
+
+        // 防止ham menu事件冒泡（不要吃到 window.onclick 效果）
+        hamMenu.addEventListener('click', (e) => {
+            e.stopPropagation();
+        })
+
+        hamBtn.addEventListener('click', function (e) {
+            navBar.classList.remove('bg-white/50');
+            navBar.classList.add('bg-lightGray');
+            // 防止ham btn事件冒泡（不要吃到 window.onclick 效果）
+            e.stopPropagation();
+
+            function showHamMenu(result) {
+                hamMenu.style.display = result ? 'block' : 'none';
+            }
+
+            if (hamMenu.style.display === 'none') {
+                showHamMenu(true);
+            } else if (hamMenu.style.display === 'block') {
+                showHamMenu(false);
+            }
+        });
+
+        // search box 搜尋框 顯示／隱藏 
+        const searchIcon = document.querySelector('#searchIcon');
+        const searchBox = document.querySelector('#searchBox');
+        const bgMask = document.querySelector('#bgMask');
+
+        searchIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            searchBox.style.display = 'block';
+            bgMask.style.display = 'block';
+        });
+
+        searchBox.addEventListener('click', (e) => {
+            e.stopPropagation(); // 防止事件冒泡
+        })
+
+        //cart icon 點開購物車
+        const cartIcon = document.querySelector('#cartIcon');
+        const cartShow = document.querySelector('#cartShow');
+        const cartCloseBtn = document.querySelector('#cartCloseBtn');
+
+        cartIcon.addEventListener('click', function (e) {
+            cartShow.style.display = 'block';
+            e.stopPropagation();
+        })
+
+        // cart 裡面的叉叉 關閉購物車
+        cartCloseBtn.addEventListener('click', function () {
+            cartShow.style.display = 'none';
+        })
+
+        cartShow.addEventListener('click', (e) => {
+            e.stopPropagation
+        })
+
+        // 點擊視窗空白處，關掉ham menu, searchBox bgMask, cartShow
+        window.addEventListener('click', () => {
+            // hamMenu.style.display = 'none';
+            // searchBox.style.display = 'none';
+            [hamMenu, searchBox, bgMask, cartShow].forEach(element => {
+                element.style.display = 'none';
+            })
+        });
+        
         // go top button
         const goTopBtn = document.querySelector('#goTopBtn');
 
@@ -675,6 +753,7 @@
         } else {
             console.error('Product not found');
         }
+
 
         //下方文字區 template
         const infoContainer = document.querySelector('#infoContainer');
