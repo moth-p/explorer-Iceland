@@ -3258,6 +3258,14 @@ video {
   width: 300px;
 }
 
+.w-\[200px\]{
+  width: 200px;
+}
+
+.w-\[\]{
+  width: ;
+}
+
 .min-w-\[\]{
   min-width: ;
 }
@@ -3304,6 +3312,30 @@ video {
 
 .max-w-lg{
   max-width: 32rem;
+}
+
+.max-w-\[200px\]{
+  max-width: 200px;
+}
+
+.max-w-\[180px\]{
+  max-width: 180px;
+}
+
+.max-w-\[20px\]{
+  max-width: 20px;
+}
+
+.max-w-\[250px\]{
+  max-width: 250px;
+}
+
+.max-w-\[150px\]{
+  max-width: 150px;
+}
+
+.max-w-\[px\]{
+  max-width: px;
 }
 
 .flex-1{
