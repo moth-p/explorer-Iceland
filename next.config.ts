@@ -17,6 +17,9 @@ const nextConfig: NextConfig = {
   // hosts resolve reliably.
   trailingSlash: true,
   basePath,
+  // Hides the floating Next.js dev badge in the bottom-left corner. Compile and
+  // runtime errors are still reported.
+  devIndicators: false,
   images: {
     // Required by output: 'export' — there is no server to run the optimizer.
     // next/image still gives us width/height (no layout shift) and lazy loading.

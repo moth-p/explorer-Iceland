@@ -91,6 +91,11 @@ export function computeTotals(items: CartItem[]): CartTotals {
  * The legacy page kept this in a page-local `disabledDates` array that reset on
  * every reload, which let an already-booked date be selected again. Deriving it
  * from the cart is what the original was reaching for.
+ *
+ * MUST be wrapped in useShallow at the call site:
+ *   useCartStore(useShallow(selectBookedDates(id)))
+ * It returns a new array each call, and Zustand v5 compares with Object.is, so
+ * an unwrapped call re-renders forever.
  */
 export const selectBookedDates = (productId: string) => (s: CartState) =>
   s.items.filter((i) => i.productId === productId).map((i) => i.date);

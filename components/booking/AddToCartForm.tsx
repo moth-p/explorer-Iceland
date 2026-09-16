@@ -3,6 +3,7 @@
 import type { Instance } from 'flatpickr/dist/types/instance';
 import dynamic from 'next/dynamic';
 import { useCallback, useRef, useState } from 'react';
+import { useShallow } from 'zustand/react/shallow';
 import { fireAlert, successAlert, warningAlert } from '@/lib/alerts';
 import { selectBookedDates, useCartStore } from '@/lib/cart-store';
 import type { Product } from '@/lib/types';
@@ -20,7 +21,11 @@ const DatePicker = dynamic(() => import('./DatePicker'), {
  */
 export function AddToCartForm({ product }: { product: Product }) {
   const addItem = useCartStore((s) => s.addItem);
-  const bookedDates = useCartStore(selectBookedDates(product.id));
+  // useShallow is required, not optional: selectBookedDates builds a new array
+  // on every call, and Zustand v5 compares selector output with Object.is. A
+  // fresh reference each render makes useSyncExternalStore re-render forever --
+  // "The result of getSnapshot should be cached to avoid an infinite loop".
+  const bookedDates = useCartStore(useShallow(selectBookedDates(product.id)));
 
   const [date, setDate] = useState('');
   const [groupSize, setGroupSize] = useState('');
