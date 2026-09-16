@@ -1,8 +1,7 @@
 # Project Scope — Explorer Iceland
 
 > What this product is, who it serves, and where its boundaries are.
-> For technology choices see [tech-stack.md](./tech-stack.md); for the migration
-> checklist see [implementation-plan.md](./implementation-plan.md).
+> For technology choices see [tech-stack.md](./tech-stack.md).
 
 ## Purpose
 

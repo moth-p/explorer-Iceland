@@ -141,4 +141,3 @@ only where it is a real anchor or CSS target.
 
 - [project-scope.md](./project-scope.md) — what the product does and what it deliberately doesn't
 - [tech-stack.md](./tech-stack.md) — every dependency and why
-- [implementation-plan.md](./implementation-plan.md) — migration phases and status

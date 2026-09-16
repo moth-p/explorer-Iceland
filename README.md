@@ -8,7 +8,7 @@
 ### 專案簡介
 **Explorer** 是一個冰島旅遊行程預定網站，主打小團體行動制的戶外探索活動。網站以 Next.js 15（App Router）、React 19、TypeScript 與 Tailwind CSS（v3.4）開發，購物車資料會儲存在使用者的 `localStorage` 中，支援 RWD 響應式設計，適用於桌機、平板與手機等裝置。
 
-本專案原為多頁靜態 HTML，已重構為 Next.js。重構範圍與步驟請見 [implementation-plan.md](./implementation-plan.md)。
+本專案原為多頁靜態 HTML，已重構為 Next.js。
 
  **網站預覽**：  
 👉 [https://moth-p.github.io/explorer-Iceland/](https://moth-p.github.io/explorer-Iceland/)
@@ -42,7 +42,6 @@ npm run typecheck
 
 - [project-scope.md](./project-scope.md) — 產品範圍與商業規則
 - [tech-stack.md](./tech-stack.md) — 技術選型與理由
-- [implementation-plan.md](./implementation-plan.md) — 重構階段
 - [CLAUDE.md](./CLAUDE.md) — 開發約定
 
 ---
@@ -57,7 +56,7 @@ npm run typecheck
 ### Project Overview
 **Explorer** is an Iceland tour booking website that features small-group outdoor adventures. Built with Next.js 15 (App Router), React 19, TypeScript and Tailwind CSS (v3.4), it includes a shopping cart that stores data in `localStorage` and supports responsive web design for desktop, tablet, and mobile devices.
 
-Originally a multi-page static HTML site, now refactored to Next.js — see [implementation-plan.md](./implementation-plan.md) for the scope and phases.
+Originally a multi-page static HTML site, now refactored to Next.js.
 
 **Live Demo**:  
 👉 [https://moth-p.github.io/explorer-Iceland/](https://moth-p.github.io/explorer-Iceland/)
@@ -91,6 +90,5 @@ npm run typecheck
 
 - [project-scope.md](./project-scope.md) — what the product does, and its business rules
 - [tech-stack.md](./tech-stack.md) — every dependency and why
-- [implementation-plan.md](./implementation-plan.md) — refactor phases
 - [CLAUDE.md](./CLAUDE.md) — working conventions
 
