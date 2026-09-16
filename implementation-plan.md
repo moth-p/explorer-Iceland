@@ -99,7 +99,7 @@ GoTopButton, CartHydration) + the Zustand cart store + `/` (Hero, Marquee, Revea
 VideoSection). Removes ~240 lines of duplicated inline script in one move.
 
 **Verify** side by side with `:4000` at **375 / 768 / 1440**: hamburger opens and closes
-including outside-click; search opens; cart drawer opens with a seeded `cartData`; go-top
+including outside-click; cart drawer opens with a seeded `cartData`; go-top
 appears past 200px; video autoplays muted and looping; marquee speed matches.
 **Console must show zero hydration warnings with a populated cart.**
 *5–7 h, **HIGH risk** — everything downstream depends on this.*

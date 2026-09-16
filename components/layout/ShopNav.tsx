@@ -17,8 +17,8 @@ const HAM_ITEM_CLASS =
 
 /**
  * The full navigation used by /shop, /shop/[id] and /login: logo, links,
- * Booking flyout, mobile hamburger with its accordion, search box, cart trigger
- * and account link.
+ * Booking flyout, mobile hamburger with its accordion, cart trigger and
+ * account link.
  *
  * This replaces the `<template id="navBar">` + cloneNode trick and roughly 240
  * lines of identical inline <script> that were pasted into shop.html,
@@ -36,7 +36,6 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
 
   const [hamOpen, setHamOpen] = useState(false);
   const [accordionOpen, setAccordionOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const [flyoutOpen, setFlyoutOpen] = useState(false);
   // The original swapped the nav background the first time the hamburger was
   // tapped and never swapped it back. Preserved.
@@ -45,19 +44,15 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (!hamOpen && !searchOpen) return;
+    if (!hamOpen) return;
 
     const onPointerDown = (e: MouseEvent) => {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setHamOpen(false);
-        setSearchOpen(false);
       }
     };
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setHamOpen(false);
-        setSearchOpen(false);
-      }
+      if (e.key === 'Escape') setHamOpen(false);
     };
 
     document.addEventListener('mousedown', onPointerDown);
@@ -66,12 +61,11 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
       document.removeEventListener('mousedown', onPointerDown);
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [hamOpen, searchOpen]);
+  }, [hamOpen]);
 
   // Close everything on navigation.
   useEffect(() => {
     setHamOpen(false);
-    setSearchOpen(false);
     setFlyoutOpen(false);
   }, [pathname]);
 
@@ -165,18 +159,6 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
               </div>
             </div>
 
-            {/* search icon */}
-            <p className={`absolute right-[80px] ${iconTop} cursor-pointer md:right-[100px]`}>
-              <button
-                type="button"
-                onClick={() => setSearchOpen(true)}
-                className="h-10 w-10 rounded-full text-gray-800 hover:bg-lightGray hover:text-subPurple active:opacity-60"
-                aria-label="Search"
-              >
-                <i className="fa-solid fa-magnifying-glass" />
-              </button>
-            </p>
-
             {/* cart icon */}
             <div className={`absolute right-[40px] ${iconTop} md:right-[50px]`}>
               <button
@@ -201,40 +183,6 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
               </button>
             </Link>
 
-            {searchOpen && (
-              <div
-                className="fixed inset-0 bg-gray-500/25 transition-opacity"
-                aria-hidden="true"
-              />
-            )}
-
-            {searchOpen && (
-              <div className="absolute right-8 top-24 z-10 max-w-72 divide-gray-100 overflow-hidden rounded-xl bg-lightGray font-mono shadow-md">
-                <div className="grid grid-cols-1">
-                  <input
-                    type="text"
-                    autoFocus
-                    className="col-start-1 row-start-1 h-10 w-full pl-11 pr-4 text-base text-gray-800 outline-none placeholder:text-gray-400"
-                    placeholder="Search..."
-                    role="combobox"
-                    aria-expanded="false"
-                    aria-controls="options"
-                  />
-                  <svg
-                    className="pointer-events-none col-start-1 row-start-1 ml-4 size-5 self-center text-gray-400"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </div>
-            )}
           </div>
 
           {/* mobile hamburger panel */}

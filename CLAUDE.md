@@ -64,7 +64,7 @@ public/       img/ video/ .nojekyll
 
 Routes: `/`, `/about`, `/shop`, `/shop/[id]`, `/login`.
 
-The point of this structure is that the navbar, hamburger menu, search box, cart drawer,
+The point of this structure is that the navbar, hamburger menu, cart drawer,
 back-to-top button and footer exist **exactly once**. The pre-migration site had them pasted
 into four HTML files with ~80 lines of duplicated inline script each. Do not reintroduce
 per-page copies.

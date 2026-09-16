@@ -23,12 +23,12 @@ Site content is English throughout; only the README is bilingual (中文 / Engli
 |---|---|
 | `/` | Landing page. Hero, three scroll-revealed scenery sections (Vestrahorn, Klausturhólar, Vík), a looping "Iceland" marquee, two feature blocks ("We Provide" / "You Can Find"), and a video section with a *Start a Journey* call to action. |
 | `/about` | Company positioning, tagline, and contact details (email, phone) over a full-width banner. |
-| `/shop` | Tour catalogue. Auto-playing banner carousel, a responsive grid of all 12 tours (2 / 3 / 4 columns), three category cards, and a pagination strip. |
+| `/shop` | Tour catalogue. Auto-playing banner carousel, a responsive grid of all 12 tours (2 / 3 / 4 columns), and a pagination strip. |
 | `/shop/[id]` | Tour detail. Gallery, price, rating, description, and the booking form (date + group size → add to cart). Expandable *About the Tour* / *Before You Go* / *Rules* sections. |
 | `/login` | Cart review and checkout summary, plus a sign-in form. |
 
-Every page shares the same chrome: fixed navbar, mobile hamburger menu, search box,
-cart drawer, back-to-top button, and footer.
+Every page shares the same chrome: fixed navbar, mobile hamburger menu, cart drawer,
+back-to-top button, and footer.
 
 ## Booking flow
 
@@ -49,7 +49,7 @@ They are the behaviour to preserve.
 |---|---|---|
 | Tax rate | **3%** applied to the subtotal | `src/js/cart.js` `updateTotal()` |
 | Earliest bookable date | **today + 14 days** | `product-detail.html` `getStartDay()` |
-| Date display format | `F j, Y` (e.g. *January 3, 2026*) over a `Y-m-d` value | Flatpickr `altFormat` |
+| Date display format | `F j, Y` (e.g. *January 3, 2026*); stored as `Y-m-d` | Flatpickr `dateFormat` + `toISODate()` |
 | Group size | required, `> 0`, and **≤ the tour's `maxGroupSize`** | add-to-cart validation |
 | Line price | `unitPrice × groupSize` | add-to-cart handler |
 | One booking per tour per date | a date already in the cart is disabled in the picker | `disabledDates` |
@@ -93,7 +93,8 @@ Deliberately **not** built, and not planned:
 - **No server-side inventory.** Group-size caps and booked dates are enforced per browser
   from cart contents only; two visitors cannot conflict because nothing is shared.
 - **No internationalisation.** English only. The site is not wired for locale switching.
-- **No search backend.** The navbar search box is present in the design but does not query.
+- **No search.** The original navbar had a search box that never queried anything; it was
+  removed rather than left as a control that does nothing.
 - **No analytics, cookies or tracking.**
 
 ## Known limitations
@@ -106,9 +107,9 @@ Deliberately **not** built, and not planned:
   starts empty. This is a one-time event.
 - **Pagination is decorative.** The strip on `/shop` renders page numbers, but all 12 tours
   are shown at once and the links do not navigate. Preserved from the original design.
-- **Category and flyout links are not yet wired.** The three category cards and the flyout
-  sub-items render but do not filter. The data now supports it (`getProductsByCategory`);
-  the routing does not yet.
+- **Flyout and footer category links are not wired.** The Booking flyout sub-items and the
+  footer's category columns render but do not filter. The data supports it
+  (`getProductsByCategory`); the routing does not yet.
 - **The flyout omits one tour.** *Vestmannaeyjar Puffins Viewing* is missing from the Outdoor
   Sports column, which lists only three of its four tours. Faithful to the original.
 - **Ratings are static.** The five-star display on the detail page is decorative markup.
