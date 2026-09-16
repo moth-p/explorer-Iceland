@@ -91,7 +91,7 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
           navOpaque ? 'bg-lightGray' : 'bg-white/50'
         }`}
       >
-        <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <div className="sm:px-6 lg:px-8">
           <div className="relative flex h-16 justify-between">
             {/* hamburger button */}
             <div className="item-center absolute left-0 top-3 flex sm:hidden">
