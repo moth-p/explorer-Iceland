@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import { CartDrawer } from '@/components/cart/CartDrawer';
-import { chromeVariantFor } from '@/lib/layout-variant';
+import { chromeVariantFor, hasShopChrome } from '@/lib/layout-variant';
 import { GoTopButton } from './GoTopButton';
 
 /**
@@ -16,7 +16,7 @@ export function ChromeExtras() {
   return (
     <>
       <GoTopButton />
-      {variant === 'shop' && <CartDrawer />}
+      {hasShopChrome(variant) && <CartDrawer />}
     </>
   );
 }

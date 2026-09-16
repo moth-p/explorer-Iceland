@@ -35,3 +35,24 @@ export function SocialLinks({ className = 'flex gap-x-6' }: { className?: string
     </div>
   );
 }
+
+/**
+ * The Font Awesome brand variant, used in the hamburger menu of
+ * product-detail.html and login.html (shop.html used the SVG set above).
+ * Different icons, too: YouTube rather than X.
+ */
+export function BrandSocialLinks() {
+  return (
+    <div className="flex justify-center gap-10 text-2xl text-gray-400">
+      <a href="#" aria-label="Facebook">
+        <i className="fa-brands fa-square-facebook" />
+      </a>
+      <a href="#" aria-label="Instagram">
+        <i className="fa-brands fa-square-instagram" />
+      </a>
+      <a href="#" aria-label="YouTube">
+        <i className="fa-brands fa-youtube" />
+      </a>
+    </div>
+  );
+}

@@ -6,15 +6,18 @@
  *   'simple'  index.html, about.html -- Concept/About/Shop only, no Booking
  *             flyout, no search/cart/account icons, a plain mobile menu, the
  *             centred footer, and the go-top button at end-8/bottom-8.
- *   'shop'    shop.html, product-detail.html, login.html -- adds the Booking
- *             flyout, search box, cart drawer trigger and account link, the
- *             accordion mobile menu, the three-column footer, and the go-top
- *             button at end-5/bottom-5.
+ *   'shop'    shop.html -- Concept/About/Booking/FAQ with the Booking flyout
+ *             and an accordion mobile menu, search box, cart trigger, account
+ *             link, three-column footer, go-top at end-5/bottom-5.
+ *   'detail'  product-detail.html, login.html -- as 'shop' but the desktop nav
+ *             is Concept/About/Shop/FAQ with NO Booking flyout, the icons sit
+ *             at top-4 instead of top-3, and the hamburger footer uses a
+ *             narrower logo, a wider gap and Font Awesome brand icons.
  *
  * Note these do not line up: about.html uses the simple nav but the shop
  * page-fade, and the two form-heavy pages set a different base font.
  */
-export type ChromeVariant = 'simple' | 'shop';
+export type ChromeVariant = 'simple' | 'shop' | 'detail';
 
 const SIMPLE_ROUTES = new Set(['/', '/about']);
 
@@ -24,7 +27,18 @@ function normalize(pathname: string): string {
 }
 
 export function chromeVariantFor(pathname: string): ChromeVariant {
-  return SIMPLE_ROUTES.has(normalize(pathname)) ? 'simple' : 'shop';
+  const path = normalize(pathname);
+  if (SIMPLE_ROUTES.has(path)) return 'simple';
+  // product-detail.html and login.html shared a third nav: Concept/About/Shop/FAQ
+  // with no Booking flyout, icons nudged to top-4, and a different hamburger
+  // footer (narrower logo, wider gap, Font Awesome brand icons incl. YouTube).
+  if (path === '/login' || path.startsWith('/shop/')) return 'detail';
+  return 'shop';
+}
+
+/** True for the variants that carry the cart, search and account controls. */
+export function hasShopChrome(v: ChromeVariant): boolean {
+  return v !== 'simple';
 }
 
 /**

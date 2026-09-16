@@ -7,7 +7,7 @@ import { CartBadge } from '@/components/cart/CartBadge';
 import { asset } from '@/lib/asset';
 import { useCartStore } from '@/lib/cart-store';
 import { BOOKING_MENU, NAV_LINKS } from '@/lib/navigation';
-import { SocialLinks } from './SocialLinks';
+import { BrandSocialLinks, SocialLinks } from './SocialLinks';
 
 const NAV_ITEM_CLASS =
   'inline-flex item-center px-3 py-2 text-sm text-gray-800 hover:bg-lightGray hover:text-subPurple active:bg-opacity-50 hover:rounded-md active:text-mainYellow';
@@ -27,7 +27,10 @@ const HAM_ITEM_CLASS =
  * check, rather than the original's stopPropagation() scattered across six
  * elements.
  */
-export function ShopNav() {
+export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
+  const showBooking = variant === 'shop';
+  // product-detail.html and login.html sat their icons one step lower.
+  const iconTop = variant === 'shop' ? 'top-3' : 'top-4';
   const pathname = usePathname();
   const openCart = useCartStore((s) => s.openCart);
 
@@ -137,15 +140,23 @@ export function ShopNav() {
                     {NAV_LINKS[1].label}
                   </Link>
                 </div>
-                <div
-                  className="item-center flex cursor-pointer justify-center"
-                  onMouseOver={() => setFlyoutOpen(true)}
-                >
-                  <p className="px-3 py-2 text-sm text-gray-800 hover:rounded-md hover:bg-lightGray hover:text-subPurple">
-                    Booking&nbsp;
-                    <i className="fa-solid fa-angle-down" />
-                  </p>
-                </div>
+                {showBooking ? (
+                  <div
+                    className="item-center flex cursor-pointer justify-center"
+                    onMouseOver={() => setFlyoutOpen(true)}
+                  >
+                    <p className="px-3 py-2 text-sm text-gray-800 hover:rounded-md hover:bg-lightGray hover:text-subPurple">
+                      Booking&nbsp;
+                      <i className="fa-solid fa-angle-down" />
+                    </p>
+                  </div>
+                ) : (
+                  <div className="nav-btn item-center flex justify-center">
+                    <Link href="/shop" className={NAV_ITEM_CLASS}>
+                      Shop
+                    </Link>
+                  </div>
+                )}
                 <div className="nav-btn item-center flex justify-center">
                   <Link href={NAV_LINKS[2].href} className={NAV_ITEM_CLASS}>
                     {NAV_LINKS[2].label}
@@ -155,7 +166,7 @@ export function ShopNav() {
             </div>
 
             {/* search icon */}
-            <p className="absolute right-[80px] top-3 cursor-pointer md:right-[100px]">
+            <p className={`absolute right-[80px] ${iconTop} cursor-pointer md:right-[100px]`}>
               <button
                 type="button"
                 onClick={() => setSearchOpen(true)}
@@ -167,7 +178,7 @@ export function ShopNav() {
             </p>
 
             {/* cart icon */}
-            <div className="absolute right-[40px] top-3 md:right-[50px]">
+            <div className={`absolute right-[40px] ${iconTop} md:right-[50px]`}>
               <button
                 type="button"
                 onClick={openCart}
@@ -180,7 +191,7 @@ export function ShopNav() {
             </div>
 
             {/* user icon */}
-            <Link href="/login" className="absolute right-0 top-3">
+            <Link href="/login" className={`absolute right-0 ${iconTop}`}>
               <button
                 type="button"
                 className="h-10 w-10 rounded-full text-gray-800 hover:bg-lightGray hover:text-subPurple active:opacity-60"
@@ -236,17 +247,23 @@ export function ShopNav() {
                 <Link href="/about" className={HAM_ITEM_CLASS}>
                   About
                 </Link>
-                <p
-                  className={`cursor-pointer ${HAM_ITEM_CLASS}`}
-                  onClick={() => setAccordionOpen((o) => !o)}
-                >
-                  Booking&nbsp;&nbsp;
-                  <span>
-                    <i className={`fa-solid ${accordionOpen ? 'fa-minus' : 'fa-plus'}`} />
-                  </span>
-                </p>
+                {showBooking ? (
+                  <p
+                    className={`cursor-pointer ${HAM_ITEM_CLASS}`}
+                    onClick={() => setAccordionOpen((o) => !o)}
+                  >
+                    Booking&nbsp;&nbsp;
+                    <span>
+                      <i className={`fa-solid ${accordionOpen ? 'fa-minus' : 'fa-plus'}`} />
+                    </span>
+                  </p>
+                ) : (
+                  <Link href="/shop" className={HAM_ITEM_CLASS}>
+                    Shop
+                  </Link>
+                )}
 
-                {accordionOpen && (
+                {showBooking && accordionOpen && (
                   <div className="animate__animated animate__fadeIn animate__fast py-2 ps-8">
                     {BOOKING_MENU.map((group) => (
                       <div key={group.category}>
@@ -281,16 +298,24 @@ export function ShopNav() {
 
                 <div className="flex h-80 w-full flex-col items-center gap-5 pt-8">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={asset('/img/shop-logo.png')} className="w-[150px]" alt="" />
+                  <img
+                    src={asset('/img/shop-logo.png')}
+                    className={showBooking ? 'w-[150px]' : 'w-[120px]'}
+                    alt=""
+                  />
                   <p className="mb-5 text-sm text-gray-400">Explore &copy;</p>
-                  <SocialLinks className="flex justify-center gap-6 text-2xl text-gray-400" />
+                  {showBooking ? (
+                    <SocialLinks className="flex justify-center gap-6 text-2xl text-gray-400" />
+                  ) : (
+                    <BrandSocialLinks />
+                  )}
                 </div>
               </div>
             </div>
           )}
 
           {/* desktop Booking flyout */}
-          {flyoutOpen && (
+          {showBooking && flyoutOpen && (
             <div
               className="animate__animated animate__fadeIn animate__faster absolute inset-x-0 top-0 -z-10 bg-lightGray pt-14 shadow-lg ring-1 ring-gray-900/5"
               onMouseOver={() => setFlyoutOpen(true)}
