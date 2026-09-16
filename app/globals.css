@@ -33,3 +33,16 @@
 #detailsTitle {
   line-height: 50px;
 }
+
+/* Was an inline <style> block in about.html. */
+@media screen and (max-width: 765px) {
+  #aboutTitle {
+    line-height: 45px;
+  }
+}
+
+@media screen and (min-width: 766px) {
+  #aboutTitle {
+    line-height: 65px;
+  }
+}

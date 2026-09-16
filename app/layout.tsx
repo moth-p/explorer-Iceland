@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { CartHydration } from '@/components/cart/CartHydration';
 import { ChromeExtras } from '@/components/layout/ChromeExtras';
 import { Header } from '@/components/layout/Header';
-import { PageFade } from '@/components/layout/PageFade';
+import { PageChrome } from '@/components/layout/PageChrome';
 import { kronaOne, libreBodoni, libreBodoniBoldItalic } from './fonts';
 import './globals.css';
 
@@ -29,12 +29,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${kronaOne.variable} ${libreBodoni.variable} ${libreBodoniBoldItalic.variable}`}
     >
-      <body className="border-box relative w-screen bg-lightGray font-krona">
-        <PageFade>
+      <body className="border-box relative h-screen w-screen bg-lightGray">
+        <PageChrome>
           <Header />
           {children}
           <ChromeExtras />
-        </PageFade>
+        </PageChrome>
         <CartHydration />
       </body>
     </html>
