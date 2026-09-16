@@ -46,7 +46,7 @@ export default function HomePage() {
       <header className="h-full w-full bg-banner bg-cover bg-no-repeat">
         <div className="flex h-[45%] w-screen flex-col items-center justify-center pt-[120px] md:pt-[140px] lg:mb-14 lg:pt-[150px]">
           <h1 className="font-libreBodoni_boldItalic text-[70px] text-mainYellow sm:text-[100px] md:text-[120px] lg:text-[150px]">
-            <span className="animate-fadeInTitle">Explorer</span>
+            <span className="animate-fadeInSlow">Explorer</span>
           </h1>
           <h2 className="font-libreBodoni_boldItalic text-3xl tracking-widest text-lightGray md:text-4xl lg:text-5xl">
             in Iceland

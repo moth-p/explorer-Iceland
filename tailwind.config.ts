@@ -49,11 +49,7 @@ export default {
       animation: {
         marquee: 'marquee 32s linear infinite',
         fadeIn: 'fadeIn 2s ease-in-out forwards',
-        // NOTE: references the keyframe `fadeInTitle`, which does not exist, so
-        // `animate-fadeInSlow` is inert. Preserved verbatim during the port so
-        // the migration diff stays purely structural; fixed in its own commit
-        // in Phase 9.
-        fadeInSlow: 'fadeInTitle 3s ease-in-out forwards',
+        fadeInSlow: 'fadeInSlow 3s ease-in-out forwards',
         rotateStar: 'rotateStar 2.5s ease-out forwards',
       },
       keyframes: {
