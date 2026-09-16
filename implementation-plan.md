@@ -9,14 +9,18 @@ Living checklist for the migration. Tick phases off as they land; each phase is 
 
 - [x] **Phase 0** — Safety net + repo hygiene
 - [x] **Phase 1** — Documentation
-- [ ] **Phase 2** — Scaffold Next.js + Tailwind v3 parity
-- [ ] **Phase 3** — Typed product data
-- [ ] **Phase 4** — Shared shell + cart store + home page
-- [ ] **Phase 5** — `/about`
-- [ ] **Phase 6** — `/shop`
-- [ ] **Phase 7** — `/shop/[id]`
-- [ ] **Phase 8** — `/login` + GitHub Pages deploy
-- [ ] **Phase 9** — Delete legacy + fix `fadeInSlow`
+- [x] **Phase 2** — Scaffold Next.js + Tailwind v3 parity
+- [x] **Phase 3** — Typed product data
+- [x] **Phase 4** — Shared shell + cart store + home page
+- [x] **Phase 5** — `/about`
+- [x] **Phase 6** — `/shop`
+- [x] **Phase 7** — `/shop/[id]`
+- [x] **Phase 8** — `/login` + GitHub Pages deploy
+- [x] **Phase 9** — Delete legacy + fix `fadeInSlow`
+
+> Remaining, and deliberately left to a human: push `feat/nextjs-migration`,
+> run the deploy workflow via `workflow_dispatch`, and only once it is green
+> flip **Settings → Pages → Source → GitHub Actions**, then merge.
 
 ## Why this order
 

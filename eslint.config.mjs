@@ -18,8 +18,6 @@ const eslintConfig = [
       "out/**",
       "build/**",
       "next-env.d.ts",
-      // Pre-migration site, kept as the visual baseline until Phase 9.
-      "src/**",
     ],
   },
 ];
