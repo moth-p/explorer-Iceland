@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import { asset } from '@/lib/asset';
 import { computeTotals, useCartStore } from '@/lib/cart-store';
+import { useBodyScrollLock } from '@/lib/use-body-scroll-lock';
 import type { CartItem } from '@/lib/types';
 
 /**
@@ -19,6 +20,9 @@ export function CartDrawer() {
   const isOpen = useCartStore((s) => s.isOpen);
   const closeCart = useCartStore((s) => s.closeCart);
   const panelRef = useRef<HTMLFormElement>(null);
+
+  // Freeze the page behind the drawer; see lib/use-body-scroll-lock.ts.
+  useBodyScrollLock(isOpen);
 
   // Click anywhere outside the panel closes it, matching the original
   // window-level click handler (which the panel guarded with stopPropagation).
@@ -58,7 +62,7 @@ export function CartDrawer() {
         aria-hidden="true"
       />
 
-      <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+      <div className="fixed inset-0 z-10 w-screen overflow-y-auto overscroll-contain">
         <div className="flex min-h-full items-stretch justify-center text-center sm:items-center sm:px-6 lg:px-8">
           <div className="flex w-full max-w-3xl transform text-left text-base transition sm:my-8">
             <form
@@ -188,9 +192,10 @@ function CartRow({ item }: { item: CartItem }) {
             <button
               type="button"
               onClick={() => removeItem(item.lineId)}
-              className="text-[10px] text-subPurple hover:opacity-50 sm:mt-2"
+              aria-label={`Remove ${item.title} from cart`}
+              className="-mx-2 mt-1 rounded px-2 py-1 text-sm font-medium text-subPurple underline-offset-2 hover:underline hover:opacity-70 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-subPurple active:opacity-50 sm:mt-2"
             >
-              <span>Remove</span>
+              Remove
             </button>
           </div>
         </div>

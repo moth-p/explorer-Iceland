@@ -119,6 +119,11 @@ loop — "The result of getSnapshot should be cached to avoid an infinite loop".
 rejects. Do not `await` it inside a validation guard: an alert that fails to load must not be
 able to skip a `return` and let an invalid booking through.
 
+**Any full-screen overlay must call `useBodyScrollLock`** (`lib/use-body-scroll-lock.ts`).
+It locks `<html>` as well as `<body>` — the root layout gives `<body>` `h-screen`, so overflow
+propagates to the document element and locking only `<body>` does nothing. Pair it with
+`overscroll-contain` on the overlay's own scroller to stop scroll chaining.
+
 **Don't reintroduce duplicate `id` attributes.** The old `<template>`-cloning approach repeated
 `id="cartTitle"`, `id="productImg"` etc. once per row. Use props and `className`. Keep an `id`
 only where it is a real anchor or CSS target.
