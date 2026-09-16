@@ -12,6 +12,22 @@ export function getMinBookingDate(): Date {
   return d;
 }
 
+const pad = (n: number) => String(n).padStart(2, '0');
+
+/**
+ * Local-time YYYY-MM-DD. Deliberately not toISOString(), which converts to UTC
+ * and would shift the date by a day for anyone behind or ahead of it.
+ */
+export function toISODate(d: Date): string {
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+/** Parse 'YYYY-MM-DD' at local midnight, for the same reason. */
+function fromISODate(s: string): Date {
+  const [y, m, d] = s.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
 interface Props {
   /** 'YYYY-MM-DD' strings that are already booked and must not be selectable. */
   disabledDates: string[];
@@ -21,21 +37,22 @@ interface Props {
 }
 
 /**
- * Flatpickr wrapper.
+ * Flatpickr wrapper. Flatpickr owns this input's DOM; React does not.
  *
- * Flatpickr owns this DOM, React does not. With `altInput: true` it hides the
- * real input and inserts a sibling element React knows nothing about -- so if
- * React ever re-renders through that position you get a removeChild crash or a
- * duplicated field. The rules that keep that from happening:
+ * `altInput` is deliberately NOT used, even though it is the obvious way to show
+ * "January 3, 2026" while keeping a Y-m-d value. It is incompatible with React
+ * here: flatpickr.js:2431 rewrites the input's `type` to "hidden" and :2433
+ * inserts a second, visible input as a sibling that React knows nothing about.
+ * Because this component re-renders whenever a date is picked, React restores
+ * `type="text"` from its own props on the next render -- un-hiding the original
+ * and leaving TWO visible date fields.
  *
- *   - initialise in useEffect(..., []) exactly once, never on prop change
- *   - push updates imperatively via instance.set(), never by re-rendering
- *   - always destroy() on cleanup
- *   - mount unconditionally; never behind a toggling boolean
+ * Instead flatpickr formats the input directly and we derive the Y-m-d value in
+ * onChange. One input, owned by one system, same display format as before.
  *
- * `react-flatpickr` is deliberately not used: the booking form needs imperative
- * .set('disable') and .clear(), and its React 19 types are unreliable. A native
- * <input type="date"> cannot render the required "F j, Y" display format.
+ * The remaining rules still apply: initialise once in useEffect(..., []), push
+ * updates imperatively via .set(), always destroy() on cleanup, and never mount
+ * conditionally.
  */
 export default function DatePicker({ disabledDates, onChange, registerInstance }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -49,10 +66,11 @@ export default function DatePicker({ disabledDates, onChange, registerInstance }
 
     const fp = flatpickr(inputRef.current, {
       minDate: getMinBookingDate(),
-      altInput: true,
-      altFormat: 'F j, Y',
-      dateFormat: 'Y-m-d',
-      onChange: (_dates, dateStr) => onChangeRef.current(dateStr),
+      // The display format the design calls for. Previously this was altFormat.
+      dateFormat: 'F j, Y',
+      onChange: (dates) => {
+        onChangeRef.current(dates[0] ? toISODate(dates[0]) : '');
+      },
     }) as Instance;
 
     fpRef.current = fp;
@@ -66,18 +84,23 @@ export default function DatePicker({ disabledDates, onChange, registerInstance }
   }, []);
 
   // Disabled dates change as the cart changes; push them in imperatively.
+  // Date objects, not strings: flatpickr parses `disable` strings with
+  // dateFormat, which is now 'F j, Y' rather than 'Y-m-d'.
   useEffect(() => {
-    fpRef.current?.set('disable', disabledDates);
+    fpRef.current?.set('disable', disabledDates.map(fromISODate));
   }, [disabledDates]);
 
   return (
     <input
       ref={inputRef}
       required
+      // flatpickr sets this itself when allowInput is false; declaring it here
+      // keeps React's props and the DOM in agreement.
+      readOnly
       id="datePicker"
       type="text"
       placeholder="Select a date"
-      className="me-8 mb-5 h-8 w-44 rounded-md border border-gray-300 p-2 font-sans focus:outline-none focus:ring-2 focus:ring-subPurple md:mb-0"
+      className="me-8 mb-5 h-8 w-44 cursor-pointer rounded-md border border-gray-300 p-2 font-sans focus:outline-none focus:ring-2 focus:ring-subPurple md:mb-0"
     />
   );
 }
