@@ -98,10 +98,26 @@ go through `asset()` from `lib/asset.ts`, and Tailwind `backgroundImage` entries
 from `process.env.NEXT_PUBLIC_BASE_PATH`. Product data stores bare `/img/…` so cart entries
 stay portable.
 
-**Flatpickr owns its DOM.** With `altInput: true` it hides the real input and inserts a
-sibling React does not know about. Keep it isolated in its own leaf component, initialise in
-`useEffect(…, [])` exactly once, push updates via `.set()` rather than props-driven re-render,
-always `destroy()` on cleanup, and never mount it conditionally.
+**Flatpickr owns its DOM, and `altInput` must stay off.** With `altInput: true` it rewrites
+the input's `type` to `hidden` and inserts a second visible input as a sibling React knows
+nothing about; React then restores `type="text"` on its next render and you get two date
+fields. The picker formats the single React-owned input directly (`dateFormat: 'F j, Y'`) and
+`AddToCartForm` derives the `YYYY-MM-DD` value in `onChange`. Keep it isolated in its own leaf
+component, initialise in `useEffect(…, [])` exactly once, push updates via `.set()` rather
+than props-driven re-render, always `destroy()` on cleanup, and never mount it conditionally.
+Pass `disable` Date objects, not strings — flatpickr parses disable strings with `dateFormat`.
+
+**Convert dates with the local-time helpers in `DatePicker.tsx`, never `toISOString()`.**
+In UTC+8 an early-morning selection serialises to the previous day, i.e. it books the wrong date.
+
+**Zustand selectors that build a new array or object must be wrapped in `useShallow`.**
+v5 compares with `Object.is`, so a fresh reference each render makes `useSyncExternalStore`
+loop — "The result of getSnapshot should be cached to avoid an infinite loop".
+`selectBookedDates` is the one that needs it today.
+
+**Alerts are fired, not awaited.** `fireAlert` loads SweetAlert2 over the network and never
+rejects. Do not `await` it inside a validation guard: an alert that fails to load must not be
+able to skip a `return` and let an invalid booking through.
 
 **Don't reintroduce duplicate `id` attributes.** The old `<template>`-cloning approach repeated
 `id="cartTitle"`, `id="productImg"` etc. once per row. Use props and `className`. Keep an `id`
