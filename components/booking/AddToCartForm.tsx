@@ -42,18 +42,22 @@ export function AddToCartForm({ product }: { product: Product }) {
     fpRef.current = fp;
   }, []);
 
-  const handleAdd = async () => {
+  /**
+   * Synchronous on purpose. Alerts are fired and forgotten rather than awaited,
+   * so neither the validation guards nor the form reset can be skipped if the
+   * SweetAlert2 chunk fails to load. Awaiting a rejected alert here previously
+   * meant an invalid booking could fall through the early return and be added.
+   */
+  const handleAdd = () => {
     const size = Number(groupSize);
 
     if (!date || !groupSize || size <= 0) {
-      await fireAlert(warningAlert('The Date and Group Size must be filled out.'));
+      void fireAlert(warningAlert('The Date and Group Size must be filled out.'));
       return;
     }
 
     if (size > product.maxGroupSize) {
-      await fireAlert(
-        warningAlert(`The tour is limited to ${product.maxGroupSize} participants.`),
-      );
+      void fireAlert(warningAlert(`The tour is limited to ${product.maxGroupSize} participants.`));
       return;
     }
 
@@ -66,13 +70,13 @@ export function AddToCartForm({ product }: { product: Product }) {
       unitPrice: product.price,
     });
 
-    await fireAlert(successAlert('Add to cart successfully!'));
-
     // The newly booked date becomes unselectable via selectBookedDates, which
     // now reads from the cart -- so unlike the original it survives a reload.
     fpRef.current?.clear();
     setDate('');
     setGroupSize('');
+
+    void fireAlert(successAlert('Add to cart successfully!'));
   };
 
   return (

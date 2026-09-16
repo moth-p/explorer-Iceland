@@ -43,6 +43,14 @@ npx serve /tmp/pagesroot -l 5000     # → http://localhost:5000/explorer-Icelan
 
 Always check this before touching deployment. Filter DevTools Network to 4xx — expect zero.
 
+**Do not run a build while `npm run dev` is running.** Both write to `.next`, and the
+production build overwrites the dev server's chunks, after which dev throws
+`Cannot find module './331.js'` and every route 500s. If that happens: stop dev,
+`rm -rf .next`, restart.
+
+If the browser reports `Loading chunk ... failed`, the tab is usually pointing at a dev
+server that has since restarted (often on a different port). Hard-reload it.
+
 ## Architecture
 
 ```

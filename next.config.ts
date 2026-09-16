@@ -1,3 +1,5 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { NextConfig } from 'next';
 
 /**
@@ -17,6 +19,10 @@ const nextConfig: NextConfig = {
   // hosts resolve reliably.
   trailingSlash: true,
   basePath,
+  // There is an unrelated package-lock.json in the user's home directory, so
+  // Next would otherwise infer $HOME as the workspace root and trace files from
+  // there. Pin it to this project.
+  outputFileTracingRoot: path.dirname(fileURLToPath(import.meta.url)),
   // Hides the floating Next.js dev badge in the bottom-left corner. Compile and
   // runtime errors are still reported.
   devIndicators: false,

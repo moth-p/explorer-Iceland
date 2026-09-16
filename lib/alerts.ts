@@ -49,8 +49,23 @@ export function successAlert(title: string): SweetAlertOptions {
   };
 }
 
-/** Lazily load SweetAlert2 and fire one alert. */
-export async function fireAlert(options: SweetAlertOptions) {
-  const { default: Swal } = await import('sweetalert2');
-  return Swal.fire(options);
+/**
+ * Lazily load SweetAlert2 and fire one alert.
+ *
+ * Deliberately never rejects. The import pulls a separate chunk over the
+ * network, which can fail for reasons that have nothing to do with the booking
+ * -- offline, or a stale page still asking for a chunk from a previous deploy.
+ * An alert failing to appear must never take the surrounding flow with it, so
+ * this degrades to a native alert and resolves.
+ */
+export async function fireAlert(options: SweetAlertOptions): Promise<void> {
+  try {
+    const { default: Swal } = await import('sweetalert2');
+    await Swal.fire(options);
+  } catch (err) {
+    console.error('SweetAlert2 failed to load; falling back to a native alert.', err);
+    if (typeof window !== 'undefined' && typeof options.title === 'string') {
+      window.alert(options.title);
+    }
+  }
 }
