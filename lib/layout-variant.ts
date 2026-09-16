@@ -10,9 +10,9 @@
  *             and an accordion mobile menu, search box, cart trigger, account
  *             link, three-column footer, go-top at end-5/bottom-5.
  *   'detail'  product-detail.html, login.html -- as 'shop' but the desktop nav
- *             is Concept/About/Shop/FAQ with NO Booking flyout, the icons sit
- *             at top-4 instead of top-3, and the hamburger footer uses a
- *             narrower logo, a wider gap and Font Awesome brand icons.
+ *             is Concept/About/Shop/FAQ with NO Booking flyout, and the
+ *             hamburger footer uses a narrower logo, a wider gap and Font
+ *             Awesome brand icons.
  *
  * Note these do not line up: about.html uses the simple nav but the shop
  * page-fade, and the two form-heavy pages set a different base font.
@@ -61,4 +61,15 @@ export function pageChromeClassesFor(pathname: string): string {
     return 'animate-fadeIn font-krona';
   }
   return 'animate__animated animate__fadeIn animate__fast font-krona';
+}
+
+/**
+ * Vertical offset of the search / cart / account icons.
+ *
+ * Only product-detail.html used top-4; shop.html and login.html both used
+ * top-3. It reads like a slip rather than a decision, but it is reproduced
+ * exactly so the port introduces no visual change of its own.
+ */
+export function navIconTopFor(pathname: string): string {
+  return normalize(pathname).startsWith('/shop/') ? 'top-4' : 'top-3';
 }

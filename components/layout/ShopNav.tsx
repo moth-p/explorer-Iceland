@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { CartBadge } from '@/components/cart/CartBadge';
 import { asset } from '@/lib/asset';
 import { useCartStore } from '@/lib/cart-store';
+import { navIconTopFor } from '@/lib/layout-variant';
 import { BOOKING_MENU, NAV_LINKS } from '@/lib/navigation';
 import { BrandSocialLinks, SocialLinks } from './SocialLinks';
 
@@ -29,9 +30,8 @@ const HAM_ITEM_CLASS =
  */
 export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
   const showBooking = variant === 'shop';
-  // product-detail.html and login.html sat their icons one step lower.
-  const iconTop = variant === 'shop' ? 'top-3' : 'top-4';
   const pathname = usePathname();
+  const iconTop = navIconTopFor(pathname);
   const openCart = useCartStore((s) => s.openCart);
 
   const [hamOpen, setHamOpen] = useState(false);
