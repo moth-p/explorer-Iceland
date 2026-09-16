@@ -1,0 +1,19 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+next-env.d.ts
+
+# build artifacts
+*.tsbuildinfo
+
+# env
+.env*.local
+
+# deployment
+.vercel
+
+# macOS
+.DS_Store
