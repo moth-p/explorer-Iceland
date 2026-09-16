@@ -10,9 +10,16 @@ import type { Product } from '@/lib/types';
 
 // ssr: false because Flatpickr needs the DOM. The placeholder matches the
 // input's height so the layout does not shift when it mounts.
+//
+// It MUST be a <span>, not a <div>: this is rendered inside the "Date:" <p>,
+// and a <div> there is invalid HTML. Browsers auto-close the <p> before the
+// <div>, so the parsed DOM stops matching the server markup and React reports
+// a hydration error.
 const DatePicker = dynamic(() => import('./DatePicker'), {
   ssr: false,
-  loading: () => <div className="me-8 mb-5 h-8 w-44 rounded-md border border-gray-300 md:mb-0" />,
+  loading: () => (
+    <span className="me-8 mb-5 inline-block h-8 w-44 rounded-md border border-gray-300 align-middle md:mb-0" />
+  ),
 });
 
 /**
