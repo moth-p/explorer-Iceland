@@ -3,6 +3,7 @@ import { CartHydration } from '@/components/cart/CartHydration';
 import { ChromeExtras } from '@/components/layout/ChromeExtras';
 import { Header } from '@/components/layout/Header';
 import { PageChrome } from '@/components/layout/PageChrome';
+import { Toaster } from '@/components/ui/sonner';
 
 /**
  * The single source of the site chrome.
@@ -24,6 +25,11 @@ export function RootLayout() {
         <ChromeExtras />
       </PageChrome>
       <CartHydration />
+      {/*
+        Mounted here rather than in ChromeExtras, which only renders on routes
+        with shop chrome. The toaster has to exist wherever an alert can fire.
+      */}
+      <Toaster />
       <ScrollRestoration />
     </>
   );

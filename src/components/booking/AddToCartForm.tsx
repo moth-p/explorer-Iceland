@@ -1,7 +1,7 @@
 import type { Instance } from 'flatpickr/dist/types/instance';
 import { lazy, Suspense, useCallback, useRef, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
-import { fireAlert, successAlert, warningAlert } from '@/lib/alerts';
+import { successAlert, warningAlert } from '@/lib/alerts';
 import { selectBookedDates, useCartStore } from '@/lib/cart-store';
 import type { Product } from '@/lib/types';
 
@@ -47,12 +47,12 @@ export function AddToCartForm({ product }: { product: Product }) {
     const size = Number(groupSize);
 
     if (!date || !groupSize || size <= 0) {
-      void fireAlert(warningAlert('The Date and Group Size must be filled out.'));
+      warningAlert('The Date and Group Size must be filled out.');
       return;
     }
 
     if (size > product.maxGroupSize) {
-      void fireAlert(warningAlert(`The tour is limited to ${product.maxGroupSize} participants.`));
+      warningAlert(`The tour is limited to ${product.maxGroupSize} participants.`);
       return;
     }
 
@@ -71,7 +71,7 @@ export function AddToCartForm({ product }: { product: Product }) {
     setDate('');
     setGroupSize('');
 
-    void fireAlert(successAlert('Add to cart successfully!'));
+    successAlert('Add to cart successfully!');
   };
 
   return (
