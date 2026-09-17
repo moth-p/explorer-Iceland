@@ -31,14 +31,34 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
 
-      # build:pages sets NEXT_PUBLIC_BASE_PATH=/explorer-Iceland, which Next
-      # applies to links, images and /_next/*, and tailwind.config.ts applies to
-      # the 14 background-image url() values that basePath cannot reach.
+      # build:pages sets BASE_PATH=/explorer-Iceland/, which Vite applies to the
+      # script and style tags in index.html, to every hashed asset, and to the
+      # url() references to public/ files inside the generated CSS. Its postbuild
+      # hook copies index.html to 404.html, which is how GitHub Pages serves
+      # clean SPA URLs: a deep link 404s, Pages returns the shell, and the router
+      # takes over from there.
       - run: npm run build:pages
+
+      # A missing public/ file leaves its url() untouched with no build error --
+      # a silent 404 in production only. Assert the prefix landed everywhere
+      # rather than finding out from the deployed site.
+      - name: Verify the base prefix and the SPA fallback
+        run: |
+          set -euo pipefail
+          test -f dist/404.html
+          cmp dist/index.html dist/404.html
+          grep -q '/explorer-Iceland/assets/' dist/index.html
+          grep -q '/explorer-Iceland/img/'    dist/assets/*.css
+          grep -q '/explorer-Iceland/fonts/'  dist/assets/*.css
+          # Nothing may reference public/ without the prefix.
+          ! grep -roE "url\(['\"]?/(img|fonts)/" dist/assets/*.css
+          # A zero here means the camelCase theme keys were dropped, which
+          # happens silently on tailwindcss < 4.1.18.
+          grep -q 'bg-mainYellow' dist/assets/*.css
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: ./dist
 
   deploy:
     needs: build
