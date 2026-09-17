@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 import { asset } from '@/lib/asset';
 
 /**
@@ -6,9 +8,14 @@ import { asset } from '@/lib/asset';
  * Actions, so this validates its inputs and stops -- the original posted to "#",
  * which just reloaded the page.
  *
- * Two class names below (`focus:outline-subborder-subPurple`) are typos carried
- * over from the original. They are not real utilities and emit nothing, exactly
- * as today; they are kept so the rendered markup matches.
+ * One class name below (`focus:outline-subborder-subPurple`, on the password
+ * input) is a typo carried over from the original. It is not a real utility and
+ * emits nothing, exactly as before; it is kept so the markup still matches.
+ *
+ * The two other copies of that typo lived on the hand-rolled checkbox -- a
+ * 25-line appearance-none input with an SVG tick overlaid through a CSS grid --
+ * which Radix's Checkbox replaces. Since they emitted no CSS, removing them is
+ * provably pixel-identical.
  */
 export function LoginForm() {
   const [email, setEmail] = useState('');
@@ -69,42 +76,17 @@ export function LoginForm() {
           </div>
 
           <div className="flex items-center justify-between">
-            <div className="flex gap-3">
-              <div className="flex h-6 shrink-0 items-center">
-                <div className="group grid size-4 grid-cols-1">
-                  <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    checked={remember}
-                    onChange={(e) => setRemember(e.target.checked)}
-                    className="col-start-1 row-start-1 cursor-pointer appearance-none rounded border border-gray-300 bg-white checked:border-subPurple checked:bg-subPurple indeterminate:border-subPurple indeterminate:bg-subPurple focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-subborder-subPurple disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
-                  />
-                  <svg
-                    className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
-                    viewBox="0 0 14 14"
-                    fill="none"
-                  >
-                    <path
-                      className="opacity-0 group-has-[:checked]:opacity-100"
-                      d="M3 8L6 11L11 3.5"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      className="opacity-0 group-has-[:indeterminate]:opacity-100"
-                      d="M3 7H11"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <label htmlFor="remember-me" className="block text-sm/6 text-gray-800">
+            <div className="flex items-center gap-3">
+              <Checkbox
+                id="remember-me"
+                name="remember-me"
+                checked={remember}
+                onCheckedChange={(checked) => setRemember(checked === true)}
+                className="size-4 cursor-pointer rounded border-gray-300 bg-white data-[state=checked]:border-subPurple data-[state=checked]:bg-subPurple data-[state=checked]:text-white"
+              />
+              <Label htmlFor="remember-me" className="block cursor-pointer text-sm/6 font-normal text-gray-800">
                 Remember me
-              </label>
+              </Label>
             </div>
 
             <div className="text-sm/6">
