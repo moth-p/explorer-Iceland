@@ -34,7 +34,6 @@ export default {
         'main-5': `url('${bp}/img/main-5.png')`,
         'main-6': `url('${bp}/img/main-6.png')`,
         'main-7-bg': `url('${bp}/img/main-7-bg.png')`,
-        'main-7-btn': `url('${bp}/img/main-7-button.png')`,
         'swiper-1': `url('${bp}/img/swiper-1.png')`,
         'swiper-2': `url('${bp}/img/swiper-2.png')`,
         'swiper-3': `url('${bp}/img/swiper-3.png')`,

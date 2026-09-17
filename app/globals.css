@@ -26,7 +26,12 @@
   }
 }
 
-* {
+/*
+ * Scoped to `html`, not `*`. On `*` every scroll container inherits it, which
+ * turns a programmatic scroll-to-top into a half-second animation -- fine for
+ * the back-to-top button, wrong for a route change.
+ */
+html {
   scroll-behavior: smooth;
 }
 
