@@ -64,6 +64,13 @@ export default tseslint.config(
        * which is what effects are for.
        */
       'react-hooks/set-state-in-effect': 'off',
+
+      /*
+       * PropTypes are a runtime approximation of what TypeScript already checks
+       * at build time, and this rule cannot see a prop typed through a generic
+       * or a spread -- so on a .tsx codebase it reports only false positives.
+       */
+      'react/prop-types': 'off',
     },
   },
   {

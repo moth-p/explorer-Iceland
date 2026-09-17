@@ -1,88 +1,87 @@
-import flatpickr from 'flatpickr';
-import type { Instance } from 'flatpickr/dist/types/instance';
-import { useEffect, useRef } from 'react';
-import { fromISODate, getMinBookingDate, toISODate } from '@/lib/dates';
-import 'flatpickr/dist/flatpickr.min.css';
+import { useMemo, useState } from 'react';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { formatBookingDate, fromISODate, getMinBookingDate, toISODate } from '@/lib/dates';
 
 interface Props {
+  /** The selected date as 'YYYY-MM-DD', or '' for none. Owned by the parent. */
+  value: string;
   /** 'YYYY-MM-DD' strings that are already booked and must not be selectable. */
   disabledDates: string[];
   onChange: (dateStr: string) => void;
-  /** Lets the parent clear the field after a successful add-to-cart. */
-  registerInstance?: (fp: Instance | null) => void;
 }
 
 /**
- * Flatpickr wrapper. Flatpickr owns this input's DOM; React does not.
+ * The booking date field: a Popover holding a react-day-picker Calendar.
  *
- * `altInput` is deliberately NOT used, even though it is the obvious way to show
- * "January 3, 2026" while keeping a Y-m-d value. It is incompatible with React
- * here: flatpickr.js:2431 rewrites the input's `type` to "hidden" and :2433
- * inserts a second, visible input as a sibling that React knows nothing about.
- * Because this component re-renders whenever a date is picked, React restores
- * `type="text"` from its own props on the next render -- un-hiding the original
- * and leaving TWO visible date fields.
+ * This is fully controlled by the parent's date string and holds no selection
+ * state of its own. That is what lets AddToCartForm clear the field after a
+ * successful add with the setDate('') it already calls, instead of reaching
+ * into this component through an imperative handle.
  *
- * Instead flatpickr formats the input directly and we derive the Y-m-d value in
- * onChange. One input, owned by one system, same display format as before.
+ * It replaces a Flatpickr wrapper, and with it a pile of constraints that no
+ * longer exist: Flatpickr owned the input's DOM, so `altInput` had to stay off
+ * (it rewrote the input to type="hidden" and inserted a sibling React did not
+ * know about, leaving two visible date fields), the instance had to be created
+ * exactly once, updated imperatively via .set(), destroyed on cleanup, and
+ * never mounted conditionally.
  *
- * The remaining rules still apply: initialise once in useEffect(..., []), push
- * updates imperatively via .set(), always destroy() on cleanup, and never mount
- * conditionally.
+ * What has NOT changed, and still matters: the date is serialised with the
+ * local-time helpers in lib/dates.ts and never toISOString(). onSelect hands
+ * back a Date at local midnight, and in UTC+8 toISOString() on that yields the
+ * previous day -- i.e. it books the wrong date.
  */
-export default function DatePicker({ disabledDates, onChange, registerInstance }: Props) {
-  const inputRef = useRef<HTMLInputElement>(null);
-  const fpRef = useRef<Instance | null>(null);
-  // Keep the latest onChange without making the init effect depend on it --
-  // that effect must run exactly once, or flatpickr is torn down and rebuilt on
-  // every parent render. Latched in an effect rather than during render, which
-  // is safe here because flatpickr only calls back from a DOM event, always
-  // after commit.
-  const onChangeRef = useRef(onChange);
-  useEffect(() => {
-    onChangeRef.current = onChange;
-  });
+export function DatePicker({ value, disabledDates, onChange }: Props) {
+  const [open, setOpen] = useState(false);
 
-  useEffect(() => {
-    if (!inputRef.current) return;
+  const minDate = useMemo(() => getMinBookingDate(), []);
+  const selected = value ? fromISODate(value) : undefined;
 
-    const fp = flatpickr(inputRef.current, {
-      minDate: getMinBookingDate(),
-      // The display format the design calls for. Previously this was altFormat.
-      dateFormat: 'F j, Y',
-      onChange: (dates) => {
-        onChangeRef.current(dates[0] ? toISODate(dates[0]) : '');
-      },
-    }) as Instance;
+  const disabled = useMemo(
+    () => [{ before: minDate }, ...disabledDates.map(fromISODate)],
+    [minDate, disabledDates],
+  );
 
-    fpRef.current = fp;
-    registerInstance?.(fp);
-
-    return () => {
-      registerInstance?.(null);
-      fp.destroy();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Disabled dates change as the cart changes; push them in imperatively.
-  // Date objects, not strings: flatpickr parses `disable` strings with
-  // dateFormat, which is now 'F j, Y' rather than 'Y-m-d'.
-  useEffect(() => {
-    fpRef.current?.set('disable', disabledDates.map(fromISODate));
-  }, [disabledDates]);
+  const handleSelect = (day: Date | undefined) => {
+    // The undefined branch is not optional: react-day-picker clears the
+    // selection when the user clicks the already-selected day.
+    onChange(day ? toISODate(day) : '');
+    if (day) setOpen(false);
+  };
 
   return (
-    <input
-      ref={inputRef}
-      required
-      // flatpickr sets this itself when allowInput is false; declaring it here
-      // keeps React's props and the DOM in agreement.
-      readOnly
-      id="datePicker"
-      type="text"
-      placeholder="Select a date"
-      className="me-8 mb-5 h-8 w-44 cursor-pointer rounded-md border border-gray-300 p-2 font-sans focus:outline-none focus:ring-2 focus:ring-subPurple md:mb-0"
-    />
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <button
+          type="button"
+          id="datePicker"
+          className={`me-8 mb-5 inline-flex h-8 w-44 cursor-pointer items-center rounded-md border border-gray-300 p-2 text-left font-sans focus:outline-none focus:ring-2 focus:ring-subPurple md:mb-0 ${
+            value ? '' : 'text-gray-400'
+          }`}
+        >
+          {value ? formatBookingDate(fromISODate(value)) : 'Select a date'}
+        </button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          mode="single"
+          selected={selected}
+          onSelect={handleSelect}
+          disabled={disabled}
+          // The earliest month the user can page back to, mirroring the
+          // minDate behaviour Flatpickr had.
+          startMonth={new Date(minDate.getFullYear(), minDate.getMonth())}
+          defaultMonth={selected ?? minDate}
+          /*
+           * The usual objection to autoFocus is focus moving without the user
+           * asking for it. Here the user has just opened the popover, and
+           * without this a keyboard user lands on the popover container and has
+           * to tab into the day grid.
+           */
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus
+        />
+      </PopoverContent>
+    </Popover>
   );
 }

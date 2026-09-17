@@ -1,25 +1,13 @@
-import type { Instance } from 'flatpickr/dist/types/instance';
-import { lazy, Suspense, useCallback, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
+import { DatePicker } from '@/components/booking/DatePicker';
 import { successAlert, warningAlert } from '@/lib/alerts';
 import { selectBookedDates, useCartStore } from '@/lib/cart-store';
 import type { Product } from '@/lib/types';
 
-// Flatpickr is code-split: it is only needed on this one page, and it pulls in
-// its own stylesheet.
-//
-// The fallback matches the input's height so the layout does not shift when it
-// mounts, and it MUST be a <span>, not a <div>: this renders inside the "Date:"
-// <p>, where a <div> is invalid HTML that browsers fix by auto-closing the <p>.
-const DatePicker = lazy(() => import('./DatePicker'));
-
-const DatePickerFallback = (
-  <span className="me-8 mb-5 inline-block h-8 w-44 rounded-md border border-gray-300 align-middle md:mb-0" />
-);
-
 /**
- * The only interactive island on the tour detail page: date, group size,
- * validation and add-to-cart. Everything around it stays a Server Component.
+ * Date, group size, validation and add-to-cart -- the only interactive part of
+ * the tour detail page.
  */
 export function AddToCartForm({ product }: { product: Product }) {
   const addItem = useCartStore((s) => s.addItem);
@@ -31,17 +19,11 @@ export function AddToCartForm({ product }: { product: Product }) {
 
   const [date, setDate] = useState('');
   const [groupSize, setGroupSize] = useState('');
-  const fpRef = useRef<Instance | null>(null);
-
-  const registerInstance = useCallback((fp: Instance | null) => {
-    fpRef.current = fp;
-  }, []);
 
   /**
-   * Synchronous on purpose. Alerts are fired and forgotten rather than awaited,
-   * so neither the validation guards nor the form reset can be skipped if the
-   * SweetAlert2 chunk fails to load. Awaiting a rejected alert here previously
-   * meant an invalid booking could fall through the early return and be added.
+   * Synchronous, and nothing here may be awaited. The alert helpers fire a
+   * toast and return; an alert must never be able to defer or skip one of the
+   * early returns below and let an invalid booking through.
    */
   const handleAdd = () => {
     const size = Number(groupSize);
@@ -66,8 +48,8 @@ export function AddToCartForm({ product }: { product: Product }) {
     });
 
     // The newly booked date becomes unselectable via selectBookedDates, which
-    // now reads from the cart -- so unlike the original it survives a reload.
-    fpRef.current?.clear();
+    // reads from the cart -- so unlike the original it survives a reload.
+    // Clearing `date` clears the picker too; it is fully controlled.
     setDate('');
     setGroupSize('');
 
@@ -80,13 +62,7 @@ export function AddToCartForm({ product }: { product: Product }) {
         <div className="relative sm:flex sm:justify-start">
           <p className="text-md font-sans">
             Date:&nbsp;&nbsp;
-            <Suspense fallback={DatePickerFallback}>
-              <DatePicker
-                disabledDates={bookedDates}
-                onChange={setDate}
-                registerInstance={registerInstance}
-              />
-            </Suspense>
+            <DatePicker value={date} disabledDates={bookedDates} onChange={setDate} />
           </p>
           <p className="text-md font-sans">
             Group Size:&nbsp;&nbsp;
