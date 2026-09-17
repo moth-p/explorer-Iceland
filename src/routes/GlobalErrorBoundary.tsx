@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { useRouteError } from 'react-router';
 
 /**
- * Last-resort boundary: catches errors thrown by RootLayout itself, which
- * RouteErrorBoundary cannot reach because it renders inside that layout.
+ * 最後一道防線的 boundary：捕捉 RootLayout 本身丟出的錯誤，
+ * RouteErrorBoundary 碰不到這些，因為它是渲染在那個 layout 裡面的。
  *
- * It cannot rely on the header, footer or cart being mounted, and is
- * deliberately plain for that reason. (Under Next this was global-error.tsx and
- * had to supply its own <html>/<body>; index.html owns those now.)
+ * 它不能依賴 header、footer 或 cart 已經被掛載，所以刻意寫得很單純。
+ * （在 Next 底下這曾經是 global-error.tsx，還必須自己提供
+ * <html>/<body>；現在這些是 index.html 負責的。）
  */
 export function GlobalErrorBoundary() {
   const error = useRouteError();

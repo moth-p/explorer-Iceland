@@ -3,15 +3,15 @@ const DEFAULT_DESCRIPTION =
   'Small-group outdoor adventures in Iceland: hiking, sightseeing and outdoor sports tours with local guides.';
 
 /**
- * The replacement for Next's `export const metadata`.
+ * 用來取代 Next 的 `export const metadata`。
  *
- * React 19 hoists <title> and <meta> into <head> from wherever they render and
- * removes them on unmount -- but it does NOT deduplicate, and document.title is
- * the FIRST title element in the document. So: render exactly one PageMeta per
- * route, none in RootLayout, and keep index.html free of a <title>.
+ * React 19 會把 <title> 和 <meta> 從渲染的位置提升到 <head> 裡，並在
+ * unmount 時移除它們 -- 但它「不會」去重，而 document.title 是文件裡
+ * 「第一個」title 元素。所以：每個路由只 render 一個 PageMeta，
+ * RootLayout 裡不放，並且讓 index.html 完全不要有 <title>。
  *
- * `title` is the page segment only; the '%s | Explorer' template that used to
- * live in the root layout's metadata export lives here.
+ * `title` 只是頁面的區段名稱；以前放在 root layout 的 metadata export
+ * 裡的 '%s | Explorer' 樣板，現在放在這裡。
  */
 export function PageMeta({ title, description }: { title?: string; description?: string }) {
   return (

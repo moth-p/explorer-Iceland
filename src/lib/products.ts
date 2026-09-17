@@ -2,10 +2,11 @@ import { products } from '@/data/products';
 import type { Category, Product } from './types';
 
 /**
- * Tour ids become directory names under output: 'export'. A non-ASCII id works
- * in `next dev` and on macOS, then 404s on GitHub Pages, because macOS
- * normalises filenames to NFD while browsers request the NFC form and Linux
- * hosts serve bytes literally. Fail the build instead of shipping that.
+ * 在 output: 'export' 底下，行程的 id 會變成目錄名稱。一個非 ASCII
+ * 的 id 在 `next dev` 和 macOS 上可以正常運作，但部署到 GitHub Pages
+ * 之後會 404，因為 macOS 會把檔名正規化成 NFD，而瀏覽器要求的是
+ * NFC 形式，Linux 主機則是原封不動地依照 bytes 提供檔案。與其這樣
+ * 出貨，不如讓 build 直接失敗。
  */
 const SLUG = /^[a-z0-9-]+$/;
 for (const p of products) {
@@ -28,6 +29,6 @@ export const getProductById = (id: string): Product | undefined =>
 export const getProductsByCategory = (category: Category): Product[] =>
   products.filter((p) => p.category === category);
 
-/** Resolve a pre-migration id (e.g. 'hiking-4-Ásbyrgi-Canyon-Hike'). */
+/** 解析 migration 前的 id（例如 'hiking-4-Ásbyrgi-Canyon-Hike'）。 */
 export const getProductByLegacyId = (legacyId: string): Product | undefined =>
   products.find((p) => p.legacyId === legacyId);

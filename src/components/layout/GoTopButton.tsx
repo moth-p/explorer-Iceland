@@ -3,16 +3,17 @@ import { useEffect, useState } from 'react';
 import { chromeVariantFor } from '@/lib/layout-variant';
 
 /**
- * The back-to-top button. Its own client boundary so the scroll listener's state
- * change re-renders this button alone, not the header.
+ * 回到頂部的按鈕。有自己的 client boundary，這樣 scroll listener 的
+ * state 變化只會重新 render 這個按鈕，不會動到 header。
  *
- * The original fired on every scroll event; this coalesces to one check per
- * animation frame. The offset differs between the two chrome variants, exactly
- * as it did in the original markup.
+ * 原本的版本在每一次 scroll 事件都會觸發；這裡合併成每個 animation
+ * frame 檢查一次。offset 在兩種 chrome variant 之間不一樣，跟原本
+ * markup 的行為完全一致。
  *
- * It scrolls imperatively rather than via `href="#"`: under a client router an
- * empty-fragment anchor is a navigation, and page-level `scroll-behavior` is
- * scoped to `html` so route changes do not animate.
+ * 這裡是用 imperative 的方式捲動，而不是透過 `href="#"`：在 client
+ * router 底下，一個空 fragment 的錨點會被當成一次導覽，而且
+ * page 層級的 `scroll-behavior` 是限定在 `html` 上的，所以路由切換
+ * 不會有動畫。
  */
 export function GoTopButton() {
   const [visible, setVisible] = useState(false);

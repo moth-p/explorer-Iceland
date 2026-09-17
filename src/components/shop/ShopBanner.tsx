@@ -5,13 +5,13 @@ import { useRef } from 'react';
 import 'swiper/css';
 
 /**
- * The shop hero carousel. Previously a CDN <script> plus a global `new Swiper()`
- * in src/js/shopBanner.js; now the npm package's React binding, so the version
- * is pinned and bundled.
+ * shop 頁面的主視覺輪播。以前是一個 CDN <script> 加上
+ * src/js/shopBanner.js 裡的全域 `new Swiper()`；現在改用 npm 套件的
+ * React binding，所以版本是固定並打包進來的。
  *
- * Config matches the original exactly: one slide, 1000ms transition, 2800ms
- * autoplay that stops on interaction, looping, and click-to-advance which
- * restarts autoplay.
+ * 設定跟原本完全一致：一次顯示一張、1000ms 的轉場、2800ms 的
+ * autoplay（互動時會停止）、循環播放，並且點擊可以前進到下一張，
+ * 而且會重新啟動 autoplay。
  */
 const SLIDES = [
   {
@@ -47,8 +47,8 @@ export function ShopBanner() {
       }}
       onClick={() => {
         swiperRef.current?.slideNext();
-        // The original restarted autoplay on click, since disableOnInteraction
-        // had just stopped it.
+        // 原本的版本會在點擊時重新啟動 autoplay，因為 disableOnInteraction
+        // 剛把它停掉。
         swiperRef.current?.autoplay.start();
       }}
       modules={[Autoplay]}

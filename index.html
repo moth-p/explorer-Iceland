@@ -6,17 +6,17 @@
     <link rel="icon" type="image/png" href="%BASE_URL%icon.png" />
 
     <!--
-      Deliberately no <title> here. React 19 hoists a per-route <title> into
-      <head>, but it does not deduplicate, and document.title is defined as the
-      FIRST title element in the document -- a placeholder here would win over
-      every route forever. See src/components/layout/PageMeta.tsx.
+      這裡刻意不放 <title>。React 19 會把每個路由自己的 <title>
+      提升到 <head> 裡，但它不會去重，而 document.title 是被定義成
+      文件裡「第一個」title 元素 -- 這裡如果放一個佔位符，就會永遠
+      蓋過每個路由的設定。見 src/components/layout/PageMeta.tsx。
     -->
 
     <!--
-      Replaces the preload hints next/font used to emit. crossorigin is required
-      even same-origin: fonts are fetched in CORS mode, and without it the
-      browser downloads each file twice. The bold-italic face is the LCP (the
-      150px hero wordmark), so it goes first.
+      取代了以前 next/font 產生的 preload hint。即使是同源，
+      crossorigin 也是必要的：字體是以 CORS 模式抓取的，沒有它的話
+      瀏覽器會把每個檔案下載兩次。bold-italic 這個字體是 LCP
+      （150px 的 hero 文字標誌），所以放在最前面。
     -->
     <link
       rel="preload"

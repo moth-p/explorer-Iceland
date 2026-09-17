@@ -6,15 +6,15 @@ import { PageChrome } from '@/components/layout/PageChrome';
 import { Toaster } from '@/components/ui/sonner';
 
 /**
- * The single source of the site chrome.
+ * 網站 chrome 的唯一來源。
  *
- * Header, cart drawer and back-to-top were previously pasted into four separate
- * HTML files along with ~240 lines of identical inline script. The footer is
- * NOT here, because / and /about use a different one from the shop pages --
- * pages render SimpleFooter or SiteFooter themselves.
+ * Header、cart drawer 和回到頂部按鈕以前是被貼進四個各自獨立的 HTML
+ * 檔案裡，還附帶大約 240 行完全相同的 inline script。footer「不」
+ * 放在這裡，因為 / 和 /about 用的跟 shop 系列頁面不一樣 -- 各個頁面
+ * 會自己 render SimpleFooter 或 SiteFooter。
  *
- * <html> and <body> live in index.html now, and the font families come from
- * @font-face in index.css rather than next/font's generated classes.
+ * <html> 和 <body> 現在放在 index.html 裡，字體來自 index.css 裡的
+ * @font-face，而不是 next/font 產生出來的 class。
  */
 export function RootLayout() {
   return (
@@ -26,8 +26,9 @@ export function RootLayout() {
       </PageChrome>
       <CartHydration />
       {/*
-        Mounted here rather than in ChromeExtras, which only renders on routes
-        with shop chrome. The toaster has to exist wherever an alert can fire.
+        掛載在這裡，而不是掛在 ChromeExtras 裡，因為 ChromeExtras
+        只會在有 shop chrome 的路由上 render。凡是能觸發 alert 的地方，
+        toaster 就必須存在。
       */}
       <Toaster />
       <ScrollRestoration />

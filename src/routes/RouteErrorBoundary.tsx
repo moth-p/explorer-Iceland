@@ -3,19 +3,20 @@ import { useNavigate, useRouteError } from 'react-router';
 import { MessagePage } from '@/components/layout/MessagePage';
 
 /**
- * Route-level error boundary. Catches render and effect errors in any page,
- * while keeping the header, footer and cart chrome around it intact.
+ * 路由層級的錯誤 boundary。捕捉任何頁面裡 render 和 effect 的錯誤，
+ * 同時讓周圍的 header、footer 和 cart chrome 保持完整。
  *
- * There is no `reset()` on a React Router boundary, and no error digest: this
- * is a static bundle with no server to fingerprint anything. navigate(0) is a
- * real reload, which is what "Try again" amounted to on the static export too.
+ * React Router 的 boundary 沒有 `reset()`，也沒有 error digest：
+ * 這是一個靜態的 bundle，沒有 server 能對任何東西產生 fingerprint。
+ * navigate(0) 是一次真正的重新整理，這也是在 static export 上
+ * 「Try again」實際上做的事。
  */
 export function RouteErrorBoundary() {
   const error = useRouteError();
   const navigate = useNavigate();
 
   useEffect(() => {
-    // No error-reporting backend on a static site; the console is the sink.
+    // 靜態網站沒有錯誤回報的 backend；console 就是唯一的接收端。
     console.error(error);
   }, [error]);
 

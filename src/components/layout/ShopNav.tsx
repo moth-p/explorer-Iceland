@@ -14,17 +14,15 @@ const HAM_ITEM_CLASS =
   'block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 ps-3 pe-4 text-gray-800 font-medium hover:text-subPurple active:opacity-60';
 
 /**
- * The full navigation used by /shop, /shop/[id] and /login: logo, links,
- * Booking flyout, mobile hamburger with its accordion, cart trigger and
- * account link.
+ * /shop、/shop/[id] 和 /login 使用的完整導覽列：logo、連結、Booking
+ * flyout、有手風琴選單的手機版漢堡選單、cart 觸發器和 account 連結。
  *
- * This replaces the `<template id="navBar">` + cloneNode trick and roughly 240
- * lines of identical inline <script> that were pasted into shop.html,
- * product-detail.html and login.html.
+ * 這取代了 `<template id="navBar">` 加上 cloneNode 的做法，以及被貼進
+ * shop.html、product-detail.html 和 login.html 裡、大約 240 行完全相同的
+ * inline <script>。
  *
- * Dismiss-on-outside-click is a single document listener with a ref containment
- * check, rather than the original's stopPropagation() scattered across six
- * elements.
+ * 「點擊外部關閉」的功能是用一個單一的 document listener 搭配 ref
+ * 包含範圍檢查來實作，而不是原本散落在六個元素上的 stopPropagation()。
  */
 export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
   const showBooking = variant === 'shop';
@@ -35,8 +33,8 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
   const [hamOpen, setHamOpen] = useState(false);
   const [accordionOpen, setAccordionOpen] = useState(false);
   const [flyoutOpen, setFlyoutOpen] = useState(false);
-  // The original swapped the nav background the first time the hamburger was
-  // tapped and never swapped it back. Preserved.
+  // 原本的版本會在漢堡選單第一次被點擊時切換 nav 的背景，而且從不切回去。
+  // 這裡保留這個行為。
   const [navOpaque, setNavOpaque] = useState(false);
 
   const navRef = useRef<HTMLElement>(null);
@@ -61,7 +59,7 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
     };
   }, [hamOpen]);
 
-  // Close everything on navigation.
+  // 導覽切換時把所有東西都關閉。
   useEffect(() => {
     setHamOpen(false);
     setFlyoutOpen(false);
@@ -85,7 +83,7 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
       >
         <div className="sm:px-6 lg:px-8">
           <div className="relative flex h-16 justify-between">
-            {/* hamburger button */}
+            {/* 漢堡選單按鈕 */}
             <div className="item-center absolute left-0 top-3 flex sm:hidden">
               <button
                 type="button"
@@ -112,7 +110,7 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
               </button>
             </div>
 
-            {/* logo + desktop links */}
+            {/* logo + 桌面版連結 */}
             <div className="flex flex-1 items-center justify-center gap-6 sm:justify-start">
               <div className="item-center flex shrink-0">
                 <Link to="/">
@@ -134,10 +132,10 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
                 {showBooking ? (
                   <div className="item-center flex justify-center">
                     {/*
-                      A real <button>, not the original hover-only <div>/<p>:
-                      the flyout was unreachable without a mouse. onFocus opens
-                      it for keyboard users and onClick for touch, which have no
-                      hover at all.
+                      這裡是一個真正的 <button>，不是原本只靠 hover 的
+                      <div>/<p>：沒有滑鼠的話 flyout 是打不開的。onFocus
+                      讓用鍵盤操作的使用者能打開它，onClick 則是給觸控
+                      裝置用的，因為它們完全沒有 hover。
                     */}
                     <button
                       type="button"
@@ -166,7 +164,7 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
               </div>
             </div>
 
-            {/* cart icon */}
+            {/* cart 圖示 */}
             <div className={`absolute right-[40px] ${iconTop} md:right-[50px]`}>
               <button
                 type="button"
@@ -179,7 +177,7 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
               </button>
             </div>
 
-            {/* user icon */}
+            {/* user 圖示 */}
             <Link to="/login" className={`absolute right-0 ${iconTop}`}>
               <button
                 type="button"
@@ -192,7 +190,7 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
 
           </div>
 
-          {/* mobile hamburger panel */}
+          {/* 手機版漢堡選單面板 */}
           {hamOpen && (
             <div className="w-screen sm:hidden" id="hamMenu">
               <div className="h-screen w-screen space-y-1 overflow-y-auto bg-lightGray p-5 pb-5">
@@ -270,7 +268,7 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
             </div>
           )}
 
-          {/* desktop Booking flyout */}
+          {/* 桌面版 Booking flyout */}
           {showBooking && flyoutOpen && (
             <div
               className="animate__animated animate__fadeIn animate__faster absolute inset-x-0 top-0 -z-10 bg-lightGray pt-14 shadow-lg ring-1 ring-gray-900/5"

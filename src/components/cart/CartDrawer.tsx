@@ -11,26 +11,25 @@ import { useHtmlScrollLock } from '@/lib/use-html-scroll-lock';
 import type { CartItem } from '@/lib/types';
 
 /**
- * The cart modal. Replaces `<template id="cartTemplate">` and the
- * querySelector/cloneNode rendering in src/js/cart.js.
+ * cart 的 modal。取代了 `<template id="cartTemplate">` 以及
+ * src/js/cart.js 裡的 querySelector/cloneNode 渲染方式。
  *
- * The template approach gave every cloned row the same ids (`cartTitle`,
- * `cartImg`, `cartPrice`, ...), which is invalid HTML once there is more than
- * one row. Those are props now.
+ * template 的做法讓每一列複製出來的元素都有一樣的 id（`cartTitle`、
+ * `cartImg`、`cartPrice`、……），一旦有超過一列，這就是不合法的
+ * HTML。現在這些都改成 props 了。
  *
- * Built on shadcn's Dialog rather than Sheet: despite the name this has always
- * been a centred modal that fades in, not an edge-anchored panel that slides,
- * and Sheet would have been a redesign. Radix brings the outside-click and
- * Escape handling, the focus trap and the ARIA wiring that were hand-written
- * here before.
+ * 是建立在 shadcn 的 Dialog 上，而不是 Sheet：儘管名字是這樣，
+ * 這個一直都是一個淡入的置中 modal，而不是從邊緣滑出的面板，
+ * 用 Sheet 會等於是重新設計一次。Radix 帶來了點擊外部關閉和
+ * Escape 處理、focus trap，以及以前在這裡是手寫的 ARIA 屬性。
  */
 export function CartDrawer() {
   const items = useCartStore((s) => s.items);
   const isOpen = useCartStore((s) => s.isOpen);
   const closeCart = useCartStore((s) => s.closeCart);
 
-  // Radix locks <body>, but the root layout gives <body> h-screen, so <html> is
-  // the real scroll container. See lib/use-body-scroll-lock.ts.
+  // Radix 會鎖定 <body>，但 root layout 給了 <body> h-screen，所以
+  // <html> 才是真正的 scroll container。見 lib/use-html-scroll-lock.ts。
   useHtmlScrollLock(isOpen);
 
   const totals = computeTotals(items);
@@ -38,9 +37,9 @@ export function CartDrawer() {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && closeCart()}>
       {/*
-        showCloseButton={false} because this panel has its own styled X. The
-        sizing classes reproduce the original: full-bleed below sm, a centred
-        max-w-3xl card above it.
+        showCloseButton={false} 是因為這個面板有自己樣式的 X。
+        尺寸相關的 class 重現了原本的樣子：在 sm 以下是滿版，
+        在 sm 以上是一張置中、max-w-3xl 的卡片。
       */}
       <DialogContent
         showCloseButton={false}

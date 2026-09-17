@@ -3,9 +3,9 @@ import { BOOKING_MENU } from '@/lib/navigation';
 import { SocialLinks } from './SocialLinks';
 
 /**
- * Server Component -- no interactivity, so it ships no JavaScript.
- * Used by /shop, /shop/[id] and /login. The simpler centred footer on / and
- * /about is SimpleFooter. Previously both were pasted into each HTML file.
+ * Server Component -- 沒有互動性，所以不會送出任何 JavaScript。
+ * 給 /shop、/shop/[id] 和 /login 使用。/ 和 /about 上比較簡單、置中的
+ * footer 是 SimpleFooter。以前這兩個都是被貼進每一個 HTML 檔案裡。
  */
 export function SiteFooter() {
   return (

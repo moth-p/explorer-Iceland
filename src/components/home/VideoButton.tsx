@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { asset } from '@/lib/asset';
 
 /**
- * The play button over the video section. Swaps artwork on hover, as the
- * original mouseenter/mouseleave handlers did by rewriting img.src.
+ * 覆蓋在影片區塊上的播放按鈕。滑鼠移過去時會換圖，就像原本的
+ * mouseenter/mouseleave handler 靠改寫 img.src 做到的一樣。
  */
 export function VideoButton() {
   const [hovered, setHovered] = useState(false);

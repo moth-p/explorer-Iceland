@@ -24,12 +24,12 @@ const Star = ({ filled }: { filled: boolean }) => (
 );
 
 /**
- * The tour detail page. The route is /shop/:id rather than the original ?id=
- * query param so each tour has its own shareable URL.
+ * 行程的詳細頁面。路由是 /shop/:id，而不是原本的 ?id= query
+ * 參數，這樣每個行程才有自己可以分享的 URL。
  *
- * The 12 tours are a closed set, so an unknown id renders the 404 in place --
- * which is what Next's `dynamicParams = false` did, and it keeps the site
- * chrome exactly as the framework's not-found page did.
+ * 這 12 個行程是一個封閉的集合，所以一個未知的 id 會就地渲染 404 --
+ * 這正是 Next 的 `dynamicParams = false` 做的事，而且會讓網站的
+ * chrome 跟框架的 not-found 頁面表現一致。
  */
 export function ProductDetail() {
   const { id } = useParams<{ id: string }>();

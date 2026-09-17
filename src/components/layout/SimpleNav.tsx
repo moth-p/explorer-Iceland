@@ -15,11 +15,11 @@ const MOBILE_BASE =
   'block border-l-4 hover:border-mainYellow hover:bg-gray-50 py-2 pl-3 pr-4 font-medium hover:text-subPurple active:opacity-60';
 
 /**
- * The lighter navigation used by / and /about: three links, no Booking flyout,
- * no search / cart / account icons, and a plain mobile menu.
+ * / 和 /about 使用的較輕量版導覽列：三個連結、沒有 Booking flyout、
+ * 沒有搜尋 / cart / account 圖示，加上一個單純的手機版選單。
  *
- * The link for the current page is rendered inert and greyed, which the original
- * did with a hardcoded `pointer-events-none text-gray-400` per file.
+ * 目前所在頁面的連結會被渲染成不可點擊且變灰色，這是原本每個檔案裡
+ * 用寫死的 `pointer-events-none text-gray-400` 做到的。
  */
 export function SimpleNav() {
   const pathname = useLocation().pathname;

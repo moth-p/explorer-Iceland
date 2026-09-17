@@ -1,24 +1,24 @@
 import type { Product } from '@/lib/types';
 
 /**
- * The 12 tours. Generated from the pre-migration src/js/products.js and then
- * owned by hand -- edit this file directly.
+ * 這 12 個行程。是從 migration 前的 src/js/products.js 產生出來的，
+ * 之後就改成手動維護 -- 直接編輯這個檔案。
  *
- * Two things to know before editing:
+ * 編輯之前要知道兩件事：
  *
- * 1. `id` must match /^[a-z0-9-]+$/. Under output: 'export' each id becomes a
- *    directory name, and the original ids carried diacritics (Ásbyrgi,
- *    Jökulsárlón, Mývatn, Snæfellsnes, Dalvík). macOS normalises filenames to
- *    NFD while browsers request NFC, so those pages worked in dev and 404'd on
- *    GitHub Pages. `legacyId` preserves the original. lib/products.ts asserts
- *    this at module load.
+ * 1. `id` 必須符合 /^[a-z0-9-]+$/。在 output: 'export' 底下，每個 id
+ *    都會變成一個目錄名稱，而原本的 id 帶有變音符號（Ásbyrgi、
+ *    Jökulsárlón、Mývatn、Snæfellsnes、Dalvík）。macOS 會把檔名
+ *    正規化成 NFD，而瀏覽器要求的是 NFC，所以這些頁面在 dev
+ *    環境下能動，部署到 GitHub Pages 後卻會 404。`legacyId`
+ *    保留了原本的值。lib/products.ts 會在 module 載入時斷言這件事。
  *
- * 2. `category` is explicit. It cannot be derived from the id: every original
- *    id was prefixed `hiking-`, including the sightseeing and outdoor-sports
- *    tours. The grouping comes from the shop flyout menu.
+ * 2. `category` 是明確指定的。沒辦法從 id 推導出來：每個原本的 id
+ *    都有 `hiking-` 這個前綴，連 sightseeing 和 outdoor-sports 的
+ *    行程也不例外。分組的依據是 shop 的 flyout 選單。
  *
- * Text contains U+2019 (’) and non-breaking spaces are represented structurally
- * via RuleItem.label -- preserve both when editing.
+ * 文字內容包含 U+2019（’），而不斷行空格則是透過 RuleItem.label
+ * 以結構化的方式表示 -- 編輯時兩者都要保留。
  */
 export const products: Product[] = [
   {

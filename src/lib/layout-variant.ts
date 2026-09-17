@@ -1,27 +1,30 @@
 /**
- * The pre-migration site had two distinct chrome designs, and three distinct
- * <body> treatments. The ported pages must keep both.
+ * migration 前的網站有兩種不同的 chrome 設計，還有三種不同的 <body>
+ * 處理方式。移植後的頁面必須把兩者都保留下來。
  *
- * Navigation / footer variant:
- *   'simple'  index.html, about.html -- Concept/About/Shop only, no Booking
- *             flyout, no search/cart/account icons, a plain mobile menu, the
- *             centred footer, and the go-top button at end-8/bottom-8.
- *   'shop'    shop.html -- Concept/About/Booking/FAQ with the Booking flyout
- *             and an accordion mobile menu, search box, cart trigger, account
- *             link, three-column footer, go-top at end-5/bottom-5.
- *   'detail'  product-detail.html, login.html -- as 'shop' but the desktop nav
- *             is Concept/About/Shop/FAQ with NO Booking flyout, and the
- *             hamburger footer uses a narrower logo, a wider gap and Font
- *             Awesome brand icons.
+ * 導覽列 / footer 的 variant：
+ *   'simple'  index.html、about.html -- 只有 Concept/About/Shop，
+ *             沒有 Booking flyout，沒有搜尋/cart/account 圖示，
+ *             一個單純的手機版選單，置中的 footer，回到頂部按鈕在
+ *             end-8/bottom-8。
+ *   'shop'    shop.html -- Concept/About/Booking/FAQ，有 Booking
+ *             flyout 和手風琴式手機版選單、搜尋框、cart 觸發器、
+ *             account 連結、三欄式 footer，回到頂部按鈕在
+ *             end-5/bottom-5。
+ *   'detail'  product-detail.html、login.html -- 跟 'shop' 類似，
+ *             但桌面版導覽列是 Concept/About/Shop/FAQ，沒有 Booking
+ *             flyout，而且漢堡選單的 footer 用比較窄的 logo、
+ *             比較寬的間距和 Font Awesome 的品牌圖示。
  *
- * Note these do not line up: about.html uses the simple nav but the shop
- * page-fade, and the two form-heavy pages set a different base font.
+ * 要注意這些設定並不是完全對齊的：about.html 用的是 simple 的導覽列，
+ * 但用的是 shop 的頁面淡入效果，而且兩個表單較多的頁面設定了不同的
+ * 基礎字體。
  */
 export type ChromeVariant = 'simple' | 'shop' | 'detail';
 
 const SIMPLE_ROUTES = new Set(['/', '/about']);
 
-/** Strip the trailing slash that trailingSlash: true produces. */
+/** 去掉 trailingSlash: true 產生的結尾斜線。 */
 function normalize(pathname: string): string {
   return pathname.length > 1 && pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
 }
@@ -29,31 +32,33 @@ function normalize(pathname: string): string {
 export function chromeVariantFor(pathname: string): ChromeVariant {
   const path = normalize(pathname);
   if (SIMPLE_ROUTES.has(path)) return 'simple';
-  // product-detail.html and login.html shared a third nav: Concept/About/Shop/FAQ
-  // with no Booking flyout, icons nudged to top-4, and a different hamburger
-  // footer (narrower logo, wider gap, Font Awesome brand icons incl. YouTube).
+  // product-detail.html 和 login.html 共用第三種導覽列：
+  // Concept/About/Shop/FAQ，沒有 Booking flyout，圖示位置微調到
+  // top-4，而且有不同的漢堡選單 footer（更窄的 logo、更寬的間距、
+  // 包含 YouTube 在內的 Font Awesome 品牌圖示）。
   if (path === '/login' || path.startsWith('/shop/')) return 'detail';
   return 'shop';
 }
 
-/** True for the variants that carry the cart, search and account controls. */
+/** 對於帶有 cart、搜尋和 account 控制項的 variant 回傳 true。 */
 export function hasShopChrome(v: ChromeVariant): boolean {
   return v !== 'simple';
 }
 
 /**
- * The per-route half of the original <body> class list: the page-load fade and
- * the base font. Applied to a wrapper so the root layout stays a Server
- * Component; both fades are opacity-only, so the fixed nav inside is unaffected.
+ * 原本 <body> class list 裡會隨路由而變的那一半：頁面載入時的淡入效果
+ * 和基礎字體。套用在一個 wrapper 上，這樣 root layout 才能保持是一個
+ * Server Component；兩種淡入效果都只作用在 opacity 上，所以裡面固定
+ * 的 nav 不會受影響。
  *
  *   /                      animate-fadeIn                       font-krona
  *   /about, /shop          animate__animated animate__fadeIn …  font-krona
- *   /shop/[id], /login     (no fade)                            font-sans scroll-smooth
+ *   /shop/[id], /login     （沒有淡入效果）                     font-sans scroll-smooth
  */
 export function pageChromeClassesFor(pathname: string): string {
   const path = normalize(pathname);
 
-  // The two form-heavy pages set a different base font and no entry animation.
+  // 這兩個表單較多的頁面設定了不同的基礎字體，也沒有進場動畫。
   if (path === '/login' || path.startsWith('/shop/')) {
     return 'font-sans scroll-smooth';
   }
@@ -64,11 +69,11 @@ export function pageChromeClassesFor(pathname: string): string {
 }
 
 /**
- * Vertical offset of the search / cart / account icons.
+ * 搜尋 / cart / account 圖示的垂直偏移量。
  *
- * Only product-detail.html used top-4; shop.html and login.html both used
- * top-3. It reads like a slip rather than a decision, but it is reproduced
- * exactly so the port introduces no visual change of its own.
+ * 只有 product-detail.html 用了 top-4；shop.html 和 login.html
+ * 都用 top-3。這看起來比較像是一個失誤而不是刻意的決定，但這裡還是
+ * 原封不動地重現它，這樣移植過程本身就不會引入任何視覺上的變化。
  */
 export function navIconTopFor(pathname: string): string {
   return normalize(pathname).startsWith('/shop/') ? 'top-4' : 'top-3';

@@ -11,9 +11,10 @@ export function About() {
         description="A team of local Icelandic guides specialising in ecological interpretation, hiking safety, geography, climate and local culture."
       />
       {/*
-        about.html wrapped its (fixed) nav in <header class="w-screen mb-20 lg:mb-0">,
-        so the header contributed nothing but bottom margin. The nav now lives in
-        the root layout, so that spacing is reproduced here.
+        about.html 把它（固定位置的）nav 包在
+        <header class="w-screen mb-20 lg:mb-0"> 裡，所以這個 header
+        除了下方的 margin 之外什麼都沒貢獻。現在 nav 放在 root layout
+        裡了，所以這裡重現這個間距。
       */}
       <div className="mb-20 w-screen lg:mb-0" />
 

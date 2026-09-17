@@ -1,7 +1,7 @@
 /*
- * CSS requires @import before any other rule -- these must stay at the top, and
- * in this order. The vendor sheets come first so Tailwind's preflight lands on
- * top of them, exactly as it did under the v3 @tailwind directives.
+ * CSS 要求 @import 必須放在其他規則之前 -- 這些必須留在最上面，而且要照這個順序。
+ * vendor 的樣式表放在最前面，這樣 Tailwind 的 preflight 才會蓋在它們上面，
+ * 跟以前在 v3 的 @tailwind directive 底下的行為一樣。
  */
 @import 'animate.css';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
@@ -9,28 +9,28 @@
 @import 'tw-animate-css';
 
 /*
- * MANDATORY, even though the site has no dark mode.
+ * 必須保留，即使這個網站沒有 dark mode。
  *
- * Tailwind v4's default `dark:` variant is @media (prefers-color-scheme: dark),
- * and shadcn's generated components are full of dark:bg-input/30,
- * dark:border-input and friends. Without this line those utilities activate for
- * every visitor whose OS is in dark mode and resolve against values we never
- * defined -- a half-broken site, invisible unless you happen to test with dark
- * mode on. Redefining the variant as a .dark ancestor, and never putting that
- * class on <html>, compiles them as permanently inert.
+ * Tailwind v4 預設的 `dark:` variant 是 @media (prefers-color-scheme: dark)，
+ * 而 shadcn 產生出來的 component 裡到處都是 dark:bg-input/30、
+ * dark:border-input 之類的 utility。沒有這一行的話，這些 utility 會在每個
+ * OS 開著 dark mode 的訪客身上啟動，並套用我們從未定義過的值 --
+ * 一個半壞掉的網站，除非你剛好開著 dark mode 測試，否則根本看不出來。
+ * 把這個 variant 重新定義成 .dark 這個祖先元素，並且永遠不要把那個
+ * class 加到 <html> 上，就能讓它們編譯出來後永遠是不啟動的。
  *
- * Never add class="dark" to <html>, and never delete this line.
+ * 永遠不要把 class="dark" 加到 <html> 上，也永遠不要刪掉這一行。
  */
 @custom-variant dark (&:is(.dark *));
 
 /*
- * The former tailwind.config.ts theme.extend, ported to v4's CSS-first config.
+ * 這是以前 tailwind.config.ts 裡的 theme.extend，移植成 v4 的 CSS-first config。
  *
- * The keys are deliberately camelCase and left byte-identical to the v3 config,
- * so not one className in the ported markup had to change. That requires
- * tailwindcss >= 4.1.18 -- releases 4.0.0 through 4.1.17 silently dropped theme
- * keys containing uppercase letters, which would produce a site with no colours
- * and no build error (tailwindlabs/tailwindcss#18114). Do not loosen that floor.
+ * 這些 key 刻意保持 camelCase，並且跟 v3 的 config 逐位元組相同，
+ * 這樣移植過來的 markup 裡就一個 className 都不用改。這需要
+ * tailwindcss >= 4.1.18 -- 4.0.0 到 4.1.17 這幾個版本會悄悄地丟掉含有大寫字母的
+ * theme key，導致網站沒有任何顏色，而且不會有 build 錯誤
+ * (tailwindlabs/tailwindcss#18114)。不要放寬這個版本下限。
  */
 @theme {
   --color-mainYellow: #d4fb71;
@@ -86,19 +86,19 @@
 }
 
 /*
- * shadcn/ui's design tokens, mapped onto the Iceland palette so generated
- * components inherit the site's look instead of shadcn's neutral defaults.
+ * shadcn/ui 的 design tokens，對應到 Iceland 的配色，這樣產生出來的
+ * component 才會繼承這個網站的外觀，而不是 shadcn 的中性預設值。
  *
- * Keep writing markup with bg-subPurple / text-mainYellow; these exist for the
- * components in components/ui, not for hand-written classes.
+ * 繼續用 bg-subPurple / text-mainYellow 來寫 markup；這些 token 是給
+ * components/ui 裡的 component 用的，不是給手寫的 class 用的。
  *
- * The --accent mapping is the one to get right. shadcn uses `accent` for hover
- * SURFACES (ghost buttons, menu items, calendar day hover), and this site's
- * hover surface is lightGray with subPurple text -- mainYellow is the hover for
- * FILLED buttons only, which is `secondary`. Swap the two and every ghost
- * button in the nav turns lime green. Mapped this way, shadcn's
- * `variant="ghost" size="icon"` lands exactly on the nav's existing
- * hover:bg-lightGray hover:text-subPurple.
+ * 要對的地方是 --accent 這個對應。shadcn 用 `accent` 來表示 hover 的
+ * SURFACE（ghost 按鈕、選單項目、日曆 day 的 hover），而這個網站的
+ * hover surface 是 lightGray 配 subPurple 文字 -- mainYellow 只是
+ * FILLED 按鈕的 hover，也就是 `secondary`。如果把兩者對調，nav 裡每個
+ * ghost 按鈕都會變成萊姆綠。照這樣對應，shadcn 的
+ * `variant="ghost" size="icon"` 就會剛好落在 nav 原本的
+ * hover:bg-lightGray hover:text-subPurple 上。
  */
 @theme inline {
   --color-background: var(--background);
@@ -126,50 +126,50 @@
 }
 
 :root {
-  /* 0.5rem so radius-lg is 0.5rem (sm:rounded-lg) and radius-md is 0.375rem
-     (rounded-md) -- the only two radii the site actually uses. */
+  /* 0.5rem，這樣 radius-lg 就是 0.5rem（sm:rounded-lg），radius-md 是 0.375rem
+     （rounded-md）-- 這是這個網站實際會用到的僅有兩種 radius。 */
   --radius: 0.5rem;
 
-  --background: #f5f5f5; /* lightGray, the body background */
-  --foreground: #1f2937; /* gray-800, the default text colour */
+  --background: #f5f5f5; /* lightGray，body 的背景色 */
+  --foreground: #1f2937; /* gray-800，預設的文字顏色 */
 
-  --card: #ffffff; /* white panels: cart, login card, product cards */
+  --card: #ffffff; /* 白色面板：cart、login 卡片、product 卡片 */
   --card-foreground: #1f2937;
   --popover: #ffffff;
   --popover-foreground: #1f2937;
 
-  --primary: #8cabfb; /* subPurple: primary buttons, the selected calendar day */
-  --primary-foreground: #f5f5f5; /* matches the Sign in button */
+  --primary: #8cabfb; /* subPurple：primary 按鈕、被選中的日曆日期 */
+  --primary-foreground: #f5f5f5; /* 跟 Sign in 按鈕一致 */
 
-  --secondary: #d4fb71; /* mainYellow: the filled-button hover state */
+  --secondary: #d4fb71; /* mainYellow：filled 按鈕的 hover 狀態 */
   --secondary-foreground: #1f2937;
 
   --muted: #f5f5f5;
-  --muted-foreground: #9ca3af; /* gray-400, the site's muted text everywhere */
+  --muted-foreground: #9ca3af; /* gray-400，全站通用的 muted 文字顏色 */
 
-  --accent: #f5f5f5; /* hover surfaces are lightGray... */
-  --accent-foreground: #8cabfb; /* ...with subPurple text */
+  --accent: #f5f5f5; /* hover surface 是 lightGray... */
+  --accent-foreground: #8cabfb; /* ...文字是 subPurple */
 
-  --destructive: #f77171; /* the warning colour the alerts already used */
+  --destructive: #f77171; /* alert 原本就在用的警告色 */
 
-  --border: #e5e7eb; /* gray-200: cart row borders, dividers */
-  --input: #d1d5db; /* gray-300: the date and group-size input borders */
-  --ring: #8cabfb; /* subPurple, matching focus:ring-subPurple sitewide */
+  --border: #e5e7eb; /* gray-200：cart 列的邊框、分隔線 */
+  --input: #d1d5db; /* gray-300：日期和團體人數輸入框的邊框 */
+  --ring: #8cabfb; /* subPurple，跟全站的 focus:ring-subPurple 一致 */
 }
 
 /*
- * The v3 theme.extend.backgroundImage entries. Tailwind v4 has no
- * --background-image-* theme namespace, so these are custom utilities.
+ * 這些是 v3 的 theme.extend.backgroundImage 項目。Tailwind v4 沒有
+ * --background-image-* 這個 theme namespace，所以這些改成自訂的 utility。
  *
- * They MUST be @utility rules rather than plain .bg-swiper-1 classes: ShopBanner
- * uses `md:bg-swiper-1`, and variants only compose onto real utilities.
+ * 它們「必須」是 @utility 規則，不能是單純的 .bg-swiper-1 class：ShopBanner
+ * 用了 `md:bg-swiper-1`，而 variant 只能組合在真正的 utility 上面。
  *
- * The paths are root-absolute into public/. Under v3 they had to be built from
- * NEXT_PUBLIC_BASE_PATH by hand, because Next's basePath does not rewrite url()
- * in CSS; Vite does apply `base` to public-asset URLs in CSS at build time, so
- * the interpolation is gone. The failure mode if a file is missing is still a
- * silent 404 with no build error, which is why CI greps the built CSS for the
- * prefix.
+ * 這些路徑是指向 public/ 的 root-absolute 路徑。在 v3 底下，這些路徑必須手動
+ * 用 NEXT_PUBLIC_BASE_PATH 組出來，因為 Next 的 basePath 不會改寫 CSS 裡的
+ * url()；Vite 在 build time 會把 `base` 套用到 CSS 裡的 public-asset URL 上，
+ * 所以那個字串內插的做法就不需要了。如果檔案不存在，失敗模式仍然是悄悄地
+ * 404、不會有 build 錯誤，這也是為什麼 CI 要在編譯出來的 CSS 裡 grep 這個
+ * prefix。
  */
 @utility bg-banner {
   background-image: url('/img/banner.png');
@@ -211,9 +211,9 @@
   background-image: url('/img/swiper-3-sm.png');
 }
 
-/* Was an @layer utilities block under v3. */
+/* 在 v3 底下原本是一個 @layer utilities 區塊。 */
 @utility no-spinner {
-  /* Chrome, Safari, Edge, Opera */
+  /* Chrome、Safari、Edge、Opera */
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -227,11 +227,11 @@
 }
 
 /*
- * The three faces next/font/local used to generate. They are served from
- * public/fonts with stable names rather than fingerprinted out of src/assets,
- * because index.html is static: you cannot write a hashed filename into a
- * <link rel="preload">, and on GitHub Pages (fixed max-age=600 on everything)
- * the preload is worth far more than the hash.
+ * 這三個字體是以前 next/font/local 產生出來的。它們是用固定的檔名從
+ * public/fonts 提供的，而不是從 src/assets 產生指紋檔名，因為 index.html
+ * 是靜態的：你沒辦法把帶 hash 的檔名寫進 <link rel="preload"> 裡，
+ * 而且在 GitHub Pages 上（所有東西都固定 max-age=600），preload
+ * 帶來的價值遠比 hash 大得多。
  */
 @font-face {
   font-family: 'Krona One';
@@ -251,9 +251,9 @@
 
 @font-face {
   /*
-   * Registered as its own family at weight 400 / style normal despite the name,
-   * matching the original @font-face exactly. Declaring it bold or italic would
-   * change what the browser synthesises on top of it.
+   * 雖然名稱是 BoldItalic，但這裡是以 weight 400 / style normal
+   * 註冊成自己獨立的一個 family，跟原本的 @font-face 完全一致。如果宣告成
+   * bold 或 italic，會改變瀏覽器在它上面額外合成出來的效果。
    */
   font-family: 'Libre Bodoni BoldItalic';
   src: url('/fonts/LibreBodoni-BoldItalic.ttf') format('truetype');
@@ -263,9 +263,9 @@
 }
 
 /*
- * Scoped to `html`, not `*`. On `*` every scroll container inherits it, which
- * turns a programmatic scroll-to-top into a half-second animation -- fine for
- * the back-to-top button, wrong for a route change.
+ * 只作用在 `html` 上，不是 `*`。如果用 `*`，每個 scroll container 都會繼承它，
+ * 這會讓程式化的 scroll-to-top 變成半秒的動畫 -- 對 back-to-top 按鈕來說沒問題，
+ * 但對路由切換來說是錯的。
  */
 html {
   scroll-behavior: smooth;
@@ -275,7 +275,7 @@ html {
   line-height: 50px;
 }
 
-/* Was an inline <style> block in about.html. */
+/* 以前是 about.html 裡的一個 inline <style> 區塊。 */
 @media screen and (max-width: 765px) {
   #aboutTitle {
     line-height: 45px;

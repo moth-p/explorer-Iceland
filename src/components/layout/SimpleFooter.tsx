@@ -8,11 +8,12 @@ const LINKS = [
 ] as const;
 
 /**
- * The centred footer used by / and /about. (The shop pages use the wider
- * three-column SiteFooter.)
+ * / 和 /about 使用的置中 footer。（shop 系列頁面用的是比較寬的
+ * 三欄式 SiteFooter。）
  *
- * Server Component -- the current page is passed in rather than read from
- * useLocation().pathname, so this ships no JavaScript.
+ * Server Component -- 目前所在的頁面是被傳進來的，而不是從
+ * useLocation().pathname 讀取，所以這個 component 不會送出任何
+ * JavaScript。
  */
 export function SimpleFooter({ current }: { current: string }) {
   return (
@@ -28,7 +29,7 @@ export function SimpleFooter({ current }: { current: string }) {
         {LINKS.map(({ label, href }) => (
           <Link
             key={href} to={href}
-            // The current page is rendered inert and greyed, as in the original.
+            // 目前所在的頁面會被渲染成不可點擊且變灰色，跟原本一樣。
             className={
               href === current
                 ? 'pointer-events-none text-gray-400 hover:text-subPurple'

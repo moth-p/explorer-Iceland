@@ -6,24 +6,24 @@ import { selectBookedDates, useCartStore } from '@/lib/cart-store';
 import type { Product } from '@/lib/types';
 
 /**
- * Date, group size, validation and add-to-cart -- the only interactive part of
- * the tour detail page.
+ * 日期、團體人數、驗證跟加入購物車 -- 這是行程詳細頁面唯一有互動性的部分。
  */
 export function AddToCartForm({ product }: { product: Product }) {
   const addItem = useCartStore((s) => s.addItem);
-  // useShallow is required, not optional: selectBookedDates builds a new array
-  // on every call, and Zustand v5 compares selector output with Object.is. A
-  // fresh reference each render makes useSyncExternalStore re-render forever --
-  // "The result of getSnapshot should be cached to avoid an infinite loop".
+  // useShallow 是必要的，不是可有可無的：selectBookedDates 每次呼叫都會
+  // 建立一個新的陣列，而 Zustand v5 是用 Object.is 比較 selector 的輸出。
+  // 每次 render 都拿到新的 reference 會讓 useSyncExternalStore 永遠重新
+  // render -- "The result of getSnapshot should be cached to avoid an
+  // infinite loop"。
   const bookedDates = useCartStore(useShallow(selectBookedDates(product.id)));
 
   const [date, setDate] = useState('');
   const [groupSize, setGroupSize] = useState('');
 
   /**
-   * Synchronous, and nothing here may be awaited. The alert helpers fire a
-   * toast and return; an alert must never be able to defer or skip one of the
-   * early returns below and let an invalid booking through.
+   * 這是同步的，這裡面沒有任何東西可以被 await。alert 的 helper
+   * 只會觸發一個 toast 就回傳；一個 alert 絕對不能延遲執行或跳過下面
+   * 任何一個提早 return，讓不合法的訂購被放行。
    */
   const handleAdd = () => {
     const size = Number(groupSize);
@@ -47,9 +47,9 @@ export function AddToCartForm({ product }: { product: Product }) {
       unitPrice: product.price,
     });
 
-    // The newly booked date becomes unselectable via selectBookedDates, which
-    // reads from the cart -- so unlike the original it survives a reload.
-    // Clearing `date` clears the picker too; it is fully controlled.
+    // 新訂的日期會透過 selectBookedDates 變成不能選 -- 這是從 cart
+    // 裡讀出來的，所以跟原本的版本不同，它在重新整理後仍然有效。
+    // 清空 `date` 也會一併清空 picker；它是完全被控制的。
     setDate('');
     setGroupSize('');
 

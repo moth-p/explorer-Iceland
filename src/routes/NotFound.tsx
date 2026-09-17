@@ -2,11 +2,13 @@ import { MessagePage } from '@/components/layout/MessagePage';
 import { PageMeta } from '@/components/layout/PageMeta';
 
 /**
- * Rendered for unknown URLs, and by ProductDetail for any /shop/:id that is not
- * one of the 12 tours -- which is what Next's `dynamicParams = false` did.
+ * 給未知 URL 渲染的頁面，也會被 ProductDetail 用在任何不屬於這 12 個
+ * 行程之一的 /shop/:id 上 -- 這正是 Next 的 `dynamicParams = false`
+ * 做的事。
  *
- * On GitHub Pages the server still answers those URLs with a real HTTP 404; the
- * deploy copies index.html to 404.html so the SPA boots and routes to this.
+ * 在 GitHub Pages 上，server 對這些 URL 仍然會回應真正的 HTTP
+ * 404；部署流程會把 index.html 複製成 404.html，這樣 SPA 才能啟動
+ * 並導向這裡。
  */
 export function NotFound() {
   return (

@@ -1,20 +1,20 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 
-/** Exactly the classes index.html added on intersection. */
+/** 跟 index.html 在 intersection 發生時加上去的完全一樣的 class。 */
 const REVEAL_CLASSES = 'animate__animated animate__fadeInUp animate__fast sm:animate__slow';
 
 const RevealContext = createContext(false);
 
 /**
- * Fades its children up as the section scrolls into view, replacing the
- * IntersectionObserver + classList block in index.html.
+ * 在區塊捲動進入畫面時，讓它的子元素以淡入向上的方式出現，取代
+ * index.html 裡原本的 IntersectionObserver + classList 區塊。
  *
- * It takes `children`, so only this wrapper and <Reveal> are Client Components
- * -- the actual content rendered inside stays server-rendered.
+ * 它接收 `children`，所以只有這個 wrapper 和 <Reveal> 是 Client
+ * Component -- 實際渲染在裡面的內容仍然是 server-rendered 的。
  *
- * Note the original queried `.observeTarget2` unconditionally and dereferenced
- * it, which threw on the sections that only have one target. Here each target
- * opts in via <Reveal>, so a section with one target is fine.
+ * 要注意的是，原本的程式碼會無條件查詢 `.observeTarget2` 並直接解參考，
+ * 這在只有一個 target 的區塊上會丟出錯誤。這裡改成每個 target 透過
+ * <Reveal> 自行加入，所以只有一個 target 的區塊也沒問題。
  */
 export function RevealSection({
   children,
@@ -30,7 +30,7 @@ export function RevealSection({
     const el = ref.current;
     if (!el) return;
 
-    // Respect a reduced-motion preference by revealing immediately.
+    // 尊重使用者的 reduced-motion 偏好設定，直接立即顯示。
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setShown(true);
       return;
@@ -57,7 +57,7 @@ export function RevealSection({
   );
 }
 
-/** A target inside a RevealSection: hidden until the section comes into view. */
+/** RevealSection 裡的一個 target：在區塊進入畫面之前都是隱藏的。 */
 export function Reveal({
   children,
   className = '',

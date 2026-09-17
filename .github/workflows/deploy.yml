@@ -10,7 +10,7 @@ permissions:
   pages: write
   id-token: write
 
-# Let a running deploy finish rather than cancelling it mid-publish.
+# 讓正在進行的部署跑完，而不是在發布途中把它取消。
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -31,17 +31,17 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
 
-      # build:pages sets BASE_PATH=/explorer-Iceland/, which Vite applies to the
-      # script and style tags in index.html, to every hashed asset, and to the
-      # url() references to public/ files inside the generated CSS. Its postbuild
-      # hook copies index.html to 404.html, which is how GitHub Pages serves
-      # clean SPA URLs: a deep link 404s, Pages returns the shell, and the router
-      # takes over from there.
+      # build:pages 會設定 BASE_PATH=/explorer-Iceland/，Vite 會把它套用到
+      # index.html 裡的 script 和 style 標籤、每一個帶 hash 的 asset，
+      # 以及產生出來的 CSS 裡指向 public/ 檔案的 url() 參照上。它的
+      # postbuild hook 會把 index.html 複製成 404.html，這就是 GitHub
+      # Pages 提供乾淨 SPA URL 的方式：一個深層連結會 404，Pages 回傳
+      # 這個 shell，然後由 router 接手後續的工作。
       - run: npm run build:pages
 
-      # A missing public/ file leaves its url() untouched with no build error --
-      # a silent 404 in production only. Assert the prefix landed everywhere
-      # rather than finding out from the deployed site.
+      # 一個缺少的 public/ 檔案會讓它的 url() 保持原樣，不會有 build
+      # 錯誤 -- 只有在 production 才會悄悄地 404。這裡斷言 prefix
+      # 有確實套用到每個地方，而不是等部署上去之後才發現問題。
       - name: Verify the base prefix and the SPA fallback
         run: |
           set -euo pipefail
@@ -50,10 +50,10 @@ jobs:
           grep -q '/explorer-Iceland/assets/' dist/index.html
           grep -q '/explorer-Iceland/img/'    dist/assets/*.css
           grep -q '/explorer-Iceland/fonts/'  dist/assets/*.css
-          # Nothing may reference public/ without the prefix.
+          # 不能有任何東西在參照 public/ 時沒有帶上 prefix。
           ! grep -roE "url\(['\"]?/(img|fonts)/" dist/assets/*.css
-          # A zero here means the camelCase theme keys were dropped, which
-          # happens silently on tailwindcss < 4.1.18.
+          # 這裡如果是 0，代表 camelCase 的 theme key 被丟掉了，
+          # 這在 tailwindcss < 4.1.18 上會悄悄地發生。
           grep -q 'bg-mainYellow' dist/assets/*.css
 
       - uses: actions/upload-pages-artifact@v3

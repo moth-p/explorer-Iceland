@@ -2,12 +2,12 @@ import { useState } from 'react';
 import type { Product } from '@/lib/types';
 
 /**
- * The five collapsible sections below the tour detail. All start expanded, as in
- * the original, and the icon flips between minus and plus.
+ * 行程詳細內容下面那五個可折疊的區塊。全部預設展開，跟原本一樣，
+ * 圖示會在 minus 和 plus 之間切換。
  *
- * The original wired these with five near-identical click handlers over
- * `#minusIcon1`..`#minusIcon5` / `#foldaccordion1`..`#foldaccordion5`; the
- * markup is one component here.
+ * 原本的版本是用五個幾乎一樣的 click handler，分別接在
+ * `#minusIcon1`..`#minusIcon5` / `#foldaccordion1`..`#foldaccordion5`
+ * 上；這裡則統一成一個 component 的 markup。
  */
 function Section({
   title,
@@ -40,7 +40,7 @@ function Section({
   );
 }
 
-/** A `<b>Label:</b>&nbsp;&nbsp;value` list item, the shape used throughout. */
+/** 一個 `<b>Label:</b>&nbsp;&nbsp;value` 形式的列表項目，全篇通用的樣式。 */
 function LabelledItem({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <li>
@@ -67,8 +67,8 @@ export function ProductAccordion({ product }: { product: Product }) {
             <div className="pt-10">
               <dt>
                 <div className="flex w-full items-start justify-between text-left text-gray-900">
-                  {/* The original filled this from briefLong, not aboutTheTour --
-                      preserved, so the longer aboutTheTour copy stays unused. */}
+                  {/* 原本的版本是用 briefLong 填這裡的，不是 aboutTheTour --
+                      這裡保留這個行為，所以較長的 aboutTheTour 文字仍然沒有被用到。 */}
                   <span className="text-lg font-medium text-gray-800">{product.briefLong}</span>
                 </div>
               </dt>

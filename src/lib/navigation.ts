@@ -1,19 +1,18 @@
 import type { Category } from './types';
 
 /**
- * The Booking menu, shared by the desktop flyout, the mobile hamburger
- * accordion and the footer -- three places that previously held three
- * hand-maintained copies of the same list.
+ * Booking 選單，由桌面版 flyout、手機版漢堡選單的手風琴以及 footer
+ * 共用 -- 這三個地方以前各自維護著同一份清單的三個副本。
  *
- * `items` are display labels only. They do not yet map to tours or filter the
- * shop; the original markup rendered them as dead links and that behaviour is
- * preserved. `lib/products.ts` already exposes getProductsByCategory() for when
- * these get wired up.
+ * `items` 只是顯示用的標籤。它們目前還沒有對應到任何行程，也不會過濾
+ * shop；原本的 markup 把它們渲染成沒有作用的連結，這裡保留這個行為。
+ * 等以後要接上功能時，`lib/products.ts` 已經有提供
+ * getProductsByCategory() 可以用。
  */
 export interface BookingGroup {
   category: Category;
   label: string;
-  /** The footer writes the third group's heading in the singular. Preserved. */
+  /** footer 把第三組的標題寫成單數形式。這裡保留這個行為。 */
   footerLabel?: string;
   items: string[];
 }
@@ -33,8 +32,8 @@ export const BOOKING_MENU: BookingGroup[] = [
     category: 'outdoor-sports',
     label: 'Outdoor Sports',
     footerLabel: 'Outdoor Sport',
-    // The original lists only three here; Vestmannaeyjar Puffins Viewing is
-    // missing from the menu even though it is an outdoor-sports tour.
+    // 原本的版本這裡只列出三項；Vestmannaeyjar Puffins Viewing 雖然是
+    // outdoor-sports 的行程，卻沒有出現在選單裡。
     items: ['Skiing and Snowboarding', 'Kayaking', 'Horseback Riding'],
   },
 ];
@@ -47,6 +46,6 @@ export interface NavLink {
 export const NAV_LINKS: NavLink[] = [
   { label: 'Concept', href: '/' },
   { label: 'About', href: '/about' },
-  // 'Booking' is not a link -- it opens the flyout / accordion.
+  // 'Booking' 不是一個連結 -- 它是用來打開 flyout / accordion 的。
   { label: 'FAQ', href: '/shop' },
 ];

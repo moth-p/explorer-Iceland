@@ -4,8 +4,8 @@ import { ShopNav } from './ShopNav';
 import { SimpleNav } from './SimpleNav';
 
 /**
- * Picks the navigation that matches the route, preserving the three distinct
- * designs the pre-migration site had. See lib/layout-variant.ts.
+ * 依照路由挑選對應的導覽列，保留 migration 前那個網站原有的三種不同設計。
+ * 見 lib/layout-variant.ts。
  */
 export function Header() {
   const variant = chromeVariantFor(useLocation().pathname);

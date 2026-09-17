@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { CartItem, CartTotals } from './types';
 
-/** Applied to the subtotal. Matches the pre-migration `taxRate` in src/js/cart.js. */
+/** 套用在小計上。跟 migration 前 src/js/cart.js 裡的 `taxRate` 一致。 */
 export const TAX_RATE = 0.03;
 
 export interface CartState {
@@ -36,9 +36,9 @@ export const useCartStore = create<CartState>()(
           ],
         })),
 
-      // Keyed by lineId, not array index. The legacy removeCartItem(index)
-      // closed over the index at render time, so removing two rows in
-      // succession deleted the wrong one.
+      // 用 lineId 當 key，不是用陣列索引。舊版的 removeCartItem(index)
+      // 在 render 當下 closure 住那個 index，所以連續移除兩列時會
+      // 刪掉錯的那一列。
       removeItem: (lineId) =>
         set((s) => ({ items: s.items.filter((i) => i.lineId !== lineId) })),
 
@@ -47,27 +47,28 @@ export const useCartStore = create<CartState>()(
       closeCart: () => set({ isOpen: false }),
     }),
     {
-      // Same localStorage key the pre-migration site used.
+      // 跟 migration 前的網站用的是同一個 localStorage key。
       name: 'cartData',
       version: 1,
       /**
-       * Load-bearing. Without it, `persist` rehydrates synchronously during
-       * module initialisation -- before React's first client render. The
-       * prerendered HTML would say "0 items" while the first client render says
-       * "3", which React treats as a hydration mismatch and responds to by
-       * discarding the server HTML for the whole subtree. Since the header lives
-       * in the root layout, that would flash on every page.
+       * 這個設定有實際作用。沒有它的話，`persist` 會在 module
+       * 初始化期間就同步地 rehydrate -- 也就是在 React 第一次 client
+       * render 之前。prerender 出來的 HTML 會顯示「0 items」，
+       * 而第一次 client render 卻顯示「3」，React 會把這個視為
+       * hydration mismatch，並且會捨棄整個 subtree 的 server HTML
+       * 來因應。因為 header 是放在 root layout 裡的，這會導致每個
+       * 頁面都閃一下。
        *
-       * Rehydration is instead triggered from an effect in <CartHydration />.
+       * Rehydration 改成是從 <CartHydration /> 裡的一個 effect 觸發的。
        */
       skipHydration: true,
       storage: createJSONStorage(() => localStorage),
-      // `isOpen` is UI state; it must never be restored from a previous visit.
+      // `isOpen` 是 UI 的 state；絕對不能從之前的造訪紀錄裡還原。
       partialize: (s) => ({ items: s.items }),
       migrate: (persisted, version) => {
-        // v0 was a bare array of {title, img, price, date, groupSize} with image
-        // paths pointing at './src/img/...', which no longer resolve, and no
-        // stable per-line id. Rather than render broken thumbnails, start empty.
+        // v0 是一個 {title, img, price, date, groupSize} 的單純陣列，圖片路徑
+        // 指向 './src/img/...'，現在已經解析不出來了，而且每一列也沒有
+        // 穩定的 id。與其渲染出壞掉的縮圖，不如直接從空的開始。
         if (version === 0 || Array.isArray(persisted)) return { items: [] };
         return persisted as { items: CartItem[] };
       },
@@ -84,16 +85,16 @@ export function computeTotals(items: CartItem[]): CartTotals {
 }
 
 /**
- * Dates already booked for a tour, so the picker can disable them.
+ * 某個行程已經被訂走的日期，這樣 picker 才能把它們設為不可選。
  *
- * The legacy page kept this in a page-local `disabledDates` array that reset on
- * every reload, which let an already-booked date be selected again. Deriving it
- * from the cart is what the original was reaching for.
+ * 舊版頁面把這個放在一個頁面內的 `disabledDates` 陣列裡，每次重新整理
+ * 都會重置，導致已經被訂走的日期可以再被選一次。從 cart 推導出這個值，
+ * 正是原本的版本想做卻沒做到的事。
  *
- * MUST be wrapped in useShallow at the call site:
+ * 在呼叫端「必須」用 useShallow 包起來：
  *   useCartStore(useShallow(selectBookedDates(id)))
- * It returns a new array each call, and Zustand v5 compares with Object.is, so
- * an unwrapped call re-renders forever.
+ * 它每次呼叫都會回傳一個新的陣列，而 Zustand v5 是用 Object.is
+ * 比較的，所以沒包起來的呼叫會永遠重新 render。
  */
 export const selectBookedDates = (productId: string) => (s: CartState) =>
   s.items.filter((i) => i.productId === productId).map((i) => i.date);

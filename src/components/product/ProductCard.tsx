@@ -3,12 +3,12 @@ import { asset } from '@/lib/asset';
 import type { Product } from '@/lib/types';
 
 /**
- * One tour card in the shop grid. Server Component -- static markup from props,
- * so it ships no JavaScript.
+ * shop 網格裡的一張行程卡片。Server Component -- 完全是從 props 產生的
+ * 靜態 markup，所以不會送出任何 JavaScript。
  *
- * Replaces `<template id="productTemplate">`, which was cloned 12 times and so
- * produced 12 elements each claiming id="productImg" / "productTitle" /
- * "productPrice" / "productBrief".
+ * 取代了 `<template id="productTemplate">`，它以前被複製 12 次，
+ * 因此產生了 12 個各自宣稱 id="productImg" / "productTitle" /
+ * "productPrice" / "productBrief" 的元素。
  */
 export function ProductCard({ product }: { product: Product }) {
   return (

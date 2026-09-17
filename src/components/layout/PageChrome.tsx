@@ -2,12 +2,11 @@ import { useLocation } from 'react-router';
 import { pageChromeClassesFor } from '@/lib/layout-variant';
 
 /**
- * Applies the half of the original <body> class list that varied by page --
- * the entry animation and the base font. See lib/layout-variant.ts for the
- * per-route table.
+ * 套用原本 <body> class list 裡會隨頁面而變的那一半 -- 進場動畫和
+ * 基礎字體。個別路由的對應表請見 lib/layout-variant.ts。
  *
- * This lives on a wrapper rather than <body> so the root layout can remain a
- * Server Component.
+ * 這放在一個 wrapper 上而不是放在 <body> 上，這樣 root layout
+ * 才能保持是一個 Server Component。
  */
 export function PageChrome({ children }: { children: React.ReactNode }) {
   return <div className={pageChromeClassesFor(useLocation().pathname)}>{children}</div>;

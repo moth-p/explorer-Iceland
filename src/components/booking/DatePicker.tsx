@@ -4,32 +4,31 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { formatBookingDate, fromISODate, getMinBookingDate, toISODate } from '@/lib/dates';
 
 interface Props {
-  /** The selected date as 'YYYY-MM-DD', or '' for none. Owned by the parent. */
+  /** 選定的日期，格式為 'YYYY-MM-DD'，未選則為 ''。由 parent 持有。 */
   value: string;
-  /** 'YYYY-MM-DD' strings that are already booked and must not be selectable. */
+  /** 已經被預訂、不能被選取的 'YYYY-MM-DD' 字串。 */
   disabledDates: string[];
   onChange: (dateStr: string) => void;
 }
 
 /**
- * The booking date field: a Popover holding a react-day-picker Calendar.
+ * 訂購日期欄位：一個裝著 react-day-picker Calendar 的 Popover。
  *
- * This is fully controlled by the parent's date string and holds no selection
- * state of its own. That is what lets AddToCartForm clear the field after a
- * successful add with the setDate('') it already calls, instead of reaching
- * into this component through an imperative handle.
+ * 這個 component 完全由 parent 的日期字串控制，自己不持有任何選取
+ * state。這也是為什麼 AddToCartForm 能在成功新增之後，用它原本就會
+ * 呼叫的 setDate('') 來清空這個欄位，而不用透過 imperative handle
+ * 伸進這個 component 裡操作。
  *
- * It replaces a Flatpickr wrapper, and with it a pile of constraints that no
- * longer exist: Flatpickr owned the input's DOM, so `altInput` had to stay off
- * (it rewrote the input to type="hidden" and inserted a sibling React did not
- * know about, leaving two visible date fields), the instance had to be created
- * exactly once, updated imperatively via .set(), destroyed on cleanup, and
- * never mounted conditionally.
+ * 它取代了一個 Flatpickr wrapper，也一併去掉了一堆不再存在的限制：
+ * Flatpickr 掌控 input 的 DOM，所以 `altInput` 必須關閉（它會把 input
+ * 改寫成 type="hidden"，並插入一個 React 不知道的 sibling，留下兩個
+ * 可見的日期欄位），這個 instance 必須恰好被建立一次、透過 .set()
+ * 以 imperative 的方式更新、在 cleanup 時銷毀，而且絕對不能有條件地掛載。
  *
- * What has NOT changed, and still matters: the date is serialised with the
- * local-time helpers in lib/dates.ts and never toISOString(). onSelect hands
- * back a Date at local midnight, and in UTC+8 toISOString() on that yields the
- * previous day -- i.e. it books the wrong date.
+ * 沒有改變、而且仍然重要的地方：日期是用 lib/dates.ts 裡的 local-time
+ * helper 做序列化的，絕對不用 toISOString()。onSelect 回傳的是一個
+ * 在本地時間午夜的 Date，在 UTC+8 對它呼叫 toISOString() 會得到前一天
+ * -- 也就是會訂到錯的日期。
  */
 export function DatePicker({ value, disabledDates, onChange }: Props) {
   const [open, setOpen] = useState(false);
@@ -43,8 +42,8 @@ export function DatePicker({ value, disabledDates, onChange }: Props) {
   );
 
   const handleSelect = (day: Date | undefined) => {
-    // The undefined branch is not optional: react-day-picker clears the
-    // selection when the user clicks the already-selected day.
+    // undefined 這個分支不是可有可無的：當使用者點擊已經選取的那一天時，
+    // react-day-picker 會清空選取狀態。
     onChange(day ? toISODate(day) : '');
     if (day) setOpen(false);
   };
@@ -68,15 +67,14 @@ export function DatePicker({ value, disabledDates, onChange }: Props) {
           selected={selected}
           onSelect={handleSelect}
           disabled={disabled}
-          // The earliest month the user can page back to, mirroring the
-          // minDate behaviour Flatpickr had.
+          // 使用者能往回翻到的最早一個月，跟 Flatpickr 原本的
+          // minDate 行為一致。
           startMonth={new Date(minDate.getFullYear(), minDate.getMonth())}
           defaultMonth={selected ?? minDate}
           /*
-           * The usual objection to autoFocus is focus moving without the user
-           * asking for it. Here the user has just opened the popover, and
-           * without this a keyboard user lands on the popover container and has
-           * to tab into the day grid.
+           * 一般反對 autoFocus 的理由是焦點在使用者沒有要求的情況下自己移動。
+           * 但這裡是使用者剛打開這個 popover，如果沒有這個設定，用鍵盤操作的
+           * 使用者會停在 popover 的容器上，還得再 tab 進日期格子裡。
            */
           // eslint-disable-next-line jsx-a11y/no-autofocus
           autoFocus

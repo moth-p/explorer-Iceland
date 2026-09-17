@@ -5,7 +5,7 @@ import { SimpleFooter } from '@/components/layout/SimpleFooter';
 import { PageMeta } from '@/components/layout/PageMeta';
 import { asset } from '@/lib/asset';
 
-/** The three scenery sections between the hero and the marquee. */
+/** hero 和跑馬燈之間的三個風景區塊。 */
 const SCENERY = [
   {
     bg: 'bg-main-1-bg',
@@ -24,7 +24,7 @@ const SCENERY = [
   },
 ];
 
-/** The two "We Provide" / "You Can Find" feature blocks. */
+/** 「We Provide」/「You Can Find」這兩個功能區塊。 */
 const FEATURES = [
   {
     heading: 'We Provide',
@@ -44,7 +44,7 @@ export function Home() {
   return (
     <>
       <PageMeta />
-      {/* hero */}
+      {/* hero 區塊 */}
       <header className="h-full w-full bg-banner bg-cover bg-no-repeat">
         <div className="flex h-[45%] w-screen flex-col items-center justify-center pt-[120px] md:pt-[140px] lg:mb-14 lg:pt-[150px]">
           <h1 className="font-libreBodoni_boldItalic text-[70px] text-mainYellow sm:text-[100px] md:text-[120px] lg:text-[150px]">
@@ -112,7 +112,7 @@ export function Home() {
 
         {FEATURES.map(({ heading, image, bg, items }) => (
           <section key={heading} className="h-[480px] w-screen md:h-[680px] lg:h-screen">
-            {/* below lg: stacked image + text */}
+            {/* 低於 lg：圖片和文字堆疊排列 */}
             <div className="mb-5 flex h-[45%] w-full justify-center md:mb-16 lg:hidden">
               <div className="h-[90%] w-[75%] md:h-[100%] md:w-[80%]">
                 <img
@@ -139,7 +139,7 @@ export function Home() {
               </div>
             </RevealSection>
 
-            {/* lg and up: split layout */}
+            {/* lg 以上：分割排版 */}
             <div className="hidden h-screen w-screen lg:block">
               <div className="grid h-full grid-cols-12">
                 <div className="col-span-6 h-full w-full pb-20 ps-32">
@@ -167,7 +167,7 @@ export function Home() {
           </section>
         ))}
 
-        {/* video section */}
+        {/* 影片區塊 */}
         <section className="relative flex h-screen max-h-[400px] w-full items-center justify-center bg-main-7-bg bg-cover bg-no-repeat md:max-h-[600px] lg:h-[900px] lg:max-h-full">
           <div className="flex h-[30%] w-[70%] justify-center md:w-[60%] lg:h-[35%]">
             <video

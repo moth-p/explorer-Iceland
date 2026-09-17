@@ -2,9 +2,9 @@
   "files": [],
   "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
   "compilerOptions": {
-    // Duplicated from tsconfig.app.json purely so tooling that reads the root
-    // config can resolve the alias -- the shadcn CLI looks here, and without it
-    // `shadcn add` writes components into a literal ./@/ directory.
+    // 從 tsconfig.app.json 複製過來，純粹是為了讓讀取 root config 的工具能解析
+    // 這個 alias -- shadcn CLI 會查這裡，沒有它的話 `shadcn add`
+    // 就會把 component 寫進一個字面上叫 ./@/ 的目錄。
     "baseUrl": ".",
     "paths": { "@/*": ["./src/*"] }
   }

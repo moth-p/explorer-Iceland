@@ -1,10 +1,10 @@
 import { selectCount, useCartStore } from '@/lib/cart-store';
 
 /**
- * The red count bubble on the cart icon (`#cartAlert` / `#cartAlertNum`).
+ * cart 圖示上的紅色數字泡泡（`#cartAlert` / `#cartAlertNum`）。
  *
- * Its own client boundary and its own selector, so a cart count change
- * re-renders this bubble and nothing else in the header.
+ * 有自己的 client boundary 和自己的 selector，所以 cart 數量改變時
+ * 只會重新 render 這個泡泡，不會動到 header 裡的其他東西。
  */
 export function CartBadge() {
   const count = useCartStore(selectCount);

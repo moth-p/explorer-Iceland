@@ -1,8 +1,8 @@
 import { Link } from 'react-router';
 
 /**
- * Shared shell for the 404 and error screens, so they look like the site rather
- * than like a framework default. Server Component.
+ * 404 和錯誤畫面共用的外殼，這樣它們看起來像這個網站的一部分，而不是
+ * framework 的預設畫面。Server Component。
  */
 export function MessagePage({
   code,

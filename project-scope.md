@@ -1,64 +1,64 @@
-# Project Scope — Explorer Iceland
+# 產品範圍 — Explorer Iceland
 
-> What this product is, who it serves, and where its boundaries are.
-> For technology choices see [tech-stack.md](./tech-stack.md).
+> 這個產品是什麼、服務誰、邊界在哪裡。
+> 技術選型見 [tech-stack.md](./tech-stack.md)。
 
-## Purpose
+## 目的
 
-**Explorer** is a tour-booking website for small-group outdoor adventures in Iceland.
-It presents 12 guided tours across three categories, lets a visitor pick a departure date
-and a group size, and collects the selection into a cart with a running total.
+**Explorer** 是一個冰島小團體戶外探索行程的預訂網站。
+它陳列三個分類、共 12 條導覽行程，讓訪客挑出發日期與團體人數，
+再把選擇收進購物車並即時累計金額。
 
-It is a **portfolio / front-end project**. There is no backend: everything runs in the
-browser, and the cart lives in `localStorage`. It should be judged as a faithful, responsive,
-accessible storefront — not as a transacting e-commerce system.
+這是一個 **portfolio／前端專案**。沒有後端：所有東西都跑在瀏覽器裡，
+購物車存在 `localStorage`。評價它的標準應該是「一個忠實、響應式、可近用的店面」，
+而不是「一套能成交的電商系統」。
 
-**Audience:** English-speaking travellers browsing Iceland tours on phone, tablet or desktop.
-Site content is English throughout; only the README is bilingual (中文 / English).
+**受眾：** 用手機、平板或桌機瀏覽冰島行程的英語系旅客。
+網站內容全程英文；專案文件（`*.md`）使用繁體中文，README 為中英雙語。
 
-## Pages
+## 頁面
 
-| Route | Purpose |
+| Route | 用途 |
 |---|---|
-| `/` | Landing page. Hero, three scroll-revealed scenery sections (Vestrahorn, Klausturhólar, Vík), a looping "Iceland" marquee, two feature blocks ("We Provide" / "You Can Find"), and a video section with a *Start a Journey* call to action. |
-| `/about` | Company positioning, tagline, and contact details (email, phone) over a full-width banner. |
-| `/shop` | Tour catalogue. Auto-playing banner carousel, a responsive grid of all 12 tours (2 / 3 / 4 columns), and a pagination strip. |
-| `/shop/[id]` | Tour detail. Gallery, price, rating, description, and the booking form (date + group size → add to cart). Expandable *About the Tour* / *Before You Go* / *Rules* sections. |
-| `/login` | Cart review and checkout summary, plus a sign-in form. |
+| `/` | 首頁。Hero、三段隨捲動揭示的風景區塊（Vestrahorn、Klausturhólar、Vík）、一條循環的「Iceland」marquee、兩個特色區塊（"We Provide"／"You Can Find"），以及一段帶 *Start a Journey* CTA 的影片區。 |
+| `/about` | 公司定位、標語與聯絡資訊（email、電話），鋪在滿版 banner 上。 |
+| `/shop` | 行程總覽。自動播放的 banner carousel、12 條行程的響應式 grid（2／3／4 欄），以及一條分頁列。 |
+| `/shop/[id]` | 行程詳情。相簿、價格、評分、描述，以及訂購表單（日期 + 團體人數 → 加入購物車）。可展開的 *About the Tour*／*Before You Go*／*Rules* 區塊。 |
+| `/login` | 購物車檢視與結帳摘要，外加一個登入表單。 |
 
-Every page shares the same chrome: fixed navbar, mobile hamburger menu, cart drawer,
-back-to-top button, and footer.
+每一頁共用同一套 chrome：固定 navbar、行動版 hamburger menu、cart drawer、
+back-to-top 按鈕，以及 footer。
 
-## Booking flow
+## 訂購流程
 
 ```
-/shop  →  /shop/[id]  →  pick date + group size  →  Add to cart
+/shop  →  /shop/[id]  →  挑日期 + 團體人數  →  Add to cart
                                                       ↓
-                                          cart drawer (any page)
+                                            cart drawer（任一頁）
                                                       ↓
                                                    /login
 ```
 
-## Business rules
+## 商業規則
 
-These are enforced in the UI and were extracted from the original implementation.
-They are the behaviour to preserve.
+這些規則由 UI 強制執行，是從原始實作裡抽出來的。
+它們就是必須保留的行為。
 
-| Rule | Value | Origin |
+| 規則 | 值 | 出處 |
 |---|---|---|
-| Tax rate | **3%** applied to the subtotal | `src/js/cart.js` `updateTotal()` |
-| Earliest bookable date | **today + 14 days** | `product-detail.html` `getStartDay()` |
-| Date display format | `F j, Y` (e.g. *January 3, 2026*); stored as `Y-m-d` | Flatpickr `dateFormat` + `toISODate()` |
-| Group size | required, `> 0`, and **≤ the tour's `maxGroupSize`** | add-to-cart validation |
-| Line price | `unitPrice × groupSize` | add-to-cart handler |
-| One booking per tour per date | a date already in the cart is disabled in the picker | `disabledDates` |
-| Currency | EUR (€), display only | product data |
+| 稅率 | 對小計加 **3%** | `src/js/cart.js` `updateTotal()` |
+| 最早可訂日期 | **今天 + 14 天** | `product-detail.html` `getStartDay()` |
+| 日期顯示格式 | `F j, Y`（例：*January 3, 2026*）；儲存為 `Y-m-d` | Flatpickr `dateFormat` + `toISODate()` |
+| 團體人數 | 必填、`> 0`，且**不得超過該行程的 `maxGroupSize`** | add-to-cart 驗證 |
+| 單筆金額 | `unitPrice × groupSize` | add-to-cart handler |
+| 同一行程同一天只能訂一次 | 已在購物車裡的日期會在 picker 中被停用 | `disabledDates` |
+| 幣別 | EUR（€），僅供顯示 | 產品資料 |
 
-Validation failures and success both surface as SweetAlert2 modals.
+驗證失敗與成功都以 SweetAlert2 modal 呈現。
 
-## The 12 tours
+## 12 條行程
 
-| # | Tour | Category | Region | € | Max group |
+| # | 行程 | 分類 | 區域 | € | 人數上限 |
 |---|---|---|---|---|---|
 | 1 | Laugavegur Trail | Hiking | South | 100 | 12 |
 | 2 | Hornstrandir Nature Reserve | Hiking | West | 20 | 8 |
@@ -73,42 +73,39 @@ Validation failures and success both surface as SweetAlert2 modals.
 | 11 | Eldhestar Horseback Riding | Outdoor Sports | West | 20 | 10 |
 | 12 | Vestmannaeyjar Puffins Viewing | Outdoor Sports | South | 8 | 12 |
 
-**Category is stored explicitly on each tour.** It cannot be derived from the id: every
-original id was prefixed `hiking-`, including the sightseeing and outdoor-sports tours.
-The grouping above comes from the shop flyout menu, which is the authoritative source.
+**category 是明確存在每筆行程上的欄位。** 它無法從 id 推導：原本每個 id 都以 `hiking-` 開頭，
+連 sightseeing 與 outdoor-sports 的行程也是。上表的分組來自 shop 的 flyout menu，
+那才是權威來源。
 
-Each tour also carries: a short region label, a long description, an *About the Tour*
-narrative, duration, daily activity hours, start time, meeting point, how early to arrive,
-a *Before You Go* checklist, and a list of rules.
+每條行程還帶著：一個簡短的區域標籤、一段長描述、一段 *About the Tour* 敘述、行程天數、
+每日活動時數、出發時間、集合地點、需提早多久抵達、一份 *Before You Go* 檢查清單，
+以及一組規則。
 
-## Out of scope
+## 不在範圍內
 
-Deliberately **not** built, and not planned:
+刻意**不**做，也沒有計畫要做：
 
-- **No backend, database or API.** Tour data is a typed constant compiled into the site.
-- **No real authentication.** The `/login` form validates its inputs and stops there; there
-  are no accounts, sessions or password storage.
-- **No payments or checkout completion.** The cart totals up and goes no further.
-- **No server-side inventory.** Group-size caps and booked dates are enforced per browser
-  from cart contents only; two visitors cannot conflict because nothing is shared.
-- **No internationalisation.** English only. The site is not wired for locale switching.
-- **No search.** The original navbar had a search box that never queried anything; it was
-  removed rather than left as a control that does nothing.
-- **No analytics, cookies or tracking.**
+- **沒有後端、資料庫或 API。** 行程資料是編譯進網站的具型別常數。
+- **沒有真正的身分驗證。** `/login` 表單只驗證輸入就結束；沒有帳號、session 或密碼儲存。
+- **沒有付款或結帳完成。** 購物車算完總額就到此為止。
+- **沒有伺服器端庫存。** 人數上限與已訂日期只依購物車內容、在各自的瀏覽器裡把關；
+  兩個訪客不會衝突，因為沒有任何東西是共享的。
+- **沒有國際化。** 只有英文，網站沒有接 locale 切換。
+- **沒有搜尋。** 原本的 navbar 有一個從來不會查任何東西的搜尋框；與其留一個沒有作用的控制項，
+  不如直接移除。
+- **沒有分析、cookie 或追蹤。**
 
-## Known limitations
+## 已知限制
 
-- **Cart is per-browser and per-device.** `localStorage` under the site's origin; clearing
-  site data empties the cart. Nothing syncs.
-- **Carts saved by the pre-migration site are discarded on first visit.** The old format was
-  a bare array with image paths pointing at `./src/img/…`, which no longer resolve. Rather
-  than render broken thumbnails, a stored cart in the legacy shape is cleared and the visitor
-  starts empty. This is a one-time event.
-- **Pagination is decorative.** The strip on `/shop` renders page numbers, but all 12 tours
-  are shown at once and the links do not navigate. Preserved from the original design.
-- **Flyout and footer category links are not wired.** The Booking flyout sub-items and the
-  footer's category columns render but do not filter. The data supports it
-  (`getProductsByCategory`); the routing does not yet.
-- **The flyout omits one tour.** *Vestmannaeyjar Puffins Viewing* is missing from the Outdoor
-  Sports column, which lists only three of its four tours. Faithful to the original.
-- **Ratings are static.** The five-star display on the detail page is decorative markup.
+- **購物車是每個瀏覽器、每台裝置各自獨立的。** 存在本站 origin 下的 `localStorage`；
+  清掉網站資料購物車就空了。不會同步。
+- **搬遷前的站存下的購物車會在第一次造訪時被丟棄。** 舊格式是一個裸陣列，圖片路徑指向
+  `./src/img/…`，現在已經解析不到。與其 render 出破圖，不如在偵測到舊格式時清掉，
+  讓訪客從空的購物車開始。這只會發生一次。
+- **分頁是裝飾性的。** `/shop` 上的分頁列會 render 頁碼，但 12 條行程本來就一次全部顯示，
+  連結也不會導航。這是從原始設計保留下來的。
+- **flyout 與 footer 的分類連結沒有接上。** Booking flyout 的子項目與 footer 的分類欄位會
+  render，但不會過濾。資料層支援得了（`getProductsByCategory`），routing 還沒。
+- **flyout 漏了一條行程。** *Vestmannaeyjar Puffins Viewing* 沒有出現在 Outdoor Sports 欄，
+  那一欄只列了四條中的三條。忠實還原原始設計。
+- **評分是靜態的。** 詳情頁的五星顯示是裝飾性的 markup。

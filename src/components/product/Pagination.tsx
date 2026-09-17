@@ -1,10 +1,10 @@
 /**
- * The page-number strip below the shop grid.
+ * shop 網格下方的頁碼列。
  *
- * Preserved from the original as presentation only: every <a> there was written
- * without an href, all 12 tours render on one page, and nothing navigates.
- * Wiring it up means real /shop/page/[n] segments (query params cannot be
- * prerendered under output: 'export'), which is deliberately out of scope here.
+ * 從原本的版本保留下來，純粹是展示用的：裡面每一個 <a> 都沒有寫 href，
+ * 全部 12 個行程都渲染在同一頁，什麼都不會導覽。要真的接上功能需要
+ * 真正的 /shop/page/[n] 路徑（在 output: 'export' 底下 query 參數
+ * 沒辦法被 prerender），這裡刻意不做這件事。
  */
 const LINK_BASE =
   'relative cursor-pointer active:opacity-50 items-center px-4 py-2 text-sm font-semibold ring-1 ring-inset ring-gray-300 hover:bg-white focus:z-20 focus:outline-offset-0 text-gray-800';

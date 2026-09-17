@@ -1,6 +1,6 @@
 /**
- * The scrolling "Iceland" strip. Pure CSS (`animate-marquee` plus a duplicated
- * run of text) -- Server Component, no JavaScript.
+ * 捲動顯示的「Iceland」跑馬燈。純 CSS（`animate-marquee` 加上重複一遍的
+ * 文字）-- Server Component，不需要 JavaScript。
  */
 export function Marquee() {
   const run = (

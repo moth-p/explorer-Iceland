@@ -1,7 +1,6 @@
 /**
- * The Facebook / Instagram / X icon row. Previously this SVG block was pasted
- * into both the hamburger menu and the footer of four separate HTML files --
- * eight copies of the same three paths.
+ * Facebook / Instagram / X 的圖示列。以前這個 SVG 區塊會同時被貼進四個
+ * 各自獨立的 HTML 檔案的漢堡選單和 footer 裡 -- 同樣三個 path 複製了八份。
  */
 export function SocialLinks({ className = 'flex gap-x-6' }: { className?: string }) {
   return (
@@ -37,9 +36,9 @@ export function SocialLinks({ className = 'flex gap-x-6' }: { className?: string
 }
 
 /**
- * The Font Awesome brand variant, used in the hamburger menu of
- * product-detail.html and login.html (shop.html used the SVG set above).
- * Different icons, too: YouTube rather than X.
+ * Font Awesome 品牌圖示的版本，用在 product-detail.html 和 login.html
+ * 的漢堡選單裡（shop.html 用的是上面那組 SVG）。圖示也不一樣：
+ * 是 YouTube 而不是 X。
  */
 export function BrandSocialLinks() {
   return (

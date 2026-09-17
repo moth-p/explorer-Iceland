@@ -4,18 +4,19 @@ import { Label } from '@/components/ui/label';
 import { asset } from '@/lib/asset';
 
 /**
- * The sign-in form. There is no backend and static export has no Server
- * Actions, so this validates its inputs and stops -- the original posted to "#",
- * which just reloaded the page.
+ * 登入表單。這裡沒有 backend，而且 static export 也沒有 Server Actions，
+ * 所以這裡只驗證輸入然後就停下來 -- 原本的版本是 POST 到 "#"，
+ * 效果只是重新整理頁面而已。
  *
- * One class name below (`focus:outline-subborder-subPurple`, on the password
- * input) is a typo carried over from the original. It is not a real utility and
- * emits nothing, exactly as before; it is kept so the markup still matches.
+ * 下面有一個 class 名稱（password input 上的
+ * `focus:outline-subborder-subPurple`）是從原本的程式碼帶過來的手誤。
+ * 它不是一個真正的 utility，什麼都不會產生，跟以前一樣；保留它是為了讓
+ * markup 仍然相符。
  *
- * The two other copies of that typo lived on the hand-rolled checkbox -- a
- * 25-line appearance-none input with an SVG tick overlaid through a CSS grid --
- * which Radix's Checkbox replaces. Since they emitted no CSS, removing them is
- * provably pixel-identical.
+ * 這個手誤的另外兩個副本原本在手刻的 checkbox 上 -- 一個 25 行、
+ * appearance-none 的 input，透過 CSS grid 疊上一個 SVG 打勾符號 --
+ * 現在被 Radix 的 Checkbox 取代了。因為它們原本就沒有產生任何 CSS，
+ * 移除它們可以證明是像素級一致的。
  */
 export function LoginForm() {
   const [email, setEmail] = useState('');
