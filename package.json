@@ -16,7 +16,6 @@
     "@fortawesome/fontawesome-free": "^6.7.2",
     "animate.css": "^4.1.1",
     "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
     "cn": "^0.3.0",
     "date-fns": "^4.4.0",
     "lucide-react": "^1.47.0",
@@ -27,7 +26,6 @@
     "react-router": "^7.18.4",
     "sonner": "^2.0.8",
     "swiper": "^11.2.6",
-    "tailwind-merge": "^3.7.0",
     "zustand": "^5.0.3"
   },
   "devDependencies": {
