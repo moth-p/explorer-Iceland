@@ -6,6 +6,22 @@
 @import 'animate.css';
 @import '@fortawesome/fontawesome-free/css/all.min.css';
 @import 'tailwindcss';
+@import 'tw-animate-css';
+
+/*
+ * MANDATORY, even though the site has no dark mode.
+ *
+ * Tailwind v4's default `dark:` variant is @media (prefers-color-scheme: dark),
+ * and shadcn's generated components are full of dark:bg-input/30,
+ * dark:border-input and friends. Without this line those utilities activate for
+ * every visitor whose OS is in dark mode and resolve against values we never
+ * defined -- a half-broken site, invisible unless you happen to test with dark
+ * mode on. Redefining the variant as a .dark ancestor, and never putting that
+ * class on <html>, compiles them as permanently inert.
+ *
+ * Never add class="dark" to <html>, and never delete this line.
+ */
+@custom-variant dark (&:is(.dark *));
 
 /*
  * The former tailwind.config.ts theme.extend, ported to v4's CSS-first config.
@@ -67,6 +83,78 @@
       transform: rotate(360deg);
     }
   }
+}
+
+/*
+ * shadcn/ui's design tokens, mapped onto the Iceland palette so generated
+ * components inherit the site's look instead of shadcn's neutral defaults.
+ *
+ * Keep writing markup with bg-subPurple / text-mainYellow; these exist for the
+ * components in components/ui, not for hand-written classes.
+ *
+ * The --accent mapping is the one to get right. shadcn uses `accent` for hover
+ * SURFACES (ghost buttons, menu items, calendar day hover), and this site's
+ * hover surface is lightGray with subPurple text -- mainYellow is the hover for
+ * FILLED buttons only, which is `secondary`. Swap the two and every ghost
+ * button in the nav turns lime green. Mapped this way, shadcn's
+ * `variant="ghost" size="icon"` lands exactly on the nav's existing
+ * hover:bg-lightGray hover:text-subPurple.
+ */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+  /* 0.5rem so radius-lg is 0.5rem (sm:rounded-lg) and radius-md is 0.375rem
+     (rounded-md) -- the only two radii the site actually uses. */
+  --radius: 0.5rem;
+
+  --background: #f5f5f5; /* lightGray, the body background */
+  --foreground: #1f2937; /* gray-800, the default text colour */
+
+  --card: #ffffff; /* white panels: cart, login card, product cards */
+  --card-foreground: #1f2937;
+  --popover: #ffffff;
+  --popover-foreground: #1f2937;
+
+  --primary: #8cabfb; /* subPurple: primary buttons, the selected calendar day */
+  --primary-foreground: #f5f5f5; /* matches the Sign in button */
+
+  --secondary: #d4fb71; /* mainYellow: the filled-button hover state */
+  --secondary-foreground: #1f2937;
+
+  --muted: #f5f5f5;
+  --muted-foreground: #9ca3af; /* gray-400, the site's muted text everywhere */
+
+  --accent: #f5f5f5; /* hover surfaces are lightGray... */
+  --accent-foreground: #8cabfb; /* ...with subPurple text */
+
+  --destructive: #f77171; /* the warning colour the alerts already used */
+
+  --border: #e5e7eb; /* gray-200: cart row borders, dividers */
+  --input: #d1d5db; /* gray-300: the date and group-size input borders */
+  --ring: #8cabfb; /* subPurple, matching focus:ring-subPurple sitewide */
 }
 
 /*
