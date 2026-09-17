@@ -1,8 +1,13 @@
 import { Link } from 'react-router';
-import { useEffect, useRef } from 'react';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { asset } from '@/lib/asset';
 import { computeTotals, useCartStore } from '@/lib/cart-store';
-import { useBodyScrollLock } from '@/lib/use-body-scroll-lock';
+import { useHtmlScrollLock } from '@/lib/use-html-scroll-lock';
 import type { CartItem } from '@/lib/types';
 
 /**
@@ -12,64 +17,44 @@ import type { CartItem } from '@/lib/types';
  * The template approach gave every cloned row the same ids (`cartTitle`,
  * `cartImg`, `cartPrice`, ...), which is invalid HTML once there is more than
  * one row. Those are props now.
+ *
+ * Built on shadcn's Dialog rather than Sheet: despite the name this has always
+ * been a centred modal that fades in, not an edge-anchored panel that slides,
+ * and Sheet would have been a redesign. Radix brings the outside-click and
+ * Escape handling, the focus trap and the ARIA wiring that were hand-written
+ * here before.
  */
 export function CartDrawer() {
   const items = useCartStore((s) => s.items);
   const isOpen = useCartStore((s) => s.isOpen);
   const closeCart = useCartStore((s) => s.closeCart);
-  const panelRef = useRef<HTMLFormElement>(null);
 
-  // Freeze the page behind the drawer; see lib/use-body-scroll-lock.ts.
-  useBodyScrollLock(isOpen);
-
-  // Click anywhere outside the panel closes it, matching the original
-  // window-level click handler (which the panel guarded with stopPropagation).
-  useEffect(() => {
-    if (!isOpen) return;
-
-    const onPointerDown = (e: MouseEvent) => {
-      if (panelRef.current && !panelRef.current.contains(e.target as Node)) {
-        closeCart();
-      }
-    };
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') closeCart();
-    };
-
-    document.addEventListener('mousedown', onPointerDown);
-    document.addEventListener('keydown', onKeyDown);
-    return () => {
-      document.removeEventListener('mousedown', onPointerDown);
-      document.removeEventListener('keydown', onKeyDown);
-    };
-  }, [isOpen, closeCart]);
-
-  if (!isOpen) return null;
+  // Radix locks <body>, but the root layout gives <body> h-screen, so <html> is
+  // the real scroll container. See lib/use-body-scroll-lock.ts.
+  useHtmlScrollLock(isOpen);
 
   const totals = computeTotals(items);
 
   return (
-    <div
-      className="animate__animated animate__fadeIn animate__faster relative z-50"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Shopping cart"
-    >
-      <div
-        className="hidden sm:fixed sm:inset-0 sm:block sm:bg-gray-500/75 sm:transition-opacity"
-        aria-hidden="true"
-      />
-
-      <div className="fixed inset-0 z-10 w-screen overflow-y-auto overscroll-contain">
-        <div className="flex min-h-full items-stretch justify-center text-center sm:items-center sm:px-6 lg:px-8">
-          <div className="flex w-full max-w-3xl transform text-left text-base transition sm:my-8">
-            <form
-              ref={panelRef}
-              onSubmit={(e) => e.preventDefault()}
-              className="relative flex w-full flex-col overflow-hidden bg-white pb-8 pt-6 sm:rounded-lg sm:pb-6 lg:py-8"
-            >
+    <Dialog open={isOpen} onOpenChange={(open) => !open && closeCart()}>
+      {/*
+        showCloseButton={false} because this panel has its own styled X. The
+        sizing classes reproduce the original: full-bleed below sm, a centred
+        max-w-3xl card above it.
+      */}
+      <DialogContent
+        showCloseButton={false}
+        aria-label="Shopping cart"
+        className="inset-0 flex h-full max-h-full w-screen max-w-none translate-x-0 translate-y-0 flex-col gap-0 overflow-y-auto overscroll-contain rounded-none border-0 bg-white p-0 pt-6 pb-8 sm:inset-auto sm:top-1/2 sm:left-1/2 sm:h-auto sm:max-h-[90vh] sm:w-full sm:max-w-3xl sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-lg sm:pb-6 lg:py-8"
+      >
+        <div className="flex w-full flex-col">
               <div className="flex items-center justify-between px-4 sm:px-6 lg:px-8">
-                <h2 className="text-lg font-medium text-gray-800">Shopping Cart</h2>
+                <DialogTitle className="text-lg font-medium text-gray-800">
+                  Shopping Cart
+                </DialogTitle>
+                <DialogDescription className="sr-only">
+                  The tours you have added, with the order total.
+                </DialogDescription>
                 <button
                   type="button"
                   onClick={closeCart}
@@ -152,11 +137,9 @@ export function CartDrawer() {
                   </section>
                 </>
               )}
-            </form>
-          </div>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 }
 
