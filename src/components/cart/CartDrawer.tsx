@@ -1,6 +1,4 @@
-'use client';
-
-import Link from 'next/link';
+import { Link } from 'react-router';
 import { useEffect, useRef } from 'react';
 import { asset } from '@/lib/asset';
 import { computeTotals, useCartStore } from '@/lib/cart-store';
@@ -144,7 +142,7 @@ export function CartDrawer() {
                     </div>
                     <div className="mt-8 flex justify-end px-4 sm:px-6 lg:px-8">
                       <Link
-                        href="/login"
+                        to="/login"
                         onClick={closeCart}
                         className="rounded-md border border-transparent bg-subPurple px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-mainYellow hover:text-gray-800 active:opacity-50"
                       >
@@ -168,7 +166,6 @@ function CartRow({ item }: { item: CartItem }) {
   return (
     <div className="divide-y divide-gray-200 px-4 sm:px-6 lg:px-8">
       <li className="flex py-8 text-sm sm:items-center">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={asset(item.img)}
           alt={item.title}
@@ -177,7 +174,7 @@ function CartRow({ item }: { item: CartItem }) {
         <div className="grid w-full grid-rows-12 ps-8 md:grid-cols-12">
           <div className="row-span-7 md:col-span-10">
             <h3 className="text-md text-gray-800">
-              <Link href={`/shop/${item.productId}`}>{item.title}</Link>
+              <Link to={`/shop/${item.productId}`}>{item.title}</Link>
             </h3>
             <p className="mb-3 mt-1 font-sans text-[14px] text-gray-400 sm:mb-0">
               Date:&nbsp;{item.date}

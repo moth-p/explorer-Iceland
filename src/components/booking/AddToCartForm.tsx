@@ -1,26 +1,21 @@
-'use client';
-
 import type { Instance } from 'flatpickr/dist/types/instance';
-import dynamic from 'next/dynamic';
-import { useCallback, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useRef, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
 import { fireAlert, successAlert, warningAlert } from '@/lib/alerts';
 import { selectBookedDates, useCartStore } from '@/lib/cart-store';
 import type { Product } from '@/lib/types';
 
-// ssr: false because Flatpickr needs the DOM. The placeholder matches the
-// input's height so the layout does not shift when it mounts.
+// Flatpickr is code-split: it is only needed on this one page, and it pulls in
+// its own stylesheet.
 //
-// It MUST be a <span>, not a <div>: this is rendered inside the "Date:" <p>,
-// and a <div> there is invalid HTML. Browsers auto-close the <p> before the
-// <div>, so the parsed DOM stops matching the server markup and React reports
-// a hydration error.
-const DatePicker = dynamic(() => import('./DatePicker'), {
-  ssr: false,
-  loading: () => (
-    <span className="me-8 mb-5 inline-block h-8 w-44 rounded-md border border-gray-300 align-middle md:mb-0" />
-  ),
-});
+// The fallback matches the input's height so the layout does not shift when it
+// mounts, and it MUST be a <span>, not a <div>: this renders inside the "Date:"
+// <p>, where a <div> is invalid HTML that browsers fix by auto-closing the <p>.
+const DatePicker = lazy(() => import('./DatePicker'));
+
+const DatePickerFallback = (
+  <span className="me-8 mb-5 inline-block h-8 w-44 rounded-md border border-gray-300 align-middle md:mb-0" />
+);
 
 /**
  * The only interactive island on the tour detail page: date, group size,
@@ -85,11 +80,13 @@ export function AddToCartForm({ product }: { product: Product }) {
         <div className="relative sm:flex sm:justify-start">
           <p className="text-md font-sans">
             Date:&nbsp;&nbsp;
-            <DatePicker
-              disabledDates={bookedDates}
-              onChange={setDate}
-              registerInstance={registerInstance}
-            />
+            <Suspense fallback={DatePickerFallback}>
+              <DatePicker
+                disabledDates={bookedDates}
+                onChange={setDate}
+                registerInstance={registerInstance}
+              />
+            </Suspense>
           </p>
           <p className="text-md font-sans">
             Group Size:&nbsp;&nbsp;

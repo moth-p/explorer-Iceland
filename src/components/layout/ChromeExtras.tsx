@@ -1,6 +1,4 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
+import { useLocation } from 'react-router';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { chromeVariantFor, hasShopChrome } from '@/lib/layout-variant';
 import { GoTopButton } from './GoTopButton';
@@ -11,7 +9,7 @@ import { GoTopButton } from './GoTopButton';
  * icon, matching the original).
  */
 export function ChromeExtras() {
-  const variant = chromeVariantFor(usePathname());
+  const variant = chromeVariantFor(useLocation().pathname);
 
   return (
     <>

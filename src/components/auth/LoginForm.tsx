@@ -1,5 +1,3 @@
-'use client';
-
 import { useState } from 'react';
 import { asset } from '@/lib/asset';
 
@@ -172,7 +170,6 @@ export function LoginForm() {
               href="#"
               className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus-visible:ring-transparent"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={asset('/img/facebook.png')}
                 alt=""

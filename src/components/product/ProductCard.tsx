@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router';
 import { asset } from '@/lib/asset';
 import type { Product } from '@/lib/types';
 
@@ -13,11 +13,10 @@ import type { Product } from '@/lib/types';
 export function ProductCard({ product }: { product: Product }) {
   return (
     <Link
-      href={`/shop/${product.id}`}
+      to={`/shop/${product.id}`}
       className="group relative flex max-h-[800px] cursor-pointer flex-col rounded-lg border border-gray-200 bg-white shadow-lg sm:min-w-[200px]"
     >
       <div className="px-3 pt-3">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={asset(product.img)}
           alt={product.title}

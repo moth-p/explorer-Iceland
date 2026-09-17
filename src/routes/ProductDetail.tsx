@@ -1,34 +1,12 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import { Link, useParams } from 'react-router';
 import { AddToCartForm } from '@/components/booking/AddToCartForm';
+import { PageMeta } from '@/components/layout/PageMeta';
 import { SiteFooter } from '@/components/layout/SiteFooter';
 import { ProductAccordion } from '@/components/product/ProductAccordion';
 import { asset } from '@/lib/asset';
-import { getAllProducts, getProductById } from '@/lib/products';
+import { getProductById } from '@/lib/products';
 import { CATEGORY_LABELS } from '@/lib/types';
-
-type Params = Promise<{ id: string }>;
-
-/**
- * Prerenders one HTML file per tour. This is why the route is /shop/[id] rather
- * than the original ?id= query param: under output: 'export', useSearchParams()
- * forces a client-only render, so the exported HTML would be an empty shell --
- * no title, no price, a blank flash on load, and nothing for search engines.
- */
-export function generateStaticParams() {
-  return getAllProducts().map((p) => ({ id: p.id }));
-}
-
-/** The 12 tours are a closed set; anything else is a 404 rather than a runtime render. */
-export const dynamicParams = false;
-
-export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
-  const { id } = await params;
-  const product = getProductById(id);
-  if (!product) return {};
-  return { title: product.title, description: product.briefLong };
-}
+import { NotFound } from './NotFound';
 
 const Star = ({ filled }: { filled: boolean }) => (
   <svg
@@ -45,13 +23,22 @@ const Star = ({ filled }: { filled: boolean }) => (
   </svg>
 );
 
-export default async function ProductDetailPage({ params }: { params: Params }) {
-  const { id } = await params;
-  const product = getProductById(id);
-  if (!product) notFound();
+/**
+ * The tour detail page. The route is /shop/:id rather than the original ?id=
+ * query param so each tour has its own shareable URL.
+ *
+ * The 12 tours are a closed set, so an unknown id renders the 404 in place --
+ * which is what Next's `dynamicParams = false` did, and it keeps the site
+ * chrome exactly as the framework's not-found page did.
+ */
+export function ProductDetail() {
+  const { id } = useParams<{ id: string }>();
+  const product = id ? getProductById(id) : undefined;
+  if (!product) return <NotFound />;
 
   return (
     <>
+      <PageMeta title={product.title} description={product.briefLong} />
       <main>
         <div className="leading-loose">
           <div className="mx-auto max-w-2xl px-4 py-16 font-krona sm:px-6 sm:py-24 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
@@ -60,7 +47,7 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
                 <ol role="list" className="flex items-center space-x-2">
                   <li>
                     <div className="flex items-center text-sm">
-                      <Link href="/shop" className="font-medium text-gray-500 hover:text-gray-900">
+                      <Link to="/shop" className="font-medium text-gray-500 hover:text-gray-900">
                         {CATEGORY_LABELS[product.category]}
                       </Link>
                       <svg
@@ -115,7 +102,6 @@ export default async function ProductDetailPage({ params }: { params: Params }) 
             </div>
 
             <div className="mt-10 lg:col-start-2 lg:row-span-2 lg:mt-0 lg:self-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={asset(product.imgBig)}
                 alt={product.title}

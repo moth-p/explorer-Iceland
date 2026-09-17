@@ -1,17 +1,15 @@
-import type { Metadata } from 'next';
-import Link from 'next/link';
+import { Link } from 'react-router';
 import { SimpleFooter } from '@/components/layout/SimpleFooter';
+import { PageMeta } from '@/components/layout/PageMeta';
 import { asset } from '@/lib/asset';
 
-export const metadata: Metadata = {
-  title: 'About',
-  description:
-    'A team of local Icelandic guides specialising in ecological interpretation, hiking safety, geography, climate and local culture.',
-};
-
-export default function AboutPage() {
+export function About() {
   return (
     <>
+      <PageMeta
+        title="About"
+        description="A team of local Icelandic guides specialising in ecological interpretation, hiking safety, geography, climate and local culture."
+      />
       {/*
         about.html wrapped its (fixed) nav in <header class="w-screen mb-20 lg:mb-0">,
         so the header contributed nothing but bottom margin. The nav now lives in
@@ -24,14 +22,13 @@ export default function AboutPage() {
           <div className="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
             <div className="px-6 pb-8 pt-10 lg:col-span-7 lg:px-0 lg:pb-48 lg:pt-32 xl:col-span-6">
               <div className="mx-auto max-w-lg lg:mx-0">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img className="h-10" src={asset('/img/shop-logo.png')} alt="Explorer" />
 
                 <div className="mt-8 sm:flex">
                   <div className="relative rounded-full px-3 py-1 font-sans text-sm/6 text-gray-500 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                     Provide Outdoor Tours in Iceland.&nbsp;&nbsp;&nbsp;
                     <Link
-                      href="/shop"
+                      to="/shop"
                       className="whitespace-nowrap font-semibold text-subPurple"
                     >
                       <span className="absolute inset-0" aria-hidden="true" />
@@ -77,7 +74,6 @@ export default function AboutPage() {
             </div>
 
             <div className="relative px-6 md:px-32 lg:-me-8 lg:col-span-5 lg:mt-[64px] lg:max-h-[800px] xl:absolute xl:inset-0 xl:left-1/2 xl:me-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 className="aspect-[3/2] h-full w-full bg-gray-50 object-cover lg:absolute lg:inset-0 lg:aspect-auto"
                 src={asset('/img/about-banner.jpg')}

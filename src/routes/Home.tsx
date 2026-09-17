@@ -2,6 +2,7 @@ import { Marquee } from '@/components/home/Marquee';
 import { Reveal, RevealSection } from '@/components/home/RevealSection';
 import { VideoButton } from '@/components/home/VideoButton';
 import { SimpleFooter } from '@/components/layout/SimpleFooter';
+import { PageMeta } from '@/components/layout/PageMeta';
 import { asset } from '@/lib/asset';
 
 /** The three scenery sections between the hero and the marquee. */
@@ -39,9 +40,10 @@ const FEATURES = [
   },
 ];
 
-export default function HomePage() {
+export function Home() {
   return (
     <>
+      <PageMeta />
       {/* hero */}
       <header className="h-full w-full bg-banner bg-cover bg-no-repeat">
         <div className="flex h-[45%] w-screen flex-col items-center justify-center pt-[120px] md:pt-[140px] lg:mb-14 lg:pt-[150px]">
@@ -54,7 +56,6 @@ export default function HomePage() {
         </div>
 
         <div className="flex h-[15%] w-screen items-center justify-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={asset('/img/banner-icon.png')}
             className="h-[60%] max-h-[60px] animate-rotateStar object-cover md:max-h-[70px]"
@@ -75,7 +76,6 @@ export default function HomePage() {
         </div>
 
         <div className="flex h-[5%] animate-bounce justify-center lg:items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={asset('/img/banner-icon-arrow.png')} className="h-6" alt="arrow icon" />
         </div>
       </header>
@@ -93,7 +93,6 @@ export default function HomePage() {
             </div>
 
             <div className="flex h-[15%] w-screen items-center justify-center opacity-80">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={asset('/img/banner-icon.png')}
                 className="h-[60%] max-h-[100px] object-cover"
@@ -116,7 +115,6 @@ export default function HomePage() {
             {/* below lg: stacked image + text */}
             <div className="mb-5 flex h-[45%] w-full justify-center md:mb-16 lg:hidden">
               <div className="h-[90%] w-[75%] md:h-[100%] md:w-[80%]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={asset(image)}
                   className="h-full w-full rounded-2xl object-cover"
@@ -133,7 +131,6 @@ export default function HomePage() {
                 ))}
               </Reveal>
               <div className="flex h-[10%] justify-center">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={asset('/img/main-5-icon.png')}
                   className="h-[70%] max-h-[100px] object-cover"
@@ -157,7 +154,6 @@ export default function HomePage() {
                     ))}
                   </Reveal>
                   <div className="mb-28 flex h-[6%] justify-center">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={asset('/img/main-5-icon.png')}
                       className="h-[70%] max-h-[100px] object-cover"

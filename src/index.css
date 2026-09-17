@@ -1,0 +1,201 @@
+/*
+ * CSS requires @import before any other rule -- these must stay at the top, and
+ * in this order. The vendor sheets come first so Tailwind's preflight lands on
+ * top of them, exactly as it did under the v3 @tailwind directives.
+ */
+@import 'animate.css';
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+@import 'tailwindcss';
+
+/*
+ * The former tailwind.config.ts theme.extend, ported to v4's CSS-first config.
+ *
+ * The keys are deliberately camelCase and left byte-identical to the v3 config,
+ * so not one className in the ported markup had to change. That requires
+ * tailwindcss >= 4.1.18 -- releases 4.0.0 through 4.1.17 silently dropped theme
+ * keys containing uppercase letters, which would produce a site with no colours
+ * and no build error (tailwindlabs/tailwindcss#18114). Do not loosen that floor.
+ */
+@theme {
+  --color-mainYellow: #d4fb71;
+  --color-subPurple: #8cabfb;
+  --color-lightGray: #f5f5f5;
+
+  --font-krona: 'Krona One', sans-serif;
+  --font-libreBodoni_Regular: 'Libre Bodoni', serif;
+  --font-libreBodoni_boldItalic: 'Libre Bodoni BoldItalic', serif;
+
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-fadeIn: fadeIn 2s ease-in-out forwards;
+  --animate-fadeInSlow: fadeInSlow 3s ease-in-out forwards;
+  --animate-rotateStar: rotateStar 2.5s ease-out forwards;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInSlow {
+    0% {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+  @keyframes rotateStar {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/*
+ * The v3 theme.extend.backgroundImage entries. Tailwind v4 has no
+ * --background-image-* theme namespace, so these are custom utilities.
+ *
+ * They MUST be @utility rules rather than plain .bg-swiper-1 classes: ShopBanner
+ * uses `md:bg-swiper-1`, and variants only compose onto real utilities.
+ *
+ * The paths are root-absolute into public/. Under v3 they had to be built from
+ * NEXT_PUBLIC_BASE_PATH by hand, because Next's basePath does not rewrite url()
+ * in CSS; Vite does apply `base` to public-asset URLs in CSS at build time, so
+ * the interpolation is gone. The failure mode if a file is missing is still a
+ * silent 404 with no build error, which is why CI greps the built CSS for the
+ * prefix.
+ */
+@utility bg-banner {
+  background-image: url('/img/banner.png');
+}
+@utility bg-main-1-bg {
+  background-image: url('/img/main-1-bg.png');
+}
+@utility bg-main-2-bg {
+  background-image: url('/img/main-2-bg.png');
+}
+@utility bg-main-3-bg {
+  background-image: url('/img/main-3-bg.png');
+}
+@utility bg-main-5 {
+  background-image: url('/img/main-5.png');
+}
+@utility bg-main-6 {
+  background-image: url('/img/main-6.png');
+}
+@utility bg-main-7-bg {
+  background-image: url('/img/main-7-bg.png');
+}
+@utility bg-swiper-1 {
+  background-image: url('/img/swiper-1.png');
+}
+@utility bg-swiper-2 {
+  background-image: url('/img/swiper-2.png');
+}
+@utility bg-swiper-3 {
+  background-image: url('/img/swiper-3.png');
+}
+@utility bg-swiper-1-sm {
+  background-image: url('/img/swiper-1-sm.png');
+}
+@utility bg-swiper-2-sm {
+  background-image: url('/img/swiper-2-sm.png');
+}
+@utility bg-swiper-3-sm {
+  background-image: url('/img/swiper-3-sm.png');
+}
+
+/* Was an @layer utilities block under v3. */
+@utility no-spinner {
+  /* Chrome, Safari, Edge, Opera */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  /* Firefox */
+  &[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+/*
+ * The three faces next/font/local used to generate. They are served from
+ * public/fonts with stable names rather than fingerprinted out of src/assets,
+ * because index.html is static: you cannot write a hashed filename into a
+ * <link rel="preload">, and on GitHub Pages (fixed max-age=600 on everything)
+ * the preload is worth far more than the hash.
+ */
+@font-face {
+  font-family: 'Krona One';
+  src: url('/fonts/KronaOne-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Libre Bodoni';
+  src: url('/fonts/LibreBodoni-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  /*
+   * Registered as its own family at weight 400 / style normal despite the name,
+   * matching the original @font-face exactly. Declaring it bold or italic would
+   * change what the browser synthesises on top of it.
+   */
+  font-family: 'Libre Bodoni BoldItalic';
+  src: url('/fonts/LibreBodoni-BoldItalic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+ * Scoped to `html`, not `*`. On `*` every scroll container inherits it, which
+ * turns a programmatic scroll-to-top into a half-second animation -- fine for
+ * the back-to-top button, wrong for a route change.
+ */
+html {
+  scroll-behavior: smooth;
+}
+
+#detailsTitle {
+  line-height: 50px;
+}
+
+/* Was an inline <style> block in about.html. */
+@media screen and (max-width: 765px) {
+  #aboutTitle {
+    line-height: 45px;
+  }
+}
+
+@media screen and (min-width: 766px) {
+  #aboutTitle {
+    line-height: 65px;
+  }
+}

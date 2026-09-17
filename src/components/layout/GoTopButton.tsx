@@ -1,6 +1,4 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
+import { useLocation } from 'react-router';
 import { useEffect, useState } from 'react';
 import { chromeVariantFor } from '@/lib/layout-variant';
 
@@ -18,7 +16,7 @@ import { chromeVariantFor } from '@/lib/layout-variant';
  */
 export function GoTopButton() {
   const [visible, setVisible] = useState(false);
-  const variant = chromeVariantFor(usePathname());
+  const variant = chromeVariantFor(useLocation().pathname);
 
   useEffect(() => {
     let frame = 0;

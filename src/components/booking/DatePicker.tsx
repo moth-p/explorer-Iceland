@@ -1,32 +1,8 @@
-'use client';
-
 import flatpickr from 'flatpickr';
 import type { Instance } from 'flatpickr/dist/types/instance';
 import { useEffect, useRef } from 'react';
+import { fromISODate, getMinBookingDate, toISODate } from '@/lib/dates';
 import 'flatpickr/dist/flatpickr.min.css';
-
-/** Earliest bookable date: today + 14 days. Matches getStartDay() in the original. */
-export function getMinBookingDate(): Date {
-  const d = new Date();
-  d.setDate(d.getDate() + 14);
-  return d;
-}
-
-const pad = (n: number) => String(n).padStart(2, '0');
-
-/**
- * Local-time YYYY-MM-DD. Deliberately not toISOString(), which converts to UTC
- * and would shift the date by a day for anyone behind or ahead of it.
- */
-export function toISODate(d: Date): string {
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-}
-
-/** Parse 'YYYY-MM-DD' at local midnight, for the same reason. */
-function fromISODate(s: string): Date {
-  const [y, m, d] = s.split('-').map(Number);
-  return new Date(y, m - 1, d);
-}
 
 interface Props {
   /** 'YYYY-MM-DD' strings that are already booked and must not be selectable. */
@@ -57,9 +33,15 @@ interface Props {
 export default function DatePicker({ disabledDates, onChange, registerInstance }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const fpRef = useRef<Instance | null>(null);
-  // Keep the latest onChange without making the init effect depend on it.
+  // Keep the latest onChange without making the init effect depend on it --
+  // that effect must run exactly once, or flatpickr is torn down and rebuilt on
+  // every parent render. Latched in an effect rather than during render, which
+  // is safe here because flatpickr only calls back from a DOM event, always
+  // after commit.
   const onChangeRef = useRef(onChange);
-  onChangeRef.current = onChange;
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  });
 
   useEffect(() => {
     if (!inputRef.current) return;

@@ -1,5 +1,3 @@
-'use client';
-
 import { selectCount, useCartStore } from '@/lib/cart-store';
 
 /**

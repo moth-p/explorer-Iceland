@@ -1,7 +1,5 @@
-'use client';
-
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link } from 'react-router';
+import { useLocation } from 'react-router';
 import { useEffect, useRef, useState } from 'react';
 import { CartBadge } from '@/components/cart/CartBadge';
 import { asset } from '@/lib/asset';
@@ -30,7 +28,7 @@ const HAM_ITEM_CLASS =
  */
 export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
   const showBooking = variant === 'shop';
-  const pathname = usePathname();
+  const pathname = useLocation().pathname;
   const iconTop = navIconTopFor(pathname);
   const openCart = useCartStore((s) => s.openCart);
 
@@ -117,42 +115,51 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
             {/* logo + desktop links */}
             <div className="flex flex-1 items-center justify-center gap-6 sm:justify-start">
               <div className="item-center flex shrink-0">
-                <Link href="/">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                <Link to="/">
                   <img className="h-7 w-auto" src={asset('/img/logo.png')} alt="Company Logo" />
                 </Link>
               </div>
 
               <div className="hidden sm:ml-6 sm:flex sm:space-x-3">
                 <div className="nav-btn item-center flex justify-center">
-                  <Link href="/" className={NAV_ITEM_CLASS}>
+                  <Link to="/" className={NAV_ITEM_CLASS}>
                     {NAV_LINKS[0].label}
                   </Link>
                 </div>
                 <div className="nav-btn item-center flex justify-center">
-                  <Link href="/about" className={NAV_ITEM_CLASS}>
+                  <Link to="/about" className={NAV_ITEM_CLASS}>
                     {NAV_LINKS[1].label}
                   </Link>
                 </div>
                 {showBooking ? (
-                  <div
-                    className="item-center flex cursor-pointer justify-center"
-                    onMouseOver={() => setFlyoutOpen(true)}
-                  >
-                    <p className="px-3 py-2 text-sm text-gray-800 hover:rounded-md hover:bg-lightGray hover:text-subPurple">
+                  <div className="item-center flex justify-center">
+                    {/*
+                      A real <button>, not the original hover-only <div>/<p>:
+                      the flyout was unreachable without a mouse. onFocus opens
+                      it for keyboard users and onClick for touch, which have no
+                      hover at all.
+                    */}
+                    <button
+                      type="button"
+                      aria-expanded={flyoutOpen}
+                      onMouseOver={() => setFlyoutOpen(true)}
+                      onFocus={() => setFlyoutOpen(true)}
+                      onClick={() => setFlyoutOpen((o) => !o)}
+                      className="cursor-pointer px-3 py-2 text-sm text-gray-800 hover:rounded-md hover:bg-lightGray hover:text-subPurple"
+                    >
                       Booking&nbsp;
                       <i className="fa-solid fa-angle-down" />
-                    </p>
+                    </button>
                   </div>
                 ) : (
                   <div className="nav-btn item-center flex justify-center">
-                    <Link href="/shop" className={NAV_ITEM_CLASS}>
+                    <Link to="/shop" className={NAV_ITEM_CLASS}>
                       Shop
                     </Link>
                   </div>
                 )}
                 <div className="nav-btn item-center flex justify-center">
-                  <Link href={NAV_LINKS[2].href} className={NAV_ITEM_CLASS}>
+                  <Link to={NAV_LINKS[2].href} className={NAV_ITEM_CLASS}>
                     {NAV_LINKS[2].label}
                   </Link>
                 </div>
@@ -173,7 +180,7 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
             </div>
 
             {/* user icon */}
-            <Link href="/login" className={`absolute right-0 ${iconTop}`}>
+            <Link to="/login" className={`absolute right-0 ${iconTop}`}>
               <button
                 type="button"
                 className="h-10 w-10 rounded-full text-gray-800 hover:bg-lightGray hover:text-subPurple active:opacity-60"
@@ -189,24 +196,26 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
           {hamOpen && (
             <div className="w-screen sm:hidden" id="hamMenu">
               <div className="h-screen w-screen space-y-1 overflow-y-auto bg-lightGray p-5 pb-5">
-                <Link href="/" className={HAM_ITEM_CLASS}>
+                <Link to="/" className={HAM_ITEM_CLASS}>
                   Concept
                 </Link>
-                <Link href="/about" className={HAM_ITEM_CLASS}>
+                <Link to="/about" className={HAM_ITEM_CLASS}>
                   About
                 </Link>
                 {showBooking ? (
-                  <p
-                    className={`cursor-pointer ${HAM_ITEM_CLASS}`}
+                  <button
+                    type="button"
+                    aria-expanded={accordionOpen}
+                    className={`w-full cursor-pointer text-left ${HAM_ITEM_CLASS}`}
                     onClick={() => setAccordionOpen((o) => !o)}
                   >
                     Booking&nbsp;&nbsp;
                     <span>
                       <i className={`fa-solid ${accordionOpen ? 'fa-minus' : 'fa-plus'}`} />
                     </span>
-                  </p>
+                  </button>
                 ) : (
-                  <Link href="/shop" className={HAM_ITEM_CLASS}>
+                  <Link to="/shop" className={HAM_ITEM_CLASS}>
                     Shop
                   </Link>
                 )}
@@ -237,7 +246,7 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
                   </div>
                 )}
 
-                <Link href="/shop" className={HAM_ITEM_CLASS}>
+                <Link to="/shop" className={HAM_ITEM_CLASS}>
                   FAQ
                 </Link>
                 <br />
@@ -245,7 +254,6 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
                 <hr />
 
                 <div className="flex h-80 w-full flex-col items-center gap-5 pt-8">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={asset('/img/shop-logo.png')}
                     className={showBooking ? 'w-[150px]' : 'w-[120px]'}
@@ -268,6 +276,8 @@ export function ShopNav({ variant }: { variant: 'shop' | 'detail' }) {
               className="animate__animated animate__fadeIn animate__faster absolute inset-x-0 top-0 -z-10 bg-lightGray pt-14 shadow-lg ring-1 ring-gray-900/5"
               onMouseOver={() => setFlyoutOpen(true)}
               onMouseOut={() => setFlyoutOpen(false)}
+              onFocus={() => setFlyoutOpen(true)}
+              onBlur={() => setFlyoutOpen(false)}
             >
               <div className="grid grid-cols-3 items-start justify-center py-16 md:px-8 xl:px-80">
                 {BOOKING_MENU.map((group) => (

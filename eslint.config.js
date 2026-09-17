@@ -1,0 +1,69 @@
+import js from '@eslint/js';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
+
+/**
+ * Replaces eslint-config-next.
+ *
+ * The react and jsx-a11y plugins are here because next/core-web-vitals bundled
+ * them and dropping them would be a real loss: this codebase leans on
+ * aria-current, role="list", sr-only headings and aria-hidden decorative icons,
+ * and several components map over arrays where react/jsx-key is the only thing
+ * catching a missing key. Nothing of value is lost with @next/next/* -- all of
+ * those rules were framework-specific.
+ */
+export default tseslint.config(
+  { ignores: ['dist/**', 'node_modules/**'] },
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      react.configs.flat.recommended,
+      react.configs.flat['jsx-runtime'],
+      jsxA11y.flatConfigs.recommended,
+      // v7 keeps the eslintrc-shaped configs at the top level; the flat ones
+      // live under .flat, and the top-level names will fail with a 'plugins
+      // must be an object' error if used here.
+      reactHooks.configs.flat.recommended,
+      reactRefresh.configs.vite,
+    ],
+    languageOptions: {
+      ecmaVersion: 2022,
+      globals: globals.browser,
+    },
+    settings: { react: { version: 'detect' } },
+    rules: {
+      /*
+       * Fires on ~30 `<a href="#">` placeholders in the footer, social links and
+       * the decorative pagination strip. Those links are deliberately unwired --
+       * project-scope.md lists it as a known limitation of the demo -- so this
+       * rule reports a product gap, not a code defect, and turning them into
+       * buttons would change markup and styling across four components.
+       *
+       * Turn this back on when the links are given real destinations.
+       */
+      'jsx-a11y/anchor-is-valid': 'off',
+
+      /*
+       * role="list" on a `list-style: none` list is not redundant: Safari drops
+       * the implicit list semantics when the marker is removed, which is why the
+       * Tailwind UI markup this is ported from sets it explicitly.
+       */
+      'jsx-a11y/no-redundant-roles': 'off',
+
+      /*
+       * A React Compiler rule, new in eslint-plugin-react-hooks v7 and stricter
+       * than anything eslint-config-next ran. The three sites here are effects
+       * synchronising with something outside React -- an IntersectionObserver
+       * callback, and closing the nav menus when the router's pathname changes --
+       * which is what effects are for.
+       */
+      'react-hooks/set-state-in-effect': 'off',
+    },
+  },
+);

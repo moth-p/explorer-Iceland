@@ -1,7 +1,5 @@
-'use client';
-
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link } from 'react-router';
+import { useLocation } from 'react-router';
 import { useEffect, useRef, useState } from 'react';
 import { asset } from '@/lib/asset';
 
@@ -24,7 +22,7 @@ const MOBILE_BASE =
  * did with a hardcoded `pointer-events-none text-gray-400` per file.
  */
 export function SimpleNav() {
-  const pathname = usePathname();
+  const pathname = useLocation().pathname;
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
@@ -83,8 +81,7 @@ export function SimpleNav() {
 
           <div className="flex flex-1 items-center justify-center gap-6 sm:justify-start">
             <div className="flex shrink-0 items-center">
-              <Link href="/">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
+              <Link to="/">
                 <img className="h-7 w-auto" src={asset('/img/logo.png')} alt="Company Logo" />
               </Link>
             </div>
@@ -93,7 +90,7 @@ export function SimpleNav() {
               {LINKS.map(({ label, href }) => (
                 <div key={href} className="nav-btn flex items-center justify-center">
                   <Link
-                    href={href}
+                    to={href}
                     aria-current={isCurrent(href) ? 'page' : undefined}
                     className={
                       isCurrent(href)
@@ -115,8 +112,7 @@ export function SimpleNav() {
           <div className="space-y-1 px-5 pb-8 pt-2">
             {LINKS.map(({ label, href }) => (
               <Link
-                key={href}
-                href={href}
+                key={href} to={href}
                 aria-current={isCurrent(href) ? 'page' : undefined}
                 className={
                   isCurrent(href)

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router';
 
 /**
  * Shared shell for the 404 and error screens, so they look like the site rather
@@ -26,13 +26,13 @@ export function MessagePage({
       <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
         {action}
         <Link
-          href="/shop"
+          to="/shop"
           className="rounded-md border border-transparent bg-subPurple px-6 py-2 font-sans text-sm font-medium text-white shadow-sm hover:bg-mainYellow hover:text-gray-800 active:opacity-50"
         >
           Browse tours
         </Link>
         <Link
-          href="/"
+          to="/"
           className="rounded-md px-6 py-2 font-sans text-sm font-medium text-subPurple ring-1 ring-inset ring-gray-300 hover:bg-white active:opacity-50"
         >
           Back home

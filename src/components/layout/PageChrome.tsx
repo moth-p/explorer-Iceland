@@ -1,6 +1,4 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
+import { useLocation } from 'react-router';
 import { pageChromeClassesFor } from '@/lib/layout-variant';
 
 /**
@@ -12,5 +10,5 @@ import { pageChromeClassesFor } from '@/lib/layout-variant';
  * Server Component.
  */
 export function PageChrome({ children }: { children: React.ReactNode }) {
-  return <div className={pageChromeClassesFor(usePathname())}>{children}</div>;
+  return <div className={pageChromeClassesFor(useLocation().pathname)}>{children}</div>;
 }

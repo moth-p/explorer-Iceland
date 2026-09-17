@@ -1,22 +1,21 @@
-'use client';
-
 import { useEffect } from 'react';
+import { useNavigate, useRouteError } from 'react-router';
 import { MessagePage } from '@/components/layout/MessagePage';
 
 /**
- * Route-level error boundary. Catches render and effect errors in any page
- * below the root layout, while keeping the header, footer and cart chrome
- * around it intact.
+ * Route-level error boundary. Catches render and effect errors in any page,
+ * while keeping the header, footer and cart chrome around it intact.
+ *
+ * There is no `reset()` on a React Router boundary, and no error digest: this
+ * is a static bundle with no server to fingerprint anything. navigate(0) is a
+ * real reload, which is what "Try again" amounted to on the static export too.
  */
-export default function Error({
-  error,
-  reset,
-}: {
-  error: Error & { digest?: string };
-  reset: () => void;
-}) {
+export function RouteErrorBoundary() {
+  const error = useRouteError();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    // No error-reporting backend on a static export; the console is the sink.
+    // No error-reporting backend on a static site; the console is the sink.
     console.error(error);
   }, [error]);
 
@@ -27,7 +26,7 @@ export default function Error({
       action={
         <button
           type="button"
-          onClick={reset}
+          onClick={() => navigate(0)}
           className="rounded-md border border-transparent bg-subPurple px-6 py-2 font-sans text-sm font-medium text-white shadow-sm hover:bg-mainYellow hover:text-gray-800 active:opacity-50"
         >
           Try again
@@ -36,11 +35,6 @@ export default function Error({
     >
       This page hit an unexpected error. Trying again often clears it &mdash; your cart is
       stored in this browser and is not affected.
-      {error.digest && (
-        <span className="mt-4 block font-mono text-xs text-gray-400">
-          Reference: {error.digest}
-        </span>
-      )}
     </MessagePage>
   );
 }

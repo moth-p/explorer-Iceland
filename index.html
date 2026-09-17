@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="%BASE_URL%icon.png" />
+
+    <!--
+      Deliberately no <title> here. React 19 hoists a per-route <title> into
+      <head>, but it does not deduplicate, and document.title is defined as the
+      FIRST title element in the document -- a placeholder here would win over
+      every route forever. See src/components/layout/PageMeta.tsx.
+    -->
+
+    <!--
+      Replaces the preload hints next/font used to emit. crossorigin is required
+      even same-origin: fonts are fetched in CORS mode, and without it the
+      browser downloads each file twice. The bold-italic face is the LCP (the
+      150px hero wordmark), so it goes first.
+    -->
+    <link
+      rel="preload"
+      href="%BASE_URL%fonts/LibreBodoni-BoldItalic.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="%BASE_URL%fonts/LibreBodoni-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="%BASE_URL%fonts/KronaOne-Regular.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+  </head>
+  <body class="border-box relative h-screen w-screen bg-lightGray">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'react-router';
 import { asset } from '@/lib/asset';
 
 const LINKS = [
@@ -12,13 +12,12 @@ const LINKS = [
  * three-column SiteFooter.)
  *
  * Server Component -- the current page is passed in rather than read from
- * usePathname(), so this ships no JavaScript.
+ * useLocation().pathname, so this ships no JavaScript.
  */
 export function SimpleFooter({ current }: { current: string }) {
   return (
     <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-24 lg:px-8">
       <a href="#" className="mb-8 flex items-center justify-center sm:mb-12">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={asset('/img/shop-logo.png')} alt="" className="w-[150px]" />
       </a>
 
@@ -28,8 +27,7 @@ export function SimpleFooter({ current }: { current: string }) {
       >
         {LINKS.map(({ label, href }) => (
           <Link
-            key={href}
-            href={href}
+            key={href} to={href}
             // The current page is rendered inert and greyed, as in the original.
             className={
               href === current

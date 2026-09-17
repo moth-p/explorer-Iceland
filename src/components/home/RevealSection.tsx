@@ -1,5 +1,3 @@
-'use client';
-
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
 
 /** Exactly the classes index.html added on intersection. */
