@@ -10,11 +10,7 @@ import type { Config } from 'tailwindcss';
 const bp = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export default {
-  content: [
-    './app/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './lib/**/*.{ts,tsx}',
-  ],
+  content: ['./app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
       colors: {
